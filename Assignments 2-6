@@ -1,0 +1,37 @@
+Assignment #2
+1. Learn Gradle build system.
+2. Create web-application based on Java containing 1 HTML page, page should show parameters of HTTP GET request.
+3. Create Unit-test for this web-application using JUnit library.
+4. Create Gradle build script for your web-application.
+5. Declare deploy gradle task that will deploy web application to the local Tomcat instance.
+6. Add to build script parameters and tasks for unit testing from Gradle.
+7. Add to build script parameters and tasks to perform static code analysis using findbugs and checkstyle.
+8. Test your build script.
+
+Assignment #3
+1. Learn configuration management using Ansible.
+2. Create a distributed application on Java that will consist of two web-services running on separate network nodes. First web-service should call second to obtain the part of service response. Second web-service should use database to obtain operation result. Both web-services should be deployed as applications in a Tomcat servlet-container.
+3. Create configuration scripts for the distributed application using Ansible. Include to the configuration domain names (or IP) of services, Tomcat configuration and database access information.
+4. Test your configuration scripts, try to change your configuration.
+
+Assignment #4
+1. Learn deployment pipeline using Docker.
+2. Create gradle task to build Docker-image of web-application in the gradle script from assignment #1. 
+3. Create Docker-image using the gradle task.
+4. Test your Docker-image.
+
+Assignment #5
+1. Learn deployment to aPaaS using Cloud Foundry.
+2. Select a cloud provider: Pivotal, IBM Bluemix.
+3. Create Gradle task that will deploy web-application from the assignment #1 using Cloud Foundry utilities.
+4. Test your deployment task using the selected cloud provider.
+
+Assignment #6
+1. Learn deployment of Desktop applications using Java Web Start.
+2. Create Desktop application on Java using JavaFX technology.
+3. Create Gradle script that will build and publish your application as JNLP package for Java Web Start runtime.
+4. Publish your JNLP package to a local instance of nginx server.
+5. Test your application using JNLP package.
+6. Change code of your application.
+7. Build and publish the new version of the JNLP package.
+8. Test the new version of JNLP package.
