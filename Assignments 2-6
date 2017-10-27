@@ -16,14 +16,14 @@ Assignment #3
 
 Assignment #4
 1. Learn deployment pipeline using Docker.
-2. Create gradle task to build Docker-image of web-application in the gradle script from assignment #1. 
+2. Create gradle task to build Docker-image of web-application in the gradle script from assignment #2. 
 3. Create Docker-image using the gradle task.
 4. Test your Docker-image.
 
 Assignment #5
 1. Learn deployment to aPaaS using Cloud Foundry.
 2. Select a cloud provider: Pivotal, IBM Bluemix.
-3. Create Gradle task that will deploy web-application from the assignment #1 using Cloud Foundry utilities.
+3. Create Gradle task that will deploy web-application from the assignment #2 using Cloud Foundry utilities.
 4. Test your deployment task using the selected cloud provider.
 
 Assignment #6
