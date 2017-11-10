@@ -8,14 +8,14 @@ After installing the required tools, you will need to ensure that your computer 
 * Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * Install [Vagrant](https://www.vagrantup.com/downloads.html)
 * Install [Packer](https://www.packer.io/downloads.html)
-* Fork this repo to your own account
-* Clone the forked repo to your local machine using this command: `git clone http://github.com/<account-name>/devops-intro-project devops`, replacing `<account-name>` with your GitHub username.
+* Clone the forked repo to your local machine using this command: `git clone http://github.com/<account-name>/devops-intro-project devops`, replacing `<account-name>` with your GitHub username, or just download repo to your local machine.
 
 ## Part I: Building a box with Packer
 
 From the packer-templates directory on your local machine:
-
-* Run `packer build -only=virtualbox-iso application-server.json`. You may see various timeouts and errors, as shown below. If you do, read Troubleshooting or retry the command until the ISO download succeeds:
+* Copy packer binary file to "packer-templates" folder
+* Run `packer build -only=virtualbox-iso application-server.json` to create virtual machine box accrodingly to application-server scenario.
+You may see various timeouts and errors, as shown below. If you do, read Troubleshooting or retry the command until the ISO download succeeds:
 
 ```
 read: operation timed out
@@ -30,7 +30,7 @@ Build 'virtualbox-iso' errored: ISO download failed.
 --> virtualbox-iso: ISO download failed.
 ```
 
-* Run `cd virtualbox`
+* Run `cd virtualbox` to go to packer-templates/firtualbox folder
 * Run `vagrant box add ubuntu-14.04.4-server-amd64-appserver_virtualbox.box --name devops-appserver`
 * Run `vagrant up`
 * Run `vagrant ssh` to connect to the server
