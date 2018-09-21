@@ -1,5 +1,10 @@
 Instructions for Assignment1
 ========================================
+In this Assignment you will learn how to work with Packer and Vagrant (ang VirtualBox, Git by the way).
+
+Packer - is an open source tool for creating identical machine images for multiple platforms from a single source configuration.
+Vagrant - is a tool for building and managing virtual machine environments in a single workflow.
+
 
 After installing the required tools, you will need to ensure that your computer can find the executables to run them. For this, you might need to modify the PATH environment variable. A good overview is at [superuser.com](https://superuser.com/questions/284342/what-are-path-and-other-environment-variables-and-how-can-i-set-or-use-them). You may need to search the web for instructions on how to set the PATH variable for your specific operating system and version. 
 
