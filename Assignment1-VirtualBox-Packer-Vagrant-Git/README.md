@@ -13,7 +13,7 @@ After installing the required tools, you will need to ensure that your computer 
 * Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * Install [Vagrant](https://www.vagrantup.com/downloads.html)
 * Install [Packer](https://www.packer.io/downloads.html)
-* Clone the forked repo to your local machine using this command: `git clone http://github.com/<account-name>/devops-intro-project devops`, replacing `<account-name>` with your GitHub username, or just download repo to your local machine.
+* Clone the forked repo to your local machine using this command: `git clone https://github.com/j-avdeev/DevOps/tree/master/Assignment1-VirtualBox-Packer-Vagrant-Git`, or just download repo to your local machine.
 
 ## Part I: Building a box with Packer
 
