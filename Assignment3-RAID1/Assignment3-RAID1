@@ -1,0 +1,12 @@
+What is RAID:
+https://en.wikipedia.org/wiki/RAID
+
+1. Create simple RAID1, based on Virtual Machine image (such as Virtualbox or VMware Workstation):
+*nix OS System (such as Debian/Ubuntu, or CentOS) on 1-st HDD, 2d and 3d HDDs are in RAID1.
+2. Test RAID1. Create file on RAID1 file system. Remove on of HHDs from VM.
+2. E-mail me Assignment3 docx report with link to download VM image files.
+
+Instruction examples:
+
+- https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-ubuntu-16-04
+- https://www.youtube.com/watch?v=NeR95b_w8GI&t=2s

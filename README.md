@@ -23,7 +23,9 @@ After completing the course, the students should be able to:
 
 ## Textbooks:
 
-* <ToDO>
+* O'Reilly Media, Linux in a Nutshell
+* O'Reilly, Vagrant: Up and Running by Mitchell Hashimoto
+* Джез Хамбл, Дейвид Фарли, Непрерывное развертывание: Автоматизация процессов сборки, тестирования и внедрения новых версий программ
 
 ### Course Evaluation
 ```
@@ -35,11 +37,11 @@ Total:            100%
 
 ### Assignment Deadlines 'Autumn 2018
 
-|                                          |  1  | 2 | 3 | 4 |
-| ---------------------------------------- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 21.10.2018 | --- | --- | --- |
-| Hard Deadline (100% reduction if missed) | 28.10.2018 | --- | --- | --- |
+|                                          |  1  | 2 | 3 | 
+| ---------------------------------------- | --- | --- | --- |
+| Soft Deadline (50% reduction if missed)  | 21.10.2018 | 08.12.2018 | 08.12.2018 |
+| Hard Deadline (100% reduction if missed) | 28.10.2018 | 16.12.2018 | 16.12.2018 | 
 
 
 Results Table:
-<ToDO>
+https://docs.google.com/spreadsheets/d/1MFLDCem-yUr_9vWvsicvAuzzEb48v4rhKG6DxdWE4c8/edit?usp=sharing
