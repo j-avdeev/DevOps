@@ -1,4 +1,5 @@
-What is RAID:
+## Assignment 2 - RAID1
+###What is RAID:
 https://en.wikipedia.org/wiki/RAID
 
 1. Add simple RAID1 to on Virtual Machine from Assignment1:
@@ -6,7 +7,16 @@ https://en.wikipedia.org/wiki/RAID
 2. How to test RAID1. Create file on RAID1 file system. Turn off VM and remove one of the HHDs from VM. Turn on VM. File should be accessble.
 3. Add section with Assignment2 description into docx and send by e-mail for checking.
 
-Instruction examples:
+###Instruction examples:
 
 - https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-ubuntu-16-04
 - (How to remove disk from RAID1) https://unix.stackexchange.com/questions/332061/remove-drive-from-soft-raid
+
+## Assignment3-Gitlab CI
+ToDo
+
+## Assignment4-Zabbix
+ToDo
+
+##Assignment5-Selenium
+ToDo
