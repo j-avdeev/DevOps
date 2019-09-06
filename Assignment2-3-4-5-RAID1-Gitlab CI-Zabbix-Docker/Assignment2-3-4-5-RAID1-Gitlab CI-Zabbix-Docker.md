@@ -12,11 +12,11 @@ https://en.wikipedia.org/wiki/RAID
 - https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-ubuntu-16-04
 - (How to remove disk from RAID1) https://unix.stackexchange.com/questions/332061/remove-drive-from-soft-raid
 
-## Assignment3-Gitlab CI
+## Assignment 3 - Gitlab CI
 ToDo
 
-## Assignment4-Zabbix
+## Assignment 4 - Zabbix
 ToDo
 
-## Assignment5-Selenium
+## Assignment 5 - Docker
 ToDo
