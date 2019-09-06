@@ -2,6 +2,11 @@ Instructions for Assignment1
 ========================================
 In this Assignment you will learn how to work with Packer and Vagrant (ang VirtualBox, Git by the way).
 
+Actually in this Assignment you will:
+* create VM box with settings from packer-template,
+* convert VM box to VM image with Vagrant,
+* clone from github npm-based application and test it with Grunt.
+
 Packer - is an open source tool for creating identical machine images for multiple platforms from a single source configuration.
 Vagrant - is a tool for building and managing virtual machine environments in a single workflow.
 
@@ -35,7 +40,7 @@ Build 'virtualbox-iso' errored: ISO download failed.
 --> virtualbox-iso: ISO download failed.
 ```
 
-* Run `cd virtualbox` to go to packer-templates/firtualbox folder
+* Run `cd virtualbox` to go to packer-templates/virtualbox folder
 * Run `vagrant box add ubuntu-14.04.4-server-amd64-appserver_virtualbox.box --name devops-appserver`
 * Run `vagrant up`
 * Run `vagrant ssh` to connect to the server
