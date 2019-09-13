@@ -60,3 +60,7 @@ If you encounter errors with Ubuntu version numbers not being available or check
 
 * Find the newest version number and checksum from the [Ubuntu website for this release](http://releases.ubuntu.com/trusty/)
 * Edit `PACKER_BOX_NAME` and `iso_checksum` in the template files to match that version number and checksum.
+
+### Outcome
+
+Create docx report with work description and Grunt test output and send by e-mail for checking.
