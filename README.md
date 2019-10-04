@@ -2,10 +2,10 @@
 
 ## Course Outline
 1. Software development lifecycle, ISO/IEC 12207.
-2. Continuous Integration
+2. Virtualization, hypervisors (Virtualbox, VMware)
 3. Version Control Systems (VCS) or Source Code Management (SCM) tools (Git)
-4. Build automation (Gradle, Maven)
-5. Virtualization, hypervisors (Virtualbox, VMware)
+4. Continuous Integration
+5. Build automation (Gradle, Maven)
 6. Software provisioning automation, configuration management, and application deployment (Ansible, Puppet, Chef)
 7. Operating-system-level virtualization, also known as "containerization" (Docker)
 
@@ -17,6 +17,11 @@ After completing the course, the students should be able to:
 - able to work with popular Version Control Systems (Git);
 - able to work with popular virtualization tools (Virtualbox, VMware);
 - able to work with containerization tools (Docker).
+
+## Lectures
+- DevOps Lecture 02: RAID VM Docker | https://youtu.be/lOhF1R2QrkU
+- DevOps Lecture 03: Git GitLab CI | ToDo
+- DevOps Lecture 04: Zabbix | ToDo
 
 ## References
 - Udacity: Intro to DevOps (https://classroom.udacity.com/courses/ud611/)
