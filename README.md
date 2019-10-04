@@ -19,8 +19,8 @@ After completing the course, the students should be able to:
 - able to work with containerization tools (Docker).
 
 ## Lectures
-- DevOps Lecture 02: RAID VM Docker | https://youtu.be/lOhF1R2QrkU
-- DevOps Lecture 03: Git GitLab CI | ToDo
+- DevOps Lecture 02: RAID VM Docker | https://www.youtube.com/watch?v=lOhF1R2QrkU
+- DevOps Lecture 03: Git GitLab CI | https://www.youtube.com/watch?v=NILYhfa35vs
 - DevOps Lecture 04: Zabbix | ToDo
 
 ## References
