@@ -24,9 +24,9 @@ For example you can use vm from bitnami collection: https://bitnami.com/stack/gi
 https://github.com/olindata/sample-gitlabci-cpp-project
 3. If you are attentive, you found that sample-gitlabci-cpp-project uses Docker.
 So you need to integrate Docker in your GitLab.
-3.1 Install GitLab Runner (if you do not made it before)
+3.1. Install GitLab Runner (if you do not made it before)
 https://docs.gitlab.com/runner/install/linux-repository.html
-3.2 Integrate Docker
+3.2. Integrate Docker
 https://docs.gitlab.com/ee/ci/docker/README.html
 https://docs.gitlab.com/ee/ci/docker/using_docker_images.html
 4. Make some repairs if for some reason Job is failed.
