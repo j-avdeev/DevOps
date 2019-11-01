@@ -42,10 +42,10 @@ Total:            100%
 
 ### Assignment Deadlines 'Autumn 2019
 
-|                                          |  1  | 2 | 3 | 
-| ---------------------------------------- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 03.10.2019 | 17.10.2019 |  |
-| Hard Deadline (100% reduction if missed) | 10.10.2019 | 24.10.2019 |  | 
+|                                          |  1  | 2 | 3 | 4 |
+| ---------------------------------------- | --- | --- | --- | --- |
+| Soft Deadline (50% reduction if missed)  | 03.10.2019 | 17.10.2019 | 14.11.2019 | ToDo |
+| Hard Deadline (100% reduction if missed) | 10.10.2019 | 24.10.2019 | 28.11.2019 | ToDo |
 
 
 Results Table:

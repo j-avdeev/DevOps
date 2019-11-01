@@ -2,6 +2,7 @@
 ### What is RAID:
 https://en.wikipedia.org/wiki/RAID
 
+### Steps
 1. Add simple RAID1 to on Virtual Machine from Assignment1:
 *nix OS System on 1-st HDD, 2d and 3d HDDs are in RAID1.
 2. How to test RAID1. Create file on RAID1 file system. Turn off VM and remove one of the HHDs from VM. Turn on VM. File should be accessble.
@@ -13,7 +14,22 @@ https://en.wikipedia.org/wiki/RAID
 - (How to remove disk from RAID1) https://unix.stackexchange.com/questions/332061/remove-drive-from-soft-raid
 
 ## Assignment 3 - Gitlab CI
-ToDo
+### What is going on?
+In this assignment you will touch Gitlab CI
+
+### Steps
+1. Create/Install/Deploy your own Gitlab server.
+For example you can use vm from bitnami collection: https://bitnami.com/stack/gitlab
+2. Clone/Copy "sample-gitlabci-cpp-project" repo to your GitLab server
+https://github.com/olindata/sample-gitlabci-cpp-project
+3. If you are attentive, you found that sample-gitlabci-cpp-project uses Docker.
+So you need to integrate Docker in your GitLab.
+3.1 Install GitLab Runner (if you do not made it before)
+https://docs.gitlab.com/runner/install/linux-repository.html
+3.2 Integrate Docker
+https://docs.gitlab.com/ee/ci/docker/README.html
+https://docs.gitlab.com/ee/ci/docker/using_docker_images.html
+4. Make some repairs if for some reason Job is failed.
 
 ## Assignment 4 - Zabbix
 ToDo
