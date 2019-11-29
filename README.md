@@ -25,6 +25,8 @@ After completing the course, the students should be able to:
 
 ## References
 - Udacity: Intro to DevOps (https://classroom.udacity.com/courses/ud611/)
+- AWS Solution Architect interview questions & concepts (https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
+- Google Cloud Platform Free Tier https://cloud.google.com/free/
 
 ## Textbooks:
 

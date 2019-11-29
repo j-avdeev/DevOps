@@ -32,7 +32,20 @@ https://docs.gitlab.com/ee/ci/docker/using_docker_images.html
 4. Make some repairs if for some reason Job is failed.
 
 ## Assignment 4 - Zabbix
-ToDo
+1. Create/Install/Deploy your own Zabbix server.
+Hint: Zabbix supports preinstalled Zabbix-servers "Zabbix Appliances" VMware/VirtualBox/KVM images https://www.zabbix.com/download_appliance
+
+Login:password for appliance is
+* System
+appliance:zabbix
+* Frontend
+Admin:zabbix
+https://www.zabbix.com/documentation/4.0/manual/appliance
+
+2. Setup agents:
+* 2.1 Execute extended Web monitoring scenario setup, based on following manual https://www.zabbix.com/documentation/3.4/manual/web_monitoring/example
+* 2.2 Agent for SMART status monitoring. On Windows or Linux host - as you prefer. This would be helpful (https://share.zabbix.com/storage-devices/smart-monitoring-with-smartmontools-lld) or other available tutorial.
+
 
 ## Assignment 5 - Docker
 ToDo
