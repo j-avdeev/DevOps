@@ -21,7 +21,8 @@ After completing the course, the students should be able to:
 ## Lectures
 - DevOps Lecture 02: RAID VM Docker | https://www.youtube.com/watch?v=lOhF1R2QrkU
 - DevOps Lecture 03: Git GitLab CI | https://www.youtube.com/watch?v=NILYhfa35vs
-- DevOps Lecture 04: Zabbix | ToDo
+- DevOps Lecture 04: Zabbix | https://www.youtube.com/watch?v=Qe9_KXIAW98
+- DevOps Lecture 05: | ToDo
 
 ## References
 - Udacity: Intro to DevOps (https://classroom.udacity.com/courses/ud611/)
@@ -44,10 +45,10 @@ Total:            100%
 
 ### Assignment Deadlines 'Autumn 2019
 
-|                                          |  1  | 2 | 3 | 4 |
-| ---------------------------------------- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 03.10.2019 | 17.10.2019 | 14.11.2019 | ToDo |
-| Hard Deadline (100% reduction if missed) | 10.10.2019 | 24.10.2019 | 28.11.2019 | ToDo |
+|                                          |  1  | 2 | 3 | 4 | 5 (Additional) |
+| ---------------------------------------- | --- | --- | --- | --- | --- |
+| Soft Deadline (50% reduction if missed)  | 03.10.2019 | 17.10.2019 | 14.11.2019 | 12.12.2019 | ToDo |
+| Hard Deadline (100% reduction if missed) | 10.10.2019 | 24.10.2019 | 28.11.2019 | 19.12.2019 | ToDo |
 
 
 Results Table:
