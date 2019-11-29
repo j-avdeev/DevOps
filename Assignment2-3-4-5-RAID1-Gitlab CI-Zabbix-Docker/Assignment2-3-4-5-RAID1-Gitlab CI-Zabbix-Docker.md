@@ -32,6 +32,11 @@ https://docs.gitlab.com/ee/ci/docker/using_docker_images.html
 4. Make some repairs if for some reason Job is failed.
 
 ## Assignment 4 - Zabbix
+
+### What is going on?
+In this assignment you will touch with Zabbix monitoring tool
+
+### Steps
 1. Create/Install/Deploy your own Zabbix server.
 Hint: Zabbix supports preinstalled Zabbix-servers "Zabbix Appliances" VMware/VirtualBox/KVM images https://www.zabbix.com/download_appliance
 
