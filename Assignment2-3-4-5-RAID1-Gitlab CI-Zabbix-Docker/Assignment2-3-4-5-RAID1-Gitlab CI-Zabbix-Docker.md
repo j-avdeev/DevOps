@@ -48,7 +48,7 @@ Admin:zabbix
 https://www.zabbix.com/documentation/4.0/manual/appliance
 
 2. Setup agents:
-* 2.1 Execute extended Web monitoring scenario setup, based on following manual https://www.zabbix.com/documentation/3.4/manual/web_monitoring/example
+* 2.1 Execute extended Web monitoring scenario setup, based on following manual https://www.zabbix.com/documentation/4.4/manual/web_monitoring/example
 * 2.2 Agent for SMART status monitoring. On Windows or Linux host - as you prefer. This would be helpful (https://share.zabbix.com/storage-devices/smart-monitoring-with-smartmontools-lld) or other available tutorial.
 
 
