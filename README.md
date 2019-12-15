@@ -45,10 +45,20 @@ Total:            100%
 
 ### Assignment Deadlines 'Autumn 2019
 
-|                                          |  1  | 2 | 3 | 4 | 5 (Additional) |
+|                                          |  1-Packer Vagrant Grunt  | 2-RAID | 3-Gitlab CI | 4-Zabbix (Web Scenario) | 5-Zabbix (Agen SMART) (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 03.10.2019 | 17.10.2019 | 14.11.2019 | 12.12.2019 | Till Exam |
-| Hard Deadline (100% reduction if missed) | 10.10.2019 | 24.10.2019 | 28.11.2019 | 19.12.2019 | Till Exam |
+| Soft Deadline (50% reduction if missed)  | 03.10.2019 (0.25 pts)| 17.10.2019 (0.25 pts)| 14.11.2019 (0.5 pts) | 12.12.2019 (0.25 pts) |  (0.25 pts) Till Exam |
+| Hard Deadline (100% reduction if missed) | 10.10.2019 (0.12 pts) | 24.10.2019 (0.12 pts) | 28.11.2019 (0.25 pts) | 19.12.2019 (0.12 pts) |  (0.25 pts) Till Exam |
+
+#### Points in grades conversion
+|Points | Mark |
+| ------- |------|
+|[0.75; 1.25+) | 5 |
+|[0.5; 0.75) | 4 |
+| [0.25; 0.5) | 3 |
+| [0 ; 0.25) | 2* |
+
+*additinal assignments
 
 
 Results Table:
