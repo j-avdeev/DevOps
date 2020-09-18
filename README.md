@@ -19,6 +19,7 @@ After completing the course, the students should be able to:
 - able to work with containerization tools (Docker).
 
 ## Lectures
+- DevOps Lecture 01: DevOps Lifecycle | 
 - DevOps Lecture 02: RAID VM Docker | https://www.youtube.com/watch?v=lOhF1R2QrkU
 - DevOps Lecture 03: Git GitLab CI | https://www.youtube.com/watch?v=NILYhfa35vs
 - DevOps Lecture 04: Zabbix | https://www.youtube.com/watch?v=Qe9_KXIAW98
@@ -45,10 +46,10 @@ Total:            100%
 
 ### Assignment Deadlines 'Autumn 2019
 
-|                                          |  1-Packer Vagrant Grunt  | 2-RAID | 3-Gitlab CI | 4-Zabbix (Web Scenario) | 5-Zabbix (Agen SMART) (Additional) |
+|                                          |  1-RAID | 2-Packer Vagrant Grunt  | 3-Gitlab CI | 4-Zabbix (Web Scenario) | 5-Zabbix (Agen SMART) (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 03.10.2019 (0.25 pts)| 17.10.2019 (0.25 pts)| 14.11.2019 (0.5 pts) | 12.12.2019 (0.25 pts) |  (0.25 pts) Till Exam |
-| Hard Deadline (100% reduction if missed) | 10.10.2019 (0.12 pts) | 24.10.2019 (0.12 pts) | 28.11.2019 (0.25 pts) | 19.12.2019 (0.12 pts) |  (0.25 pts) Till Exam |
+| Soft Deadline (50% reduction if missed)  | 03.10.2020 (0.25 pts)| 17.10.2020 (0.25 pts)| 14.11.2020 (0.5 pts) | 12.12.2020 (0.25 pts) |  (0.25 pts) Till Exam |
+| Hard Deadline (100% reduction if missed) | 10.10.2020 (0.12 pts) | 24.10.2020 (0.12 pts) | 28.11.2020 (0.25 pts) | 19.12.2020 (0.12 pts) |  (0.25 pts) Till Exam |
 
 #### Points in grades conversion
 |Points | Mark |
@@ -62,4 +63,4 @@ Total:            100%
 
 
 Results Table:
-https://docs.google.com/spreadsheets/d/1jB1r55jZs7FAy1-7wmHSlSvNGIpkls5N5cGPplU75NI/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/142OfUxdETL0uAzcBKUb6tBWbU5ZsCC3aw1Y3sYdQ95I/edit?usp=sharing
