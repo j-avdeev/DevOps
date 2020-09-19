@@ -19,7 +19,7 @@ After completing the course, the students should be able to:
 - able to work with containerization tools (Docker).
 
 ## Lectures
-- DevOps Lecture 01: DevOps Lifecycle | 
+- DevOps Lecture 01: DevOps Lifecycle | https://www.youtube.com/watch?v=BD2BxNY6F58
 - DevOps Lecture 02: RAID VM Docker | https://www.youtube.com/watch?v=lOhF1R2QrkU
 - DevOps Lecture 03: Git GitLab CI | https://www.youtube.com/watch?v=NILYhfa35vs
 - DevOps Lecture 04: Zabbix | https://www.youtube.com/watch?v=Qe9_KXIAW98
@@ -44,7 +44,7 @@ Total:            100%
 
 ```
 
-### Assignment Deadlines 'Autumn 2019
+### Assignment Deadlines 'Autumn 2020
 
 |                                          |  1-RAID | 2-Packer Vagrant Grunt  | 3-Gitlab CI | 4-Zabbix (Web Scenario) | 5-Zabbix (Agen SMART) (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- |
