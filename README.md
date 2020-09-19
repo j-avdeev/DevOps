@@ -48,8 +48,8 @@ Total:            100%
 
 |                                          |  1-RAID | 2-Packer Vagrant Grunt  | 3-Gitlab CI | 4-Zabbix (Web Scenario) | 5-Zabbix (Agen SMART) (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 03.10.2020 (0.25 pts)| 17.10.2020 (0.25 pts)| 14.11.2020 (0.5 pts) | 12.12.2020 (0.25 pts) |  (0.25 pts) Till Exam |
-| Hard Deadline (100% reduction if missed) | 10.10.2020 (0.12 pts) | 24.10.2020 (0.12 pts) | 28.11.2020 (0.25 pts) | 19.12.2020 (0.12 pts) |  (0.25 pts) Till Exam |
+| Soft Deadline (50% reduction if missed)  | 17.10.2020 (0.25 pts)| 31.10.2020 (0.25 pts)| 14.11.2020 (0.5 pts) | 12.12.2020 (0.25 pts) |  (0.25 pts) Till Exam |
+| Hard Deadline (100% reduction if missed) | 24.10.2020 (0.12 pts) | 07.11.2020 (0.12 pts) | 28.11.2020 (0.25 pts) | 19.12.2020 (0.12 pts) |  (0.25 pts) Till Exam |
 
 #### Points in grades conversion
 |Points | Mark |
