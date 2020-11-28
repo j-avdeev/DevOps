@@ -22,8 +22,8 @@ After completing the course, the students should be able to:
 - DevOps Lecture 01: DevOps Lifecycle | - |[2020'RUS](https://www.youtube.com/watch?v=BD2BxNY6F58) 
 - DevOps Lecture 02: RAID VM Docker | [2019'ENG](https://www.youtube.com/watch?v=lOhF1R2QrkU) | [2020'RUS](https://www.youtube.com/watch?v=BC19Gl2u4wc)
 - DevOps Lecture 03: Git GitLab CI | [2019'ENG](https://www.youtube.com/watch?v=NILYhfa35vs) | [2020'RUS](https://www.youtube.com/watch?v=S85in_KPPnY)
-- DevOps Lecture 04: Zabbix | [2019'ENG](https://www.youtube.com/watch?v=Qe9_KXIAW98)
-- DevOps Lecture 05: Zabbix-2 | [2019'ENG](https://www.youtube.com/watch?v=uUteBUB85_A)
+- DevOps Lecture 04: Zabbix Web Scenario | [2019'ENG](https://www.youtube.com/watch?v=Qe9_KXIAW98)
+- DevOps Lecture 05: Zabbix Agent | [2019'ENG](https://www.youtube.com/watch?v=uUteBUB85_A) | [2020'RUS](https://youtu.be/Ak9VbVCpkjk)
 
 ## References
 - Udacity: Intro to DevOps (https://classroom.udacity.com/courses/ud611/)
