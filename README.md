@@ -47,10 +47,10 @@ Total:            100%
 
 ### Assignment Deadlines 'Autumn 2020
 
-|                                          |  1-RAID | 2-Docker | 3-Git CI | 4-Packer Vagrant Grunt | 5-Zabbix (Web Scenario) | 6-Zabbix (Agen SMART) (Additional) |
+|                                          |  1-RAID | 2-Git CI | 3-Docker | ?4-Packer Vagrant Grunt | ?5-Zabbix (Web Scenario) | ?6-Zabbix (Agen SMART) (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 17.10.2020 (0.25 pts)| 31.10.2020 (0.25 pts)| 14.11.2020 (0.5 pts) | 12.12.2020 (0.25 pts) |  (0.25 pts) Till Exam |  (0.25 pts) Till Exam |
-| Hard Deadline (100% reduction if missed) | 24.10.2020 (0.12 pts) | 07.11.2020 (0.12 pts) | 28.11.2020 (0.25 pts) | 19.12.2020 (0.12 pts) |  (0.25 pts) Till Exam | (0.25 pts) Till Exam |
+| Soft Deadline (50% reduction if missed)  | 17.10.2021 (0.25 pts)| 31.10.2021 (0.25 pts)| 14.11.2021 (0.5 pts) | 28.11.2021 (0.25 pts) |  (0.25 pts) Till Exam |  (0.25 pts) Till Exam |
+| Hard Deadline (100% reduction if missed) | 24.10.2021 (0.12 pts) | 07.11.2021 (0.12 pts) | 28.11.2021 (0.25 pts) | 05.12.2021 (0.12 pts) |  (0.25 pts) Till Exam | (0.25 pts) Till Exam |
 
 
 #### Points in grades conversion
@@ -65,4 +65,4 @@ Total:            100%
 
 
 Results Table:
-https://docs.google.com/spreadsheets/d/142OfUxdETL0uAzcBKUb6tBWbU5ZsCC3aw1Y3sYdQ95I/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1Ri_TH0nF3T2_GIMLKAXx97CwAYTfGa_baTJSUa_ws0I/edit?usp=sharing
