@@ -1,4 +1,4 @@
-Instructions for Assignment1
+Instructions for Assignment4
 ========================================
 In this Assignment you will learn how to work with Packer and Vagrant (ang VirtualBox, Git by the way).
 
@@ -24,6 +24,7 @@ After installing the required tools, you will need to ensure that your computer 
 
 From the packer-templates directory on your local machine:
 * Copy packer binary file to "packer-templates" folder
+* Looks like modern Node.js has problems with old Ubuntu 14 support (https://www.youtube.com/watch?v=1OjeWuo339s) so try to use more modern Ubuntu disto.
 * Run `packer build -only=virtualbox-iso application-server.json` to create virtual machine box accrodingly to application-server scenario.
 You may see various timeouts and errors, as shown below. If you do, read Troubleshooting or retry the command until the ISO download succeeds:
 
