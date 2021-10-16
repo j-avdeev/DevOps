@@ -4,7 +4,7 @@ https://docs.gitlab.com/
 
 Video how it looks like (from 6:28): https://youtu.be/PeWiS-Shwos?t=388
 
-### Steps 
+### Steps
 
 1. Download Gitlab-Bitnami vm image from https://bitnami.com/stack/gitlab/virtual-machine
 2. Upload https://github.com/olindata/sample-gitlabci-cpp-project to your Gitlab server.
@@ -34,7 +34,7 @@ Video how it looks like (from 6:28): https://youtu.be/PeWiS-Shwos?t=388
       script:
             - g++ helloworld.cpp -o helloworld
 ```
-        
+
 10. Run Pipeline: **CI/CD > Pipelines > Run pipeline**
 
 In Job Logs you should see something like this:
@@ -59,4 +59,3 @@ Executing "step_script" stage of the job script
 $ g++ helloworld.cpp -o helloworld
 Job succeeded
 ```
-
