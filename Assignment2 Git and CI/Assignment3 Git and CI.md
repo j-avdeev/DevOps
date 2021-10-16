@@ -1,4 +1,4 @@
-## Assignment 3 - Git and CI
+## Assignment 2 - Git and CI
 ### Gitlab Docs:
 https://docs.gitlab.com/
 
