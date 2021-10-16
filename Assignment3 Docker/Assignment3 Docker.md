@@ -1,4 +1,4 @@
-## Assignment 2 - Docker
+## Assignment 3 - Docker
 ### Docker Docs - Orientation and setup:
 https://docs.docker.com/get-started/
 
