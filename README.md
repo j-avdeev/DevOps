@@ -30,6 +30,7 @@ After completing the course, the students should be able to:
 - AWS Solution Architect interview questions & concepts (https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
 - Google Cloud Platform Free Tier https://cloud.google.com/free/
 - [MLOps: Continuous delivery and automation pipelines in machine learning]  (https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
+- [Coursera: Проектирование и реализация систем машинного обучения](https://www.coursera.org/learn/machine-learning-design)
 
 ## Textbooks:
 
