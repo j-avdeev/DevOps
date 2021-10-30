@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  file-server-1:
+    image: halverneus/static-file-server
+    deploy:
+      mode: replicated
+      replicas: 2 # Add 2 replicas of this service
+    volumes:
+      - /machine-info:/web # Directory with info about machine
+  file-server-2:
+    image: halverneus/static-file-server
+    volumes:
+      - /etc:/web
+  proxy:
+    image: nginx:1.17
+    ports:
+      - 8888:8888  # Set which ports to trigger
+    configs:
+      - source: nginx-config
+        target: /etc/nginx/nginx.conf # Add configuration
+
+networks:
+  backnet:
+    external: true # Use created network backnet
+
+configs:
+  nginx-config:
+    file: ./configuration.nginx  
