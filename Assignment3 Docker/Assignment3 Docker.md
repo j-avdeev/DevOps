@@ -15,15 +15,15 @@ You can use Virtual machines or "Play with Docker" or Docker Desktop (not sure a
 1.3. Push Docker-Image to Docker Hub.
 
 #### 2
-2.1. (simple-script-1) Create and run Docker container with python-application 
+2.1. (simple-script-1) Create and run Docker container with python-application
 2.2. (mount-directory-2) Create and run Docker container with directory mounting
 2.3. (ports-3) Create and run Docker container with port forwarding
 2.4. (compose-4) Create and run Docker container with docker-compose
 2.5. (proxy-system-5) Create and run Docker containers with load distribution
-2.6. (docker-swarm-6) Create and run Docker-Swarm configuration 
+2.6. (docker-swarm-6) Create and run Docker-Swarm configuration
 
 
-3. Create report with Assignment2 description into docx and send by e-mail for checking.
+####3. Create report with Assignment2 description into docx and send by e-mail for checking.
 
 
 ### Links
