@@ -48,7 +48,7 @@ Total:            100%
 
 ### Assignment Deadlines 'Autumn 2021
 
-|                                          |  1-RAID | 2-Git CI | 3-Docker | 4-Zabbix (Web Scenario)  | ?5-Packer Vagrant Grunt | ?6-Zabbix (Agent SMART) (Additional) |
+|                                          |  1-RAID | 2-Git CI | 3-Docker | 4-Zabbix (Web Scenario)  | 5-MLflow | ?6-Zabbix (Agent SMART) (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- | --- |
 | Soft Deadline (50% reduction if missed)  | 17.10.2021 (0.25 pts)| 31.10.2021 (0.25 pts)| 14.11.2021 (0.5 pts) | 28.11.2021 (0.25 pts) |  (0.25 pts) Till Exam |  (0.25 pts) Till Exam |
 | Hard Deadline (100% reduction if missed) | 24.10.2021 (0.12 pts) | 07.11.2021 (0.12 pts) | 28.11.2021 (0.25 pts) | 05.12.2021 (0.12 pts) |  (0.25 pts) Till Exam | (0.25 pts) Till Exam |
