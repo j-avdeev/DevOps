@@ -31,3 +31,6 @@ https://classroom.udacity.com/courses/ud615
 
 Kubernetes
 https://kubernetes.io
+
+Kube Course
+https://youtu.be/7rZgXQmBeso
