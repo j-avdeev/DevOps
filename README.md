@@ -18,7 +18,7 @@ After completing the course, the students should be able to:
 - able to work with popular virtualization tools (Virtualbox, VMware);
 - able to work with containerization tools (Docker).
 
-## Lectures
+## Videos
 - DevOps Lecture 01: DevOps Lifecycle | - |[2020'RUS](https://www.youtube.com/watch?v=BD2BxNY6F58) 
 - DevOps Lecture 02: RAID VM Docker | [2019'ENG](https://www.youtube.com/watch?v=lOhF1R2QrkU) | [2020'RUS](https://www.youtube.com/watch?v=BC19Gl2u4wc)
 - DevOps Lecture 03: Git GitLab CI | [2019'ENG](https://www.youtube.com/watch?v=NILYhfa35vs) | [2020'RUS](https://www.youtube.com/watch?v=S85in_KPPnY)
@@ -46,24 +46,24 @@ Total:            100%
 
 ```
 
-### Assignment Deadlines 'Autumn 2021
+### Assignment Deadlines 'Spring 2022
 
-|                                          |  1-RAID | 2-Git CI | 3-Docker | 4-Zabbix (Web Scenario)  | 5-MLflow | ?6-Zabbix (Agent SMART) (Additional) |
+|                                          |  1-RAID-VM | ?2-Git CI | ?3-Docker | ?4-Zabbix (Web Scenario)  | ?6- |  ?5-MLflow (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 17.10.2021 (0.25 pts)| 31.10.2021 (0.25 pts)| 14.11.2021 (0.5 pts) | 28.11.2021 (0.25 pts) |  (0.25 pts) Till Exam |  (0.25 pts) Till Exam |
-| Hard Deadline (100% reduction if missed) | 24.10.2021 (0.12 pts) | 07.11.2021 (0.12 pts) | 28.11.2021 (0.25 pts) | 05.12.2021 (0.12 pts) |  (0.25 pts) Till Exam | (0.25 pts) Till Exam |
+| Soft Deadline (50% reduction if missed)  | 12.03.2022 (0.25 pts)| ToDo (0.25 pts)| ToDo (0.5 pts) | ToDo (0.25 pts) |  (0.25 pts) ToDo |  (0.25 pts) ToDo |
+| Hard Deadline (100% reduction if missed) | 24.10.2021 (0.12 pts) | ToDo (0.12 pts) | ToDo (0.25 pts) | ToDo (0.12 pts) |  (0.25 pts) ToDo | (0.25 pts) ToDo |
 
 
 #### Points in grades conversion
 |Points | Mark |
 | ------- |------|
-|[0.75; 1.25+) | 5 |
-|[0.5; 0.75) | 4 |
-| [0.25; 0.5) | 3 |
-| [0 ; 0.25) | 2* |
+|[0.75; 1.25+) | ?5 |
+|[0.5; 0.75) | ?4 |
+| [0.25; 0.5) | ?3 |
+| [0 ; 0.25) | ?2* |
 
 *additinal assignments
 
 
 Results Table:
-https://docs.google.com/spreadsheets/d/1Ri_TH0nF3T2_GIMLKAXx97CwAYTfGa_baTJSUa_ws0I/edit?usp=sharing
+?
