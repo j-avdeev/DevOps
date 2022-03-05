@@ -27,7 +27,7 @@ After completing the course, the students should be able to:
 
 
 ## References
-- 01. Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
+- Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
 - [AWS Solution Architect interview questions & concepts](https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
 - [Udacity: Intro to DevOps](https://classroom.udacity.com/courses/ud611/)
 - [Google Cloud Platform Free Tier] (https://cloud.google.com/free/)
