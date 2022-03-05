@@ -25,7 +25,9 @@ After completing the course, the students should be able to:
 - DevOps Lecture 04: Zabbix Web Scenario | [2019'ENG](https://www.youtube.com/watch?v=Qe9_KXIAW98)
 - DevOps Lecture 05: Zabbix Agent | [2019'ENG](https://www.youtube.com/watch?v=uUteBUB85_A) | [2020'RUS](https://youtu.be/Ak9VbVCpkjk)
 
+
 ## References
+- 01. Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
 - [AWS Solution Architect interview questions & concepts](https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
 - [Udacity: Intro to DevOps](https://classroom.udacity.com/courses/ud611/)
 - [Google Cloud Platform Free Tier] (https://cloud.google.com/free/)
