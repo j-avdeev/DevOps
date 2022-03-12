@@ -50,19 +50,19 @@ Total:            100%
 
 ### Assignment Deadlines 'Spring 2022
 
-|                                          |  1-RAID-VM | 2-Git CI | ?3-Docker | ?4-Zabbix (Web Scenario)  | ?6- |  ?5-MLflow (Additional) |
+|                                          |  1-RAID-VM | 2-Git CI | 3-Docker | ?4-Zabbix (Web Scenario)  | ?6- |  ?5-MLflow (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 12.03.2022 (0.25 pts)| 26.03.2022 (0.25 pts)| ToDo (0.5 pts) | ToDo (0.25 pts) |  (0.25 pts) ToDo |  (0.25 pts) ToDo |
-| Hard Deadline (100% reduction if missed) | 26.03.2022 (0.12 pts) | 02.04.2022 (0.12 pts) | ToDo (0.25 pts) | ToDo (0.12 pts) |  (0.25 pts) ToDo | (0.25 pts) ToDo |
+| Soft Deadline (50% reduction if missed)  | 12.03.2022 (0.25 pts)| 26.03.2022 (0.25 pts)| 02.04.2022 (0.5 pts) | ToDo (0.25 pts) |  (0.25 pts) ToDo |  (0.25 pts) ToDo |
+| Hard Deadline (100% reduction if missed) | 26.03.2022 (0.12 pts) | 02.04.2022 (0.12 pts) | 09.04.2022 (0.25 pts) | ToDo (0.12 pts) |  (0.25 pts) ToDo | (0.25 pts) ToDo |
 
 
 #### Points in grades conversion
 |Points | Mark |
 | ------- |------|
-|[0.75; 1.25+) | ?5 |
-|[0.5; 0.75) | ?4 |
-| [0.25; 0.5) | ?3 |
-| [0 ; 0.25) | ?2* |
+|[0.9; 1.25+) | 5 |
+|[0.75; 0.9) | 4 |
+| [0.25; 0.75) | 3 |
+| [0 ; 0.25) | 2* |
 
 *additinal assignments
 
