@@ -16,6 +16,8 @@ You can use Virtual machines or "Play with Docker" or Docker Desktop (not sure a
 1.3 Push Docker-Image to Docker Hub.
 
 #### 2
+Use Ctrl+Insert for Copy, Shift+Insert for Paste
+
 2.1 (simple-script-1) Create and run Docker container with python-application
 
 2.2 (mount-directory-2) Create and run Docker container with directory mounting
@@ -34,6 +36,7 @@ Create report with Assignment2 description into docx and send by e-mail for chec
 
 
 ### Links
+
 Docker Compose
 https://www.coursera.org/learn/machine-learning-design/lecture/1RY0S/praktichieskoie-zaniatiie-docker-compose
 
