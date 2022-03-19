@@ -29,6 +29,8 @@ After completing the course, the students should be able to:
 
 ## References
 - Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
+- Git Cheat Sheet https://github.com/arslanbilal/git-cheat-sheet
+- Git, list of links https://github.com/dictcp/awesome-git
 - [AWS Solution Architect interview questions & concepts](https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
 - [Udacity: Intro to DevOps](https://classroom.udacity.com/courses/ud611/)
 - [Google Cloud Platform Free Tier] (https://cloud.google.com/free/)
@@ -51,10 +53,10 @@ Total:            100%
 
 ### Assignment Deadlines 'Spring 2022
 
-|                                          |  1-RAID-VM | 2-Git CI | 3-Docker | ?4-Zabbix (Web Scenario)  | ?6- |  ?5-MLflow (Additional) |
+|                                          |  1-RAID-VM | 2-Git CI | 3-Docker | 4-Zabbix (Web Scenario)  | ?6- |  ?5-MLflow (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 12.03.2022 (0.25 pts)| 26.03.2022 (0.25 pts)| 02.04.2022 (0.5 pts) | ToDo (0.25 pts) |  (0.25 pts) ToDo |  (0.25 pts) ToDo |
-| Hard Deadline (100% reduction if missed) | 26.03.2022 (0.12 pts) | 02.04.2022 (0.12 pts) | 09.04.2022 (0.25 pts) | ToDo (0.12 pts) |  (0.25 pts) ToDo | (0.25 pts) ToDo |
+| Soft Deadline (50% reduction if missed)  | 12.03.2022 (0.25 pts)| 26.03.2022 (0.25 pts)| 02.04.2022 (0.5 pts) | 09.04.2022 (0.25 pts) |  (0.25 pts) ToDo |  (0.25 pts) ToDo |
+| Hard Deadline (100% reduction if missed) | 26.03.2022 (0.12 pts) | 02.04.2022 (0.12 pts) | 09.04.2022 (0.25 pts) | 16.09.2022 (0.12 pts) |  (0.25 pts) ToDo | (0.25 pts) ToDo |
 
 
 #### Points in grades conversion
