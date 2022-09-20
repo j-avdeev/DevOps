@@ -5,6 +5,7 @@ https://en.wikipedia.org/wiki/RAID
 ### Steps
 1. Create Virtual Machine with Debian/Ubuntu/CentOS or download preinstalled image (https://www.osboxes.org/).
 VM without GUI.
+Set virtual machine name with your last name.
 2. Add simple RAID1 to Virtual Machine:
 *nix OS System on 1-st HDD, 2d and 3d HDDs are in RAID1.
 2 (with star). only two HDDs. OS System on RAID1, based on this two HDD.
