@@ -53,10 +53,10 @@ Total:            100%
 
 ### Assignment Deadlines 'Spring 2022
 
-|                                          |  1-RAID-VM | 2-Git CI | 3-Docker | 4-Zabbix (Web Scenario)  | 5-Zabbix Agent |  ?5-MLflow (Additional) |
-| ---------------------------------------- | --- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 12.03.2022 (0.25 pts)| 26.03.2022 (0.25 pts)| 02.04.2022 (0.5 pts) | 09.04.2022 (0.25 pts) |  16.04.2022(0.25 pts) |  (0.25 pts) ToDo |
-| Hard Deadline (100% reduction if missed) | 26.03.2022 (0.12 pts) | 02.04.2022 (0.12 pts) | 09.04.2022 (0.25 pts) | 16.04.2022 (0.12 pts) |  23.04.2022(0.25 pts) | (0.25 pts) ToDo |
+|                                          |  1-RAID-VM | 2-Git CI (+ Jenkins ?) | 3-Docker | 4-Zabbix (Web Scenario)  | 5-Zabbix Agent | k8s |  ?5-MLflow (Additional) |
+| ---------------------------------------- | --- | --- | --- | --- | --- | --- | --- |
+| Soft Deadline (50% reduction if missed)  | 27.09.2022 (0.25 pts)| ? (0.25 pts)| 02.04.2022 (0.5 pts) | ? (0.25 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
+| Hard Deadline (100% reduction if missed) | 04.10.2022 (0.12 pts) | ? (0.12 pts) | 09.04.2022 (0.25 pts) | ? (0.12 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
 
 
 #### Points in grades conversion
@@ -71,4 +71,4 @@ Total:            100%
 
 
 Results Table:
-https://docs.google.com/spreadsheets/d/1L2tpwza9NQg8NVPf7kyU8pIj_i74aZaXyoxL_GqW1Ss/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/12a616PAbpvoAYGOUkCjL77tsQE6gqwsDYx0U5D1ElIA/edit?usp=sharing
