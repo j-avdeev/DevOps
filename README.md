@@ -55,8 +55,8 @@ Total:            100%
 
 |                                          |  1-RAID-VM | 2-Git CI (+ Jenkins ?) | 3-Docker | 4-Zabbix (Web Scenario)  | 5-Zabbix Agent | k8s |  ?5-MLflow (Additional) |
 | ---------------------------------------- | --- | --- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 27.09.2022 (0.25 pts)| ? (0.25 pts)| 02.04.2022 (0.5 pts) | ? (0.25 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
-| Hard Deadline (100% reduction if missed) | 04.10.2022 (0.12 pts) | ? (0.12 pts) | 09.04.2022 (0.25 pts) | ? (0.12 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
+| Soft Deadline (50% reduction if missed)  | 02.10.2022 (0.25 pts)| ? (0.25 pts)| 02.04.2022 (0.5 pts) | ? (0.25 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
+| Hard Deadline (100% reduction if missed) | 09.10.2022 (0.12 pts) | ? (0.12 pts) | 09.04.2022 (0.25 pts) | ? (0.12 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
 
 
 #### Points in grades conversion
