@@ -36,12 +36,15 @@ After completing the course, the students should be able to:
 - [Google Cloud Platform Free Tier] (https://cloud.google.com/free/)
 - [MLOps: Continuous delivery and automation pipelines in machine learning](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 - [Coursera: Проектирование и реализация систем машинного обучения](https://www.coursera.org/learn/machine-learning-design)
+- Kubernetes The Hard Way by Kelsey Hightower. This tutorial walks you through setting up Kubernetes the hard way https://github.com/kelseyhightower/kubernetes-the-hard-way
 
 ## Textbooks:
 
 * O'Reilly Media, Linux in a Nutshell
 * O'Reilly, Vagrant: Up and Running by Mitchell Hashimoto
 * Джез Хамбл, Дейвид Фарли, Непрерывное развертывание: Автоматизация процессов сборки, тестирования и внедрения новых версий программ
+* O'Reilly, Managing Kubernetes: Operating Kubernetes Clusters in the Real World by Craig Tracey, Brendan Burns
+* O'Reilly, Cloud Native DevOps with Kubernetes, Justin Domingus and John Arundel
 
 ### Course Evaluation
 ```
@@ -53,19 +56,19 @@ Total:            100%
 
 ### Assignment Deadlines 'Spring 2022
 
-|                                          |  1-RAID-VM | 2-Git CI (+ Jenkins ?) | 3-Docker | 4-Zabbix (Web Scenario)  | 5-Zabbix Agent | k8s |  ?5-MLflow (Additional) |
-| ---------------------------------------- | --- | --- | --- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 02.10.2022 (0.25 pts)| ? (0.25 pts)| 02.04.2022 (0.5 pts) | ? (0.25 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
-| Hard Deadline (100% reduction if missed) | 09.10.2022 (0.12 pts) | ? (0.12 pts) | 09.04.2022 (0.25 pts) | ? (0.12 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
+|                                          |  1-RAID-VM | 2-Git CI | 3-Docker | 4-Jenkins | 5-Zabbix (Web Scenario)  | 6-Zabbix Agent | k8s |  ?5-MLflow (Additional) |
+| ---------------------------------------- | --- | --- | --- |--- | --- | --- | --- | --- |
+| Soft Deadline (50% reduction if missed)  | 02.10.2022 (0.25 pts)| 06.11.2022 (0.25 pts)| 13.11.2022 (0.5 pts) | 20.11.2022 (0.35 pts) | ? (0.25 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
+| Hard Deadline (100% reduction if missed) | 09.10.2022 (0.12 pts) | 13.11.2022 (0.12 pts) | 20.11.2022 (0.25 pts) | 27.11.2022 (0.17 pts)| ? (0.12 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
 
 
 #### Points in grades conversion
 |Points | Mark |
 | ------- |------|
-|[0.9; 1.25+) | 5 |
-|[0.75; 0.9) | 4 |
-| [0.25; 0.75) | 3 |
-| [0 ; 0.25) | 2* |
+|[1.25; +) | 5 |
+|[0.9; 1.25) | 4 |
+| [0.75; 0.9) | 3 |
+| [0 ; 0.75) | 2* |
 
 *additinal assignments
 
