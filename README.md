@@ -28,6 +28,8 @@ After completing the course, the students should be able to:
 
 
 ## References
+- Bash - Beginner's Guide to the Bash Terminal [ENG] | https://www.youtube.com/watch?v=oxuRxtrO2Ag (cd, making directory, editing files, sudo etc.)
+- Bash - Linux Command Line Pipes and Redirection [ENG] | https://www.youtube.com/watch?v=mV_8GbzwZMM
 - Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
 - Git Cheat Sheet https://github.com/arslanbilal/git-cheat-sheet
 - Git, list of links https://github.com/dictcp/awesome-git
