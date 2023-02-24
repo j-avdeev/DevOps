@@ -1,5 +1,7 @@
 ﻿# Deployment and life cycle of a modern software
 
+Teams: [Link to meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_Y2JhNzY3NzEtOGEzNy00NmQwLWJiOGUtZWM1OGY0OWQyMmUy%40thread.v2/0?context=%7b%22Tid%22%3a%22bf863923-e2ac-4dac-9caa-f42937e0db49%22%2c%22Oid%22%3a%22d9f34553-261e-4536-8978-84cfa6092f66%22%7d)
+
 ## Course Outline
 1. Software development lifecycle, ISO/IEC 12207.
 2. Virtualization, hypervisors (Virtualbox, VMware)
@@ -16,7 +18,7 @@ After completing the course, the students should be able to:
 - able to work with bash;
 - able to work with popular Version Control Systems (Git);
 - able to work with popular virtualization tools (Virtualbox, VMware);
-- able to work with containerization tools (Docker).
+- able to work with containerization tools (k8s).
 
 ## Videos
 - DevOps Lecture 01: DevOps Lifecycle | - |[2020'RUS](https://www.youtube.com/watch?v=BD2BxNY6F58) 
@@ -28,22 +30,25 @@ After completing the course, the students should be able to:
 
 
 ## References
-- Bash - Beginner's Guide to the Bash Terminal [ENG] | https://www.youtube.com/watch?v=oxuRxtrO2Ag (cd, making directory, editing files, sudo etc.)
-- Bash - Linux Command Line Pipes and Redirection [ENG] | https://www.youtube.com/watch?v=mV_8GbzwZMM
-- Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
-- Git Cheat Sheet https://github.com/arslanbilal/git-cheat-sheet
-- Git, list of links https://github.com/dictcp/awesome-git
-- [AWS Solution Architect interview questions & concepts](https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
-- [Udacity: Intro to DevOps](https://classroom.udacity.com/courses/ud611/)
-- [Google Cloud Platform Free Tier] (https://cloud.google.com/free/)
+- Bash
+  * Bash - Beginner's Guide to the Bash Terminal [ENG] | https://www.youtube.com/watch?v=oxuRxtrO2Ag (cd, making directory, editing files, sudo etc.)
+  * Bash - Linux Command Line Pipes and Redirection [ENG] | https://www.youtube.com/watch?v=mV_8GbzwZMM
+- Git
+  * Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
+  * Git Cheat Sheet https://github.com/arslanbilal/git-cheat-sheet
+  * Git, list of links https://github.com/dictcp/awesome-git
+- Cloud
+  * [AWS Solution Architect interview questions & concepts](https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
+  * [Google Cloud Platform Free Tier](https://cloud.google.com/free/)
+
 - [MLOps: Continuous delivery and automation pipelines in machine learning](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 - [Coursera: Проектирование и реализация систем машинного обучения](https://www.coursera.org/learn/machine-learning-design)
 - Kubernetes The Hard Way by Kelsey Hightower. This tutorial walks you through setting up Kubernetes the hard way https://github.com/kelseyhightower/kubernetes-the-hard-way
+- I took some funny pictures from [Udacity: Intro to DevOps](https://classroom.udacity.com/courses/ud611/)
 
 ## Textbooks:
 
 * O'Reilly Media, Linux in a Nutshell
-* O'Reilly, Vagrant: Up and Running by Mitchell Hashimoto
 * Джез Хамбл, Дейвид Фарли, Непрерывное развертывание: Автоматизация процессов сборки, тестирования и внедрения новых версий программ
 * O'Reilly, Managing Kubernetes: Operating Kubernetes Clusters in the Real World by Craig Tracey, Brendan Burns
 * O'Reilly, Cloud Native DevOps with Kubernetes, Justin Domingus and John Arundel
@@ -58,22 +63,22 @@ Total:            100%
 
 ### Assignment Deadlines 'Spring 2022
 
-|                                          |  1-RAID-VM | 2-Git CI | 3-Docker | 4-Jenkins | 5-Zabbix (Web Scenario)  | 6-Zabbix Agent | k8s |  ?5-MLflow (Additional) |
-| ---------------------------------------- | --- | --- | --- |--- | --- | --- | --- | --- |
-| Soft Deadline (50% reduction if missed)  | 02.10.2022 (0.25 pts)| 06.11.2022 (0.25 pts)| 13.11.2022 (0.5 pts) | 20.11.2022 (0.35 pts) | ? (0.25 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
-| Hard Deadline (100% reduction if missed) | 09.10.2022 (0.12 pts) | 13.11.2022 (0.12 pts) | 20.11.2022 (0.25 pts) | 27.11.2022 (0.17 pts)| ? (0.12 pts) |  ? (0.25 pts) | ? | (0.25 pts) ToDo |
+|                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4- |
+| ---------------------------------------- | --- | --- | --- |--- |
+| Soft Deadline (50% reduction if missed)  | 04.03.2023 (0.5 pts)| 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts) | 25.03.2023 (0.5 pts) |
+| Hard Deadline (100% reduction if missed) | 11.03.2023 (0.25 pts) | 18.03.2023 (0.25 pts) | 25.03.2023 (0.25 pts) | 01.04.2023 (0.25 pts)|
 
 
 #### Points in grades conversion
 |Points | Mark |
 | ------- |------|
-|[1.25; +) | 5 |
-|[0.9; 1.25) | 4 |
-| [0.75; 0.9) | 3 |
-| [0 ; 0.75) | 2* |
+|[1.25; +) | ? |
+|[0.9; 1.25) | ? |
+| [0.75; 0.9) | ? |
+| [0 ; 0.75) | ? |
 
 *additinal assignments
 
 
-Results Table:
-https://docs.google.com/spreadsheets/d/12a616PAbpvoAYGOUkCjL77tsQE6gqwsDYx0U5D1ElIA/edit?usp=sharing
+DevOps Spring'23 Results Table:
+https://docs.google.com/spreadsheets/d/1bHkpKsSENh0gkB9hMo2kfTFa7Q3k36vr5fBXZVYTFDY/edit?usp=sharing
