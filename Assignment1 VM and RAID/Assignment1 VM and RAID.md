@@ -14,16 +14,18 @@ https://en.wikipedia.org/wiki/RAID
    accessible.
 5. Add new hdd and sync it to raid1.
 6. Install and run local Kubernetes cluster with **minikube**  
-  * Use steps from `Kubernetes install Tools` https://kubernetes.io/docs/tasks/tools/  
+  * Use steps from `Kubernetes install Tools` https://kubernetes.io/docs/tasks/tools/ 
 Make report with screens of:
   * `minicube version` command output
   * opened Dashboard in your web-browser
   * web-abblication in your web-browser (http://localhost:7080/ in tutorial)
-7. Create Assignment1 report and send it by e-mail (docx/link to google doc) or through creation repo fork + pull request.
+7. Deploy hello-minikube app
+8. Create Assignment1 report and send it by e-mail (docx/link to google doc) or through creation repo fork + pull request.
 
 ### Instruction examples:
 
 - https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-ubuntu-16-04
 - [How to remove disk from RAID1](https://unix.stackexchange.com/questions/332061/remove-drive-from-soft-raid)
+- Minikube video tutorial (RUS) https://www.youtube.com/watch?v=Amkkr4_nsyc
 - How to convert docx to rst \
   `pandoc -f docx -t rst -i in.docx -o out.rst`

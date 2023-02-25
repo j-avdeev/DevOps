@@ -41,6 +41,11 @@ After completing the course, the students should be able to:
   * [AWS Solution Architect interview questions & concepts](https://www.teamblind.com/article/AWS-Solution-Architect-interview-questions--concepts-in7y48S7)
   * [Google Cloud Platform Free Tier](https://cloud.google.com/free/)
 
+
+- [Minikube video tutorial (RUS)](https://www.youtube.com/watch?v=Amkkr4_nsyc)
+- How to convert docx to rst \
+  `pandoc -f docx -t rst -i in.docx -o out.rst`
+
 - [MLOps: Continuous delivery and automation pipelines in machine learning](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 - [Coursera: Проектирование и реализация систем машинного обучения](https://www.coursera.org/learn/machine-learning-design)
 - Kubernetes The Hard Way by Kelsey Hightower. This tutorial walks you through setting up Kubernetes the hard way https://github.com/kelseyhightower/kubernetes-the-hard-way
