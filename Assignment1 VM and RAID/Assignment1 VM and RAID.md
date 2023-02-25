@@ -19,8 +19,7 @@ Make report with screens of:
   * `minicube version` command output
   * opened Dashboard in your web-browser
   * web-abblication in your web-browser (http://localhost:7080/ in tutorial)
-7. Add section with assignment1 description into docx and send by e-mail
-   for checking.
+7. Create Assignment1 report and send it by e-mail (docx/link to google doc) or through creation repo fork + pull request.
 
 ### Instruction examples:
 
