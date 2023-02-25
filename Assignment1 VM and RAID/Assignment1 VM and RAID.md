@@ -3,17 +3,28 @@
 https://en.wikipedia.org/wiki/RAID
 
 ### Steps
-1. Create Virtual Machine with Debian/Ubuntu/CentOS or download preinstalled image (https://www.osboxes.org/).
-VM without GUI.
-Set virtual machine name with your last name.
-2. Add simple RAID1 to Virtual Machine:
-*nix OS System on 1-st HDD, 2d and 3d HDDs are in RAID1.
-2 (with star). only two HDDs. OS System on RAID1, based on this two HDD.
-3. How to test RAID1. Create file on RAID1 file system. Turn off VM and remove one of the HHDs from VM. Turn on VM. File should be accessible.
-4. Add new HDD and sync it to RAID1.
-5. Add section with Assignment1 description into docx and send by e-mail for checking.
+1. Create virtual machine with debian/ubuntu/centos or download
+   preinstalled image (https://www.osboxes.org/). It should be withoug GUI.
+2. Set hostname = your surname.
+3. Add simple raid1 to virtual machine: \*nix os system on 1-st hdd, 2d
+   and 3d hdds are in raid1. 1 (with star). Only two hdds. Os system on
+   raid1, based on this two hdd.
+4. How to test raid1. Create file on raid1 file system. Turn off vm and
+   remove one of the hhds from vm. Turn on vm. File should be
+   accessible.
+5. Add new hdd and sync it to raid1.
+6. Install and run local Kubernetes cluster with **minikube**  
+  * Use steps from `Kubernetes install Tools` https://kubernetes.io/docs/tasks/tools/  
+Make report with screens of:
+  * `minicube version` command output
+  * opened Dashboard in your web-browser
+  * web-abblication in your web-browser (http://localhost:7080/ in tutorial)
+7. Add section with assignment1 description into docx and send by e-mail
+   for checking.
 
 ### Instruction examples:
 
 - https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-ubuntu-16-04
-- (How to remove disk from RAID1) https://unix.stackexchange.com/questions/332061/remove-drive-from-soft-raid
+- [How to remove disk from RAID1](https://unix.stackexchange.com/questions/332061/remove-drive-from-soft-raid)
+- How to convert docx to rst \
+  `pandoc -f docx -t rst -i in.docx -o out.rst`
