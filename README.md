@@ -66,7 +66,7 @@ Total:            100%
 
 ```
 
-### Assignment Deadlines 'Spring 2022
+### Assignment Deadlines 'Spring 2023
 
 |                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4- |
 | ---------------------------------------- | --- | --- | --- |--- |
