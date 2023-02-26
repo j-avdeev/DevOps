@@ -1,4 +1,4 @@
-﻿# Deployment and life cycle of a modern software
+# Deployment and life cycle of a modern software
 
 Teams: [Link to meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_Y2JhNzY3NzEtOGEzNy00NmQwLWJiOGUtZWM1OGY0OWQyMmUy%40thread.v2/0?context=%7b%22Tid%22%3a%22bf863923-e2ac-4dac-9caa-f42937e0db49%22%2c%22Oid%22%3a%22d9f34553-261e-4536-8978-84cfa6092f66%22%7d)
 
@@ -72,6 +72,17 @@ Total:            100%
 | ---------------------------------------- | --- | --- | --- |--- |
 | Soft Deadline (50% reduction if missed)  | 04.03.2023 (0.5 pts)| 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts) | 25.03.2023 (0.5 pts) |
 | Hard Deadline (100% reduction if missed) | 11.03.2023 (0.25 pts) | 18.03.2023 (0.25 pts) | 25.03.2023 (0.25 pts) | 01.04.2023 (0.25 pts)|
+
+Some assignments has Additions. Additional assignments are optional. Additional assignments have no deadlines.
+
+```mermaid
+  graph BT;
+      1-RAID-Minikube --> 1.1-Packer-0.2-pts;
+      2-Git-CI-Jenkins;
+      3-Helm;
+      Assignment4;
+```
+
 
 
 #### Points in grades conversion
