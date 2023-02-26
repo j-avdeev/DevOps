@@ -12,3 +12,6 @@ https://developer.hashicorp.com/packer/docs/intro
 
 ### Instruction examples:
 
+Install VirtualBox and run from folder, which include `http` folder to build vm image \
+`packer.exe build ubuntu-server.pkr.hcl` 
+
