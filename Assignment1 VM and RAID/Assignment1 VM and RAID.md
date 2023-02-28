@@ -5,6 +5,7 @@ https://en.wikipedia.org/wiki/RAID
 ### Steps
 1. Create virtual machine with debian/ubuntu/centos or download
    preinstalled image (https://www.osboxes.org/). It should be withoug GUI.
+   1.1 You will need at least 20 GB of free space on your VM for steps 6 and 7
 2. Set hostname = your surname.
 3. Add simple raid1 to virtual machine: \*nix os system on 1-st hdd, 2d
    and 3d hdds are in raid1. 1 (with star). Only two hdds. Os system on
