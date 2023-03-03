@@ -27,5 +27,7 @@ Make report with screens of:
 - https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-ubuntu-16-04
 - [How to remove disk from RAID1](https://unix.stackexchange.com/questions/332061/remove-drive-from-soft-raid)
 - Minikube video tutorial (RUS) https://www.youtube.com/watch?v=Amkkr4_nsyc
+- How to access Kubernetes Dashboard from outside network https://stackoverflow.com/questions/53957413/how-to-access-kubernetes-dashboard-from-outside-network \
+`kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 8443:443 --address 0.0.0.0`
 - How to convert docx to rst \
   `pandoc -f docx -t rst -i in.docx -o out.rst`
