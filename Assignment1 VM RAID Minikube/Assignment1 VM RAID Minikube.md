@@ -70,12 +70,9 @@ where 192.168.8.190 - is you VM ip address
 
 Insert your token to access Dashboard
 
-7. Deploy hello-minikube app
-
 Make report with screens of:
   * `minicube version` command output
-  * opened Dashboard in your web-browser
-  * web-abblication in your web-browser (as http://localhost:7080/ in tutorial)
+  * opened Dashboard in your web-browser (on your host)
 
 8. Create Assignment1 report and send it by e-mail (docx/link to google doc) or through creation repo fork + pull request.
 
