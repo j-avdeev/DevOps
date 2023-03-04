@@ -78,6 +78,7 @@ Some assignments has Additions. Additional assignments are optional. Additional 
 ```mermaid
   graph BT;
       1-RAID-Minikube --> 1.1-Packer-0.2-pts;
+      1-RAID-Minikube --> 1.2-Hello-Minikube-0.2-pts;
       2-Git-CI-Jenkins;
       3-Helm;
       Assignment4;
