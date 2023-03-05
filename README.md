@@ -31,8 +31,13 @@ After completing the course, the students should be able to:
 
 ## References
 - Bash
-  * Bash - Beginner's Guide to the Bash Terminal [ENG] | https://www.youtube.com/watch?v=oxuRxtrO2Ag (cd, making directory, editing files, sudo etc.)
-  * Bash - Linux Command Line Pipes and Redirection [ENG] | https://www.youtube.com/watch?v=mV_8GbzwZMM
+  * Bash - [Beginner's Guide to the Bash Terminal (ENG)](https://www.youtube.com/watch?v=oxuRxtrO2Ag) (cd, making directory, editing files, sudo etc.)
+  * Bash - [Linux Command Line Pipes and Redirection (ENG)](https://www.youtube.com/watch?v=mV_8GbzwZMM)
+- Kubernetes
+  * [Minikube video tutorial (RUS)](https://www.youtube.com/watch?v=Amkkr4_nsyc)
+  * [Kubenetes course by Слёрм (RUS)](https://www.youtube.com/playlist?list=PL8D2P0ruohOBSA_CDqJLflJ8FLJNe26K-)
+  * [Kubenetes application developer course by Udemy (ENG)](https://www.udemy.com/course/certified-kubernetes-application-developer/)
+
 - Git
   * Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
   * Git Cheat Sheet https://github.com/arslanbilal/git-cheat-sheet
@@ -42,7 +47,6 @@ After completing the course, the students should be able to:
   * [Google Cloud Platform Free Tier](https://cloud.google.com/free/)
 
 
-- [Minikube video tutorial (RUS)](https://www.youtube.com/watch?v=Amkkr4_nsyc)
 - How to convert docx to rst \
   `pandoc -f docx -t rst -i in.docx -o out.rst`
 
