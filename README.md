@@ -81,10 +81,10 @@ Some assignments has Additions. Additional assignments are optional. Additional 
 
 ```mermaid
   graph BT;
-      1-RAID-Minikube --> 1.1-Packer-0.2-pts;
-      1-RAID-Minikube --> 1.2-Hello-Minikube-0.2-pts;
-      2-Git-CI-Jenkins --> 2.1-Git-CI-ArgoCD;
-      2-Git-CI-Jenkins --> 2.1-Git-CI-Packer/Vagrant;
+      1-RAID-Minikube --> 1.1-Packer+0.2-pts;
+      1-RAID-Minikube --> 1.2-Hello-Minikube+0.2-pts;
+      2-Git-CI-Jenkins --> 2.1-Git-CI-ArgoCD+0.25-pts;
+      2-Git-CI-Jenkins --> 2.1-Git-CI-Packer/Vagrant+0.25-pts;
       3-Helm;
       Assignment4;
 ```
@@ -94,10 +94,10 @@ Some assignments has Additions. Additional assignments are optional. Additional 
 #### Points in grades conversion
 |Points | Mark |
 | ------- |------|
-|[1.25; +) | ? |
-|[0.9; 1.25) | ? |
-| [0.75; 0.9) | ? |
-| [0 ; 0.75) | ? |
+|[2; +) | 5 |
+|[1.5; 2) | 4 |
+| [0.75; 1.5) | 3 |
+| [0 ; 0.75) | 2* |
 
 *additinal assignments
 
