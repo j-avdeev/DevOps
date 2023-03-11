@@ -36,7 +36,7 @@ After completing the course, the students should be able to:
 - Kubernetes
   * [Minikube video tutorial (RUS)](https://www.youtube.com/watch?v=Amkkr4_nsyc)
   * [Kubenetes course by Слёрм (RUS)](https://www.youtube.com/playlist?list=PL8D2P0ruohOBSA_CDqJLflJ8FLJNe26K-)
-  * [Kubenetes application developer course by Udemy (ENG)](https://www.udemy.com/course/certified-kubernetes-application-developer/)
+
 
 - Git
   * Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
@@ -74,8 +74,8 @@ Total:            100%
 
 |                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4- |
 | ---------------------------------------- | --- | --- | --- |--- |
-| Soft Deadline (50% reduction if missed)  | 11.03.2023 (0.5 pts)| 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts) | 25.03.2023 (0.5 pts) |
-| Hard Deadline (100% reduction if missed) | 18.03.2023 (0.25 pts) | 18.03.2023 (0.25 pts) | 25.03.2023 (0.25 pts) | 01.04.2023 (0.25 pts)|
+| Soft Deadline (50% reduction if missed)  | 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts)| 25.03.2023 (0.5 pts) | 01.04.2023 (0.5 pts) |
+| Hard Deadline (100% reduction if missed) | 18.03.2023 (0.25 pts) | 25.03.2023 (0.25 pts) | 01.04.2023 (0.25 pts) | 08.04.2023 (0.25 pts)|
 
 Some assignments has Additions. Additional assignments are optional. Additional assignments have no deadlines.
 
@@ -83,7 +83,8 @@ Some assignments has Additions. Additional assignments are optional. Additional 
   graph BT;
       1-RAID-Minikube --> 1.1-Packer-0.2-pts;
       1-RAID-Minikube --> 1.2-Hello-Minikube-0.2-pts;
-      2-Git-CI-Jenkins;
+      2-Git-CI-Jenkins --> 2.1-Git-CI-ArgoCD;
+      2-Git-CI-Jenkins --> 2.1-Git-CI-Packer/Vagrant;
       3-Helm;
       Assignment4;
 ```

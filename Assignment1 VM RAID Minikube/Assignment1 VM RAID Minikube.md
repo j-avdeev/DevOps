@@ -70,6 +70,17 @@ where 192.168.8.190 - is you VM ip address
 
 Insert your token to access Dashboard
 
+* Another option to access your Dashboard is to create ssl tunnel on your host
+```
+ssh -L 12345:localhost:8001 myLogin@myRemoteServer
+```
+https://stackoverflow.com/questions/47173463/how-to-access-local-kubernetes-minikube-dashboard-remotely
+
+and access Dashboard by addres such as
+```
+http://localhost:12345/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+```
+
 Make report with screens of:
   * `minicube version` command output
   * opened Dashboard in your web-browser (on your host)

@@ -7,36 +7,43 @@ Video how it looks like (from 6:28): https://youtu.be/PeWiS-Shwos?t=388
 
 ### Steps
 
-1. Download Gitlab-Bitnami vm image from https://bitnami.com/stack/gitlab/virtual-machine
-2. Upload https://github.com/olindata/sample-gitlabci-cpp-project to your Gitlab server.
-3. To unblock SSH https://docs.bitnami.com/virtual-machine/faq/get-started/enable-ssh/
-4. https://askubuntu.com/questions/204400/ssh-public-key-no-supported-authentication-methods-available-server-sent-publ
-5. Install GitLab Runner using the official GitLab repositories https://docs.gitlab.com/runner/install/linux-repository.html
 
-6. Update /etc/gitlab/gitlab.rb to disable https on gitlab (yes, it is not for production)
+1. Gitlab setup (on VM/Docker/Minikube)
+(VM variant) Download Gitlab-Bitnami vm image from https://bitnami.com/stack/gitlab/virtual-machine
+
+2. Create repo in gitlab with sources of your app
+Upload https://github.com/olindata/sample-gitlabci-cpp-project to your Gitlab server.
+
+* To unblock SSH https://docs.bitnami.com/virtual-machine/faq/get-started/enable-ssh/
+* https://askubuntu.com/questions/204400/ssh-public-key-no-supported-authentication-methods-available-server-sent-publ
+
+3. Setup runner (Gitlab, Docker, Jenkins, ArgroCD)
+* Install GitLab Runner using the official GitLab repositories https://docs.gitlab.com/runner/install/linux-repository.html
+
+* (Gitlab variant) Update /etc/gitlab/gitlab.rb to disable https on gitlab (yes, it is not for production)
 ```
     # use here your IP, but is must be HTTP
     external_url 'http://192.168.88.228'
     nginx['redirect_http_to_https'] = false
     nginx['ssl_verify_client'] = "off"
 ```
-7. Reconfigure GitLab for the changes to take effect:
+* Reconfigure GitLab for the changes to take effect:
 ```
     $ sudo gitlab-ctl reconfigure
 ```
-8. Register runner. Choose **shell** executor type. Use your ip and registration-token for command below:
+* Register runner. Choose **shell** executor type. Use your ip and registration-token for command below:
 ```
     $ sudo gitlab-runner register --url http://192.168.88.228/ --registration-token yqjsLYNFrbjaC-QhmycE
 ```
 
-9. Edit .gitlab-ci.yml to run runner in shell mode (without Docker)
+4. Edit .gitlab-ci.yml to run runner in shell mode (without Docker)
 ```
     job:
       script:
             - g++ helloworld.cpp -o helloworld
 ```
 
-10. Run Pipeline: **CI/CD > Pipelines > Run pipeline**
+5. Run Pipeline: **CI/CD > Pipelines > Run pipeline**
 
 In Job Logs you should see something like this:
 ```
@@ -60,3 +67,8 @@ Executing "step_script" stage of the job script
 $ g++ helloworld.cpp -o helloworld
 Job succeeded
 ```
+Make report with screens of:
+  * `minicube version` command output
+  * opened Dashboard in your web-browser (on your host)
+
+6. Create Assignment2 report and send it by e-mail (docx/link to google doc) or through creation repo fork + pull request.
