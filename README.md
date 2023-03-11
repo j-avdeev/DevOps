@@ -31,8 +31,13 @@ After completing the course, the students should be able to:
 
 ## References
 - Bash
-  * Bash - Beginner's Guide to the Bash Terminal [ENG] | https://www.youtube.com/watch?v=oxuRxtrO2Ag (cd, making directory, editing files, sudo etc.)
-  * Bash - Linux Command Line Pipes and Redirection [ENG] | https://www.youtube.com/watch?v=mV_8GbzwZMM
+  * Bash - [Beginner's Guide to the Bash Terminal (ENG)](https://www.youtube.com/watch?v=oxuRxtrO2Ag) (cd, making directory, editing files, sudo etc.)
+  * Bash - [Linux Command Line Pipes and Redirection (ENG)](https://www.youtube.com/watch?v=mV_8GbzwZMM)
+- Kubernetes
+  * [Minikube video tutorial (RUS)](https://www.youtube.com/watch?v=Amkkr4_nsyc)
+  * [Kubenetes course by Слёрм (RUS)](https://www.youtube.com/playlist?list=PL8D2P0ruohOBSA_CDqJLflJ8FLJNe26K-)
+
+
 - Git
   * Git — инструмент для совместной работы с нуля и до регламента в команде — Александр Васильев [RUS] | https://www.youtube.com/watch?v=XfpNNPo5ypk
   * Git Cheat Sheet https://github.com/arslanbilal/git-cheat-sheet
@@ -42,7 +47,6 @@ After completing the course, the students should be able to:
   * [Google Cloud Platform Free Tier](https://cloud.google.com/free/)
 
 
-- [Minikube video tutorial (RUS)](https://www.youtube.com/watch?v=Amkkr4_nsyc)
 - How to convert docx to rst \
   `pandoc -f docx -t rst -i in.docx -o out.rst`
 
@@ -70,16 +74,17 @@ Total:            100%
 
 |                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4- |
 | ---------------------------------------- | --- | --- | --- |--- |
-| Soft Deadline (50% reduction if missed)  | 11.03.2023 (0.5 pts)| 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts) | 25.03.2023 (0.5 pts) |
-| Hard Deadline (100% reduction if missed) | 18.03.2023 (0.25 pts) | 18.03.2023 (0.25 pts) | 25.03.2023 (0.25 pts) | 01.04.2023 (0.25 pts)|
+| Soft Deadline (50% reduction if missed)  | 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts)| 25.03.2023 (0.5 pts) | 01.04.2023 (0.5 pts) |
+| Hard Deadline (100% reduction if missed) | 18.03.2023 (0.25 pts) | 25.03.2023 (0.25 pts) | 01.04.2023 (0.25 pts) | 08.04.2023 (0.25 pts)|
 
 Some assignments has Additions. Additional assignments are optional. Additional assignments have no deadlines.
 
 ```mermaid
   graph BT;
-      1-RAID-Minikube --> 1.1-Packer-0.2-pts;
-      1-RAID-Minikube --> 1.2-Hello-Minikube-0.2-pts;
-      2-Git-CI-Jenkins;
+      1-RAID-Minikube --> 1.1-Packer+0.2-pts;
+      1-RAID-Minikube --> 1.2-Hello-Minikube+0.2-pts;
+      2-Git-CI-Jenkins --> 2.1-Git-CI-ArgoCD+0.25-pts;
+      2-Git-CI-Jenkins --> 2.1-Git-CI-Packer/Vagrant+0.25-pts;
       3-Helm;
       Assignment4;
 ```
@@ -89,10 +94,10 @@ Some assignments has Additions. Additional assignments are optional. Additional 
 #### Points in grades conversion
 |Points | Mark |
 | ------- |------|
-|[1.25; +) | ? |
-|[0.9; 1.25) | ? |
-| [0.75; 0.9) | ? |
-| [0 ; 0.75) | ? |
+|[2; +) | 5 |
+|[1.5; 2) | 4 |
+| [0.75; 1.5) | 3 |
+| [0 ; 0.75) | 2* |
 
 *additinal assignments
 

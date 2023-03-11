@@ -5,6 +5,12 @@ https://en.wikipedia.org/wiki/RAID
 ### Steps
 1. Create virtual machine with debian/ubuntu/centos or download
    preinstalled image (https://www.osboxes.org/). It should be withoug GUI.
+   
+   To run minikube on steps 6, 7 you will need: \
+   at least 20 GB of free space on your VM hard drive \
+   CPU: 2 core or more \
+   RAM: ~1900 MB (1800 MB min for minikube + OS)
+   
 2. Set hostname = your surname.
 3. Add simple raid1 to virtual machine: \*nix os system on 1-st hdd, 2d
    and 3d hdds are in raid1. 1 (with star). Only two hdds. Os system on
@@ -17,10 +23,6 @@ https://en.wikipedia.org/wiki/RAID
 I recommend to set VM network to Network bridge mode. In my case VM get IP from my router as my host so it is easier opeate, in your network case situation can be differ.
 
 For following minikube installation I recommend to install minikube inside your VM (not outside on your host) - with Docker driver, so Docker installation is prerequisite (see https://docs.docker.com/engine/install/ accordingly to your VM OS, _Install using the repository_ looks easy).
-
-Also you will need to extend your VM CPU and RAM to run minikube: \
-CPU: 2 core or more \
-RAM: ~1900 MB (1800 MB min for minikube + OS)
 
 6. Install and run local Kubernetes cluster with **minikube**  
   * Use steps from `Kubernetes install Tools` https://kubernetes.io/docs/tasks/tools/ 
@@ -69,6 +71,17 @@ https://192.168.8.190:8443/ \
 where 192.168.8.190 - is you VM ip address
 
 Insert your token to access Dashboard
+
+* Another option to access your Dashboard is to create ssl tunnel on your host
+```
+ssh -L 12345:localhost:8001 myLogin@myRemoteServer
+```
+https://stackoverflow.com/questions/47173463/how-to-access-local-kubernetes-minikube-dashboard-remotely
+
+and access Dashboard by addres such as
+```
+http://localhost:12345/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+```
 
 Make report with screens of:
   * `minicube version` command output
