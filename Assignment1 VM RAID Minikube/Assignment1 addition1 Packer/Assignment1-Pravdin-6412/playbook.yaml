@@ -1,0 +1,19 @@
+---
+- name: hello world
+  hosts: 127.0.0.1
+  connection: local
+  become: yes
+  vars:
+    pip_install_packages:
+      - name: docker
+  roles:
+    - role: geerlingguy.pip 
+      become: yes
+    - geerlingguy.docker
+    - gantsign.minikube
+  tasks:
+    - name: "Add user {{ current_user }} to docker group"
+      user:
+        name: "{{ current_user }}"
+        group: docker
+
