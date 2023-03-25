@@ -14,7 +14,7 @@ Video how it looks like (from 6:28): https://youtu.be/PeWiS-Shwos?t=388
 2. Create repo in gitlab with sources of your app
 Upload https://github.com/olindata/sample-gitlabci-cpp-project to your Gitlab server.
 
-* To unblock SSH https://docs.bitnami.com/virtual-machine/faq/get-started/enable-ssh/
+* To unblock SSH https://docs.bitnami.com/virtual-machine/faq/get-started/enable-ssh/ and then configure authentication, for example password-based https://docs.bitnami.com/virtual-machine/faq/get-started/enable-ssh-password/
 * https://askubuntu.com/questions/204400/ssh-public-key-no-supported-authentication-methods-available-server-sent-publ
 
 3. Setup runner (Gitlab, Docker, Jenkins, ArgroCD)
