@@ -29,3 +29,14 @@ Make report with screens of app running in prod dev env
 
 ### References
 * I got problems with Docker Desktop install cause of brocken Hyper-V settings https://stackoverflow.com/questions/39684974/docker-for-windows-error-hardware-assisted-virtualization-and-data-execution-p
+
+* I got problems with
+
+```kubectl --namespace prod port-forward service/myhelmapp 8888:80```
+
+instead use
+
+```kubectl --namespace prod port-forward service/myhelmapp 80:80```
+because in my case myhelmapp uses port 80. Use command to get which port myhelmapp uses
+
+```kubectl get services```
