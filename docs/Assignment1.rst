@@ -1,7 +1,7 @@
-hw module
-=========
+Assignment 1
+============
 
-.. automodule:: hw
+.. automodule:: Assignment1
    :members:
    :undoc-members:
    :show-inheritance:

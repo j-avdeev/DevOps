@@ -1,10 +1,10 @@
-jl
-==
+Assignments
+===========
 
 .. toctree::
    :maxdepth: 4
 
-   hw
+   Assignment1
    mw
    lw
    mc
