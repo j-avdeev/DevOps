@@ -1,8 +1,8 @@
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../jl'))
+sys.path.insert(0, os.path.abspath('../Assignments'))
 
-project = 'jl'
+project = 'DevOps'
 copyright = '2023, redandgreen.co.uk'
 author = 'Mr Moo'
 release = '0.0.1'

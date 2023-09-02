@@ -1,13 +1,9 @@
-.. jl documentation master file, created by
-   sphinx-quickstart on Sat Mar 18 21:50:38 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. If you want to see how this was created, check out this article:
+   https://redandgreen.co.uk/sphinx-to-github-pages-via-github-actions/
 
-jl documentation
-=================
+Deployment and life cycle of a modern software
+==============================================
 
-| If you want to see how this was created, check out this article:
-| https://redandgreen.co.uk/sphinx-to-github-pages-via-github-actions/
 
 .. toctree::
    :maxdepth: 2
