@@ -9,7 +9,8 @@ Deployment and life cycle of a modern software
    :maxdepth: 2
    :caption: Contents:
 
-   modules
+   lectures
+   assignments
 
 Course Outline
 ==============
