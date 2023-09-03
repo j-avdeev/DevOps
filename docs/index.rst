@@ -11,14 +11,19 @@ Deployment and life cycle of a modern software
 
    modules
 
+Course Outline
+==============
+
+1. Virtualization, hypervisors (Virtualbox, VMware)
+2. Version Control Systems (VCS) Git
+3. Operating-system-level virtualization, also known as "containerization" (Docker)
+4. Continuous Integration
+5. Monitoring tools
+
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-.. note::
-   This is a skeleton of a project, feel free to clone.
-   Replace 'jl' with your project name when calling Sphinx initially
 
