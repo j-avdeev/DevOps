@@ -1,3 +1,11 @@
+VM-RAID-Minikube
+================
+
+.. automodule:: VM-RAID-Minikube
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 | МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ
 | РОССИЙСКОЙ ФЕДЕРАЦИИ
 
