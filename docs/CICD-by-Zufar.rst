@@ -2,23 +2,8 @@
 Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins \| HackerNoon
 ==============================================================================================================
 
-.. rubric:: Content Overview
-   :name: h-content-overview
+Source: https://hackernoon.com/building-a-cicd-pipeline-with-aws-k8s-docker-ansible-git-github-apache-maven-and-jenkins
 
--  **Motivation**
--  **[Module 1]: AWS EC2 Virtual Server**
--  **[Module 2]: Jenkins Server**
--  **[Module 3]: Git and Github**
--  **[Module 4]: Apache Maven**
--  **[Module 5]: Docker**
--  **[Module 6]: Ansible**
--  **[Module 7]: Kubernetes**
--  **Conclusion**
--  **About the Author**
-
-| 
-
-| 
 
 .. rubric:: **Motivation**
    :name: h-motivation
@@ -36,7 +21,6 @@ their work as lines of code, they can start to embrace
 the broader context of their project as a valuable
 product.
 
-| 
 
 In this article, we aim to demystify the CI/CD process
 through practical application. We'll take you through
@@ -47,7 +31,6 @@ DevOps tools like **AWS, Docker, Kubernetes, Ansible,
 Git, Apache Maven,** and **Jenkins**. So, let's begin
 this journey!
 
-| 
 
 .. rubric:: **[Module 1]: AWS EC2 Virtual Server**
    :name: h-module-1-aws-ec-2-virtual-server
