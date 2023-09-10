@@ -236,16 +236,16 @@ Go to the **”Key pair (Login)”** section.
 
 .. figure:: media/CICD-by-Zufar/CICD-by-Zufar-16.png
 
-The screenshot of AWS web page with the pointer to
-"Ket pair (login)" section
+    The screenshot of AWS web page with the pointer to
+    "Ket pair (login)" section
 
 Create a new key-pair if you haven't created it yet.
 
 .. figure:: media/CICD-by-Zufar/CICD-by-Zufar-17.png
 
-The screenshot of AWS web page with the pointer to
-"Key pair name", "Key pair type", "Private key file
-format" in "Ket pair (login)" section
+    The screenshot of AWS web page with the pointer to
+    "Key pair name", "Key pair type", "Private key file
+    format" in "Ket pair (login)" section
 
 If you haven't created **“key-pair”** yet:
 
@@ -271,8 +271,8 @@ button **“Launch instance”**.
 
 .. figure:: media/CICD-by-Zufar/CICD-by-Zufar-18.png
 
-The screenshot of AWS web page with the pointer to
-"Launch Instance" button
+    The screenshot of AWS web page with the pointer to
+    "Launch Instance" button
 
 After the completion of the EC2 Virtual Server
 instance creation process, you will see the following.
@@ -339,4 +339,240 @@ Console Dashboard** → **Instances.**
 Then you should choose **JenkinsServer** and then
 click the **“Connect”** button.
 
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-21.png
 
+    The screenshot of AWS "Instances" web page with the
+    pointer to "Connect" button
+
+
+Then you will see this web page. You should again
+click the **“Connect”** button.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-22.png
+
+    The screenshot of AWS "Connect to Instance" web
+    page with the pointer to "Connect" button
+
+
+Now you can see EC2 virtual server instance online
+terminal.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-23.png
+
+The screenshot of AWS EC2 Virtual Server instance
+online terminal
+
+.. rubric:: **Step 3: Download the Jenkins
+   repository**
+   :name: h-step-3-download-the-jenkins-repository
+
+Now you need to download Jenkins on your EC2 virtual
+server instance.
+
+Follow these instructions:
+
+#. Go to Jenkins
+   download `webpage <https://www.jenkins.io/download>`__.
+
+#. You can see Stable (LTS) and Regular releases
+   (Weekly) options. Choose `Red
+   Hat/Fedora/Alma/Rocky/CentOS <https://pkg.jenkins.io/redhat-stable>`__\ LTS
+   option.
+
+You will see this web page.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-24.png
+
+The screenshot of Jenkins download web page
+
+3. Copy **“sudo get..”** command and execute it to
+   download Jenkins files from the Jenkins repository
+   on the Internet and save them to the specified
+   location on your EC2 virtual server instance.
+
+.. code:: bash
+
+   sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+Now Jenkins is downloaded.
+
+
+.. rubric:: **Step 4: Import Jenkins key**
+   :name: h-step-4-import-jenkins-key
+
+To finish the Jenkins installation, we need to import
+the Jenkins key.
+
+To import the Jenkins key we need to copy the **“sudo
+rpm..”** command and execute it.
+
+.. code:: bash
+
+   sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+.. container:: notice notice-info
+
+   This way **“rpm”** package manager can verify that
+   the Jenkins packages you install are exactly the
+   ones published by the Jenkins project, and that
+   they haven't been tampered with or corrupted.
+
+.. rubric:: **Step 5: Install Java**
+   :name: h-step-5-install-java
+
+To run Jenkins, we need to install **Java** on our EC2
+virtual server instance.
+
+To install **Java**, use this command.
+
+| 
+
+.. code:: bash
+
+   sudo amazon-linux-extras install java-openjdk11 -y
+
+| 
+
+Verify whether
+**Java**
+was installed correctly using this command:
+
+.. code:: bash
+
+   java -version
+
+You will see something like that.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-25.png
+
+The screenshot of AWS EC2 Virtual Server instance
+online terminal with installed JDK 11
+
+.. rubric:: **Step 6: Install fontconfig**
+   :name: h-step-6-install-fontconfig
+
+To run Jenkins, you need to install **fontconfig** on
+our EC2 virtual server instance.
+
+Use this command.
+
+.. code:: bash
+
+   sudo yum install fontconfig java-11-openjdk -y
+
+.. note::
+
+   Fontconfig is a library designed to provide
+   system-wide font configuration, customization and
+   application access. It's required by Jenkins
+   because Jenkins has features that render fonts.
+
+.. rubric:: **Step 7: Install Jenkins**
+   :name: h-step-7-install-jenkins
+
+In earlier steps, you configured your EC2 virtual
+server instance to use a specific Jenkins repository
+and then you imported the GPG key associated with this
+repository. Now, you need to run the command that will
+search all the repositories it knows about, including
+the Jenkins one you added, to find the Jenkins
+package. Once it finds the Jenkins package in the
+Jenkins repository, it will download and install it.
+
+Let’s run this command.
+
+.. code:: bash
+
+   sudo yum install jenkins -y
+
+.. rubric:: **Step 8: Start Jenkins**
+   :name: h-step-8-start-jenkins
+
+You can start Jenkins using this command.
+
+.. code:: bash
+
+   sudo systemctl start jenkins
+
+To check that Jenkins is running use this command.
+
+.. code:: bash
+
+   sudo systemctl status jenkins
+
+You will see the output as it is on the screenshot
+below:
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-26.png
+
+    The screenshot of AWS EC2 Virtual Server instance
+    online terminal with installed Jenkins
+
+Jenkins should now be up and running.
+
+.. rubric:: **Step 9: Access Jenkins**
+   :name: h-step-9-access-jenkins
+
+To access the Jenkins application, open any web
+browser and enter your EC2 instance’s public IP
+address or domain name followed by port 8080.
+
+.. code:: bash
+
+   http://<your-ec2-ip>:8080
+
+The first time you access Jenkins, it will be locked
+with an autogenerated password.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-27.png
+
+The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Administrator
+password
+
+You need to display this password using the following
+command.
+
+.. code:: bash
+
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Copy this password, return to your browser, paste it
+into the Administrator password field, and click
+"Continue".
+
+Then you will be able to see this web page.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-28.png
+
+The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to "Customize
+Jenkins" web page
+
+Now, you can use your Jenkins Server.
+
+.. rubric:: **Step 10: Create new Jenkins pipeline**
+   :name: h-step-10-create-new-jenkins-pipeline
+
+Now, as Jenkins is working fine, you can start
+creating the Jenkins pipeline. To create Jenkins
+pipeline you need to create a new “Freestyle project”.
+To create a new “Freestyle project” you need to go to
+the Jenkins dashboard and click the **“New
+Item”** button.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-29.png
+
+The screenshot of Jenkins Dashboard web page with
+the pointer to "New Item" button
+
+Enter the name of the Github “Freestyle project”
+(“pipeline” name is going to be used further) and then
+click the button **“OK”**.
+
+.. figure:: media/CICD-by-Zufar/CICD-by-Zufar-30.png
+
+The screenshot of Jenkins New Item web page with
+the pointer to "Item name" item box
+
+Then provide the **Description** of the pipeline.
