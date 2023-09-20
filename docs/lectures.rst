@@ -4,5 +4,5 @@ Lectures
 .. toctree::
    :maxdepth: 4
 
-   Lecture1
+   VM Docker
    Lecture2

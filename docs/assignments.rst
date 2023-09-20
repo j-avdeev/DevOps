@@ -4,7 +4,5 @@ Assignments
 .. toctree::
    :maxdepth: 4
 
-   Assignment1
+   CICD-by-Zufar
    VM-RAID-Minikube
-   lw
-   tests
