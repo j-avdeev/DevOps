@@ -73,7 +73,7 @@ Total:            100%
    :widths: 25 25 50
    :header-rows: 1
 
-   * - 
+   * - ...
      - 1-RAID-Minikube
      - 2-Git CI-Jenkins
      - 3-Helm
@@ -88,7 +88,6 @@ Total:            100%
      - 25.03.2023 (0.25 pts)
      - 22.04.2023 (0.25 pts)
      - 22.04.2023 (0.25 pts)
-
 
 
 |                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4-Monitoring |
