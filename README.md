@@ -2,7 +2,6 @@
 
 Pages: https://j-avdeev.github.io/DevOps/
 
-Teams: [Link to meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_Y2JhNzY3NzEtOGEzNy00NmQwLWJiOGUtZWM1OGY0OWQyMmUy%40thread.v2/0?context=%7b%22Tid%22%3a%22bf863923-e2ac-4dac-9caa-f42937e0db49%22%2c%22Oid%22%3a%22d9f34553-261e-4536-8978-84cfa6092f66%22%7d)
 
 ## Course Outline
 1. Software development lifecycle, ISO/IEC 12207.
