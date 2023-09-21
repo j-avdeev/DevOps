@@ -90,6 +90,20 @@ Total:            100%
      - 22.04.2023 (0.25 pts)
 
 
+.. list-table:: Title
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Heading row 1, column 1
+     - Heading row 1, column 2
+     - Heading row 1, column 3
+   * - Row 1, column 1
+     -
+     - Row 1, column 3
+   * - Row 2, column 1
+     - Row 2, column 2
+     - Row 2, column 3
+
 |                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4-Monitoring |
 | ---------------------------------------- | --- | --- | --- |--- |
 | Soft Deadline (50% reduction if missed)  | 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts)| 15.04.2023 (0.5 pts) | 15.04.2023 (0.5 pts) |
