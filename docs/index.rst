@@ -13,7 +13,7 @@ Deployment and life cycle of a modern software
    assignments
 
 Course Outline
-==============
+--------------
 
 1. Virtualization, hypervisors (Virtualbox, VMware)
 2. Version Control Systems (VCS) Git
@@ -22,7 +22,8 @@ Course Outline
 5. Monitoring tools
 
 
-## Videos
+Videos
+------
 - DevOps Lecture 01: DevOps Lifecycle | - |[2020'RUS](https://www.youtube.com/watch?v=BD2BxNY6F58) 
 - DevOps Lecture 02: RAID VM Docker | [2021'RUS](https://www.youtube.com/watch?v=FRlZuZ6d14E) | [2020'RUS](https://www.youtube.com/watch?v=BC19Gl2u4wc) | [2019'ENG](https://www.youtube.com/watch?v=lOhF1R2QrkU) 
 - DevOps Lecture: Docker [2021'RUS](https://www.youtube.com/watch?v=MclSAaC4A_c)
@@ -30,7 +31,8 @@ Course Outline
 - DevOps Lecture 04: Zabbix Web Scenario | [2019'ENG](https://www.youtube.com/watch?v=Qe9_KXIAW98)
 - DevOps Lecture 05: Zabbix Agent | [2019'ENG](https://www.youtube.com/watch?v=uUteBUB85_A) | [2020'RUS](https://youtu.be/Ak9VbVCpkjk)
 
-## References
+References
+----------
 - Bash
   * Bash - [Beginner's Guide to the Bash Terminal (ENG)](https://www.youtube.com/watch?v=oxuRxtrO2Ag) (cd, making directory, editing files, sudo etc.)
   * Bash - [Linux Command Line Pipes and Redirection (ENG)](https://www.youtube.com/watch?v=mV_8GbzwZMM)
@@ -54,20 +56,14 @@ Course Outline
 - Kubernetes The Hard Way by Kelsey Hightower. This tutorial walks you through setting up Kubernetes the hard way https://github.com/kelseyhightower/kubernetes-the-hard-way
 - I took some funny pictures from [Udacity: Intro to DevOps](https://classroom.udacity.com/courses/ud611/)
 
-## Textbooks:
+Textbooks:
+----------
 
 * O'Reilly Media, Linux in a Nutshell
 * Джез Хамбл, Дейвид Фарли, Непрерывное развертывание: Автоматизация процессов сборки, тестирования и внедрения новых версий программ
 * O'Reilly, Managing Kubernetes: Operating Kubernetes Clusters in the Real World by Craig Tracey, Brendan Burns
 * O'Reilly, Cloud Native DevOps with Kubernetes, Justin Domingus and John Arundel
 
-### Course Evaluation
-```
-Assignments:      100%
-Final Exam:       0%
-Total:            100%
-
-```
 
 .. list-table:: Assignment Deadlines 'Autumn 2023
    :widths: 30 20 20 20 20
@@ -90,11 +86,6 @@ Total:            100%
      - 22.04.2023 (0.25 pts)
 
 
-|                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4-Monitoring |
-| ---------------------------------------- | --- | --- | --- |--- |
-| Soft Deadline (50% reduction if missed)  | 11.03.2023 (0.5 pts)| 18.03.2023 (0.5 pts)| 15.04.2023 (0.5 pts) | 15.04.2023 (0.5 pts) |
-| Hard Deadline (100% reduction if missed) | 18.03.2023 (0.25 pts) | 25.03.2023 (0.25 pts) | 22.04.2023 (0.25 pts) | 22.04.2023 (0.25 pts)|
-
 Some assignments has Additions. Additional assignments are optional. Additional assignments have no deadlines.
 
 
@@ -108,10 +99,4 @@ Some assignments has Additions. Additional assignments are optional. Additional 
       3-Helm;
       Assignment4;
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
