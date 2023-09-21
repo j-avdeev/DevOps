@@ -3,8 +3,8 @@ import sys
 sys.path.insert(0, os.path.abspath('../DevOps'))
 
 project = 'DevOps'
-copyright = '2023, redandgreen.co.uk'
-author = 'Mr Moo'
+copyright = '2023'
+author = 'Autor'
 release = '0.0.1'
 
 
