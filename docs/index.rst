@@ -72,18 +72,18 @@ Textbooks:
    :header-rows: 1
 
    * - ...
-     - 1-RAID-Minikube
-     - 2-Git CI-Jenkins
-     - 3-Helm
+     - 1-Git-Jenkins
+     - 2-Docker
+     - 3-Kubernetes
      - 4-Monitoring
    * - Soft Deadline (50% reduction if missed)
-     - 11.03.2023 (0.5 pts)
-     - 18.03.2023 (0.5 pts)
+     - 15.10.2023 (1 pts)
+     - 22.10.2023 (1 pts)
      - 15.04.2023 (0.5 pts)
      - 15.04.2023 (0.5 pts)
    * - Hard Deadline (100% reduction if missed)
-     - 18.03.2023 (0.25 pts)
-     - 25.03.2023 (0.25 pts)
+     - 22.10.2023 (0.5 pts)
+     - 05.11.2023 (0.5 pts)
      - 22.04.2023 (0.25 pts)
      - 22.04.2023 (0.25 pts)
 
