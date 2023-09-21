@@ -33,8 +33,10 @@ Videos
 
 References
 ----------
+- Github Student Pack https://education.github.com/pack
+
 - Bash
-  * Bash - [Beginner's Guide to the Bash Terminal (ENG)](https://www.youtube.com/watch?v=oxuRxtrO2Ag) (cd, making directory, editing files, sudo etc.)
+  * `Beginner's Guide to the Bash Terminal (ENG) <https://www.youtube.com/watch?v=oxuRxtrO2Ag>`_ (cd, making directory, editing files, sudo etc.)
   * Bash - [Linux Command Line Pipes and Redirection (ENG)](https://www.youtube.com/watch?v=mV_8GbzwZMM)
 - Kubernetes
   * [Minikube video tutorial (RUS)](https://www.youtube.com/watch?v=Amkkr4_nsyc)
