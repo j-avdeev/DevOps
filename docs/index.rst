@@ -70,7 +70,7 @@ Total:            100%
 ```
 
 .. list-table:: Assignment Deadlines 'Autumn 2023
-   :widths: 25 25 50
+   :widths: 30 20 20 20 20
    :header-rows: 1
 
    * - ...
@@ -89,20 +89,6 @@ Total:            100%
      - 22.04.2023 (0.25 pts)
      - 22.04.2023 (0.25 pts)
 
-
-.. list-table:: Title
-   :widths: 25 25 50
-   :header-rows: 1
-
-   * - Heading row 1, column 1
-     - Heading row 1, column 2
-     - Heading row 1, column 3
-   * - Row 1, column 1
-     -
-     - Row 1, column 3
-   * - Row 2, column 1
-     - Row 2, column 2
-     - Row 2, column 3
 
 |                                          |  1-RAID-Minikube | 2-Git CI-Jenkins | 3-Helm | 4-Monitoring |
 | ---------------------------------------- | --- | --- | --- |--- |
