@@ -2,7 +2,8 @@ Assignments
 ===========
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
+   CICD-1-Git-Jenkins
    CICD-by-Zufar
    VM-RAID-Minikube
