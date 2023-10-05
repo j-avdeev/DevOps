@@ -74,16 +74,16 @@ Textbooks:
    * - ...
      - 1-Git-Jenkins
      - 2-Docker
-     - 3-Kubernetes
-     - 4-Monitoring
+     - 3-Nexus
+     - 4-Ansible
    * - Soft Deadline (50% reduction if missed)
      - 15.10.2023 (1 pts)
-     - 22.10.2023 (1 pts)
+     - 22.10.2023 (0.5 pts)
      - 15.04.2023 (0.5 pts)
      - 15.04.2023 (0.5 pts)
    * - Hard Deadline (100% reduction if missed)
      - 22.10.2023 (0.5 pts)
-     - 05.11.2023 (0.5 pts)
+     - 05.11.2023 (0.25 pts)
      - 22.04.2023 (0.25 pts)
      - 22.04.2023 (0.25 pts)
 

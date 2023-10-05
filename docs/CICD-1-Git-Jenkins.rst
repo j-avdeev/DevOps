@@ -941,6 +941,17 @@ To find JDK path, use this command.
     The screenshot of AWS EC2 Virtual Server instance
     terminal web page with .bash_profile file
 
+Or in .bashrc file. Accordingly to your maven version:
+
+.. code:: bash
+
+   export M2_HOME=/opt/apache-maven-3.9.4
+   export M2=/opt/apache-maven-3.9.4/bin
+
+   PATH=$PATH:$M2:$M2_HOME
+   export PATH
+
+
 .. note::
 
    **How to use VIM**
