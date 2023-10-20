@@ -39,5 +39,6 @@ After completing the course, the students should be able to:
   * [Kubenetes course by Слёрм (RUS)](https://www.youtube.com/playlist?list=PL8D2P0ruohOBSA_CDqJLflJ8FLJNe26K-)
 
 
-DevOps Spring'23 Results Table:
-https://docs.google.com/spreadsheets/d/1bHkpKsSENh0gkB9hMo2kfTFa7Q3k36vr5fBXZVYTFDY/edit?usp=sharing
+DevOps Autumn'23 Results Table:
+[https://docs.google.com/spreadsheets/d/1bHkpKsSENh0gkB9hMo2kfTFa7Q3k36vr5fBXZVYTFDY/edit?usp=sharing
+](https://docs.google.com/spreadsheets/d/1__NQhRQ_8DyOFM_F_Nc2ldODS4Ncys3ghjrEBAuqiI8/edit?usp=sharing)https://docs.google.com/spreadsheets/d/1__NQhRQ_8DyOFM_F_Nc2ldODS4Ncys3ghjrEBAuqiI8/edit?usp=sharing
