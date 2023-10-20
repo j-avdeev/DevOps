@@ -94,11 +94,9 @@ Some assignments has Additions. Additional assignments are optional. Additional 
 .. mermaid::
 
    graph BT;
-      1-RAID-Minikube --> 1.1-Packer+0.2-pts;
-      1-RAID-Minikube --> 1.2-Hello-Minikube+0.2-pts;
-      2-Git-CI-Jenkins --> 2.1-Git-CI-ArgoCD+0.25-pts;
-      2-Git-CI-Jenkins --> 2.1-Git-CI-Packer/Vagrant+0.25-pts;
-      3-Helm;
+      1-Git-Jenkins;
+      2-Docker;
+      3-Nexus Ansible --> 3.1 Nexus integraion +0.5 pts;
       Assignment4;
 
 
