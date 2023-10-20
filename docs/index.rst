@@ -96,7 +96,7 @@ Some assignments has Additions. Additional assignments are optional. Additional 
    graph BT;
       1-Git-Jenkins;
       2-Docker;
-      3-Nexus Ansible --> 3.1 Nexus integraion +0.5 pts;
+      3-Nexus-Ansible --> 3.1-Nexus-integraion+0.5-pts;
       Assignment4;
 
 
