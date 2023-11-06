@@ -97,6 +97,6 @@ Some assignments has Additions. Additional assignments are optional. Additional 
       1-Git-Jenkins;
       2-Docker;
       3-Nexus-Ansible --> 3.1-Nexus-integraion+0.5-pts;
-      Assignment4;
+      4-Kubernetes;
 
 
