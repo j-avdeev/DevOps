@@ -79,12 +79,12 @@ Textbooks:
    * - Soft Deadline (50% reduction if missed)
      - 15.10.2023 (1 pts)
      - 22.10.2023 (0.5 pts)
-     - 12.11.2023 (1 pts)
+     - 19.11.2023 (1 pts)
      - 26.11.2023 (1 pts)
    * - Hard Deadline (100% reduction if missed)
      - 22.10.2023 (0.5 pts)
      - 05.11.2023 (0.25 pts)
-     - 19.11.2023 (0.5 pts)
+     - 26.11.2023 (0.5 pts)
      - 03.12.2023 (0.25 pts)
 
 
