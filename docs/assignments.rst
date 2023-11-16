@@ -9,5 +9,6 @@ Assignments
    CICD-2-Docker
    CICD-3-Nexus
    CICD-4-K8S
+   CICD-5-Monitoring
    CICD-by-Zufar
    VM-RAID-Minikube
