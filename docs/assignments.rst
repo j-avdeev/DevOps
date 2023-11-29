@@ -10,5 +10,6 @@ Assignments
    CICD-3-Nexus
    CICD-4-K8S
    CICD-5-Monitoring
+   CICD-6-Cloud
    CICD-by-Zufar
    VM-RAID-Minikube
