@@ -83,14 +83,14 @@ Textbooks:
      - 22.10.2023 (0.5 pts)
      - 19.11.2023 (1 pts)
      - 26.11.2023 (1 pts)
-     - 03.12.2023 (1 pts)
+     - 10.12.2023 (1 pts)
      - no deadline
    * - Hard Deadline (100% reduction if missed)
      - 22.10.2023 (0.5 pts)
      - 05.11.2023 (0.25 pts)
      - 26.11.2023 (0.5 pts)
      - 03.12.2023 (0.5 pts)
-     - 10.12.2023 (0.5 pts)
+     - 17.12.2023 (0.5 pts)
      - no deadline
 
 
