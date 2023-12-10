@@ -68,7 +68,7 @@ Textbooks:
 
 
 .. list-table:: Assignment Deadlines 'Autumn 2023
-   :widths: 30 20 20 20 20
+   :widths: 30 20 20 20 20 20 20
    :header-rows: 1
 
    * - ...
