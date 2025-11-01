@@ -1,0 +1,2769 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins &mdash; DevOps 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ce236e8" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VM-RAID-Minikube" href="VM-RAID-Minikube.html" />
+    <link rel="prev" title="Cloud" href="CICD-6-Cloud.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DevOps
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lectures.html">Lectures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="assignments.html">Assignments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CICD-1-Git-Jenkins.html">Building a CI/CD Pipeline. Part1 Git-Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-1-Git-Jenkins%20%28on%20premise%29.html">Building a CI/CD Pipeline. Part1 Git-Jenkins (on premise)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-2-Docker.html">Building a CI/CD Pipeline. Part2 Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-3-Nexus.html">Building a CI/CD Pipeline. Part3 Nexus Ansible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-4-K8S.html">Building a CI/CD Pipeline. Part4 Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-5-Monitoring.html">Monitoring - Prometheus Grafana</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-6-Cloud.html">Cloud</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VM-RAID-Minikube.html">VM-RAID-Minikube</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DevOps</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="assignments.html">Assignments</a></li>
+      <li class="breadcrumb-item active">Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CICD-by-Zufar.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-a-ci-cd-pipeline-with-aws-k8s-docker-ansible-git-github-apache-maven-and-jenkins">
+<h1>Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins<a class="headerlink" href="#building-a-ci-cd-pipeline-with-aws-k8s-docker-ansible-git-github-apache-maven-and-jenkins" title="Link to this heading"></a></h1>
+<p>Source: <a class="reference external" href="https://hackernoon.com/building-a-cicd-pipeline-with-aws-k8s-docker-ansible-git-github-apache-maven-and-jenkins">https://hackernoon.com/building-a-cicd-pipeline-with-aws-k8s-docker-ansible-git-github-apache-maven-and-jenkins</a></p>
+<p class="rubric" id="h-motivation"><strong>Motivation</strong></p>
+<p>CI/CD is a technique for delivering apps to customers,
+achieved by adding automation to different stages of
+app development. I believe that grasping CI/CD
+(Continuous Integration and Continuous Deployment) can
+empower developers to gain a better understanding of
+how backend project artifacts exist beyond the
+boundaries of the project repository. This
+comprehension can also create a fundamental shift in a
+developer’s perspective. Instead of merely viewing
+their work as lines of code, they can start to embrace
+the broader context of their project as a valuable
+product.</p>
+<p>In this article, we aim to demystify the CI/CD process
+through practical application. We’ll take you through
+a step-by-step tutorial, breaking it down module by
+module, where you’ll build a CI/CD pipeline manually.
+To do this, we’ll harness the power of contemporary
+DevOps tools like <strong>AWS, Docker, Kubernetes, Ansible,
+Git, Apache Maven,</strong> and <strong>Jenkins</strong>. So, let’s begin
+this journey!</p>
+<p class="rubric" id="h-module-1-aws-ec-2-virtual-server"><strong>[Module 1]: AWS EC2 Virtual Server</strong></p>
+<p>This module is dedicated to the creation of an AWS EC2
+Virtual Server instance. As part of this article, you
+will be setting up three EC2 instances for Jenkins,
+Ansible, and Kubernetes. For now, you can proceed with
+the next modules and revisit this module in “[module
+2]: Jenkins”, “[module 6]: Ansible” and “[module 7]:
+Kubernetes” sections.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="h-step-1-create-an-aws-account"><strong>Step 1: Create an AWS Account</strong></p>
+<p>Go to <a class="reference external" href="https://aws.amazon.com">https://aws.amazon.com</a>.</p>
+<p>Click the button <strong>Create an AWS Account</strong>.</p>
+<figure class="align-default" id="id16">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-1.png"><img alt="_images/CICD-by-Zufar-1.png" src="_images/CICD-by-Zufar-1.png" style="width: 600.0px; height: 88.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS main web page with the
+pointer to “Create an AWS Account” button</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Follow the instructions on the create account web
+page.</p>
+<p class="rubric" id="h-step-2-sign-in-to-your-aws-account"><strong>Step 2: Sign In to your AWS Account</strong></p>
+<p>Go to <a class="reference external" href="https://console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>.
+Click the <strong>Sign In</strong> button.</p>
+<figure class="align-default" id="id17">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-2.png"><img alt="_images/CICD-by-Zufar-2.png" src="_images/CICD-by-Zufar-2.png" style="width: 600.0px; height: 89.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS main web page with the
+pointer to “Sign In” button</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Enter all necessary credentials on this web page.</p>
+<p class="rubric" id="h-step-3-find-ec-2-virtual-server"><strong>Step 3: Find EC2 Virtual Server</strong></p>
+<p>Find EC2 in the search box.</p>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-3.png"><img alt="_images/CICD-by-Zufar-3.png" src="_images/CICD-by-Zufar-3.png" style="width: 353.5px; height: 32.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+the search box</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Choose EC2 Virtual Server by clicking <strong>EC2 Service</strong>.</p>
+<figure class="align-default" id="id19">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-4.png"><img alt="_images/CICD-by-Zufar-4.png" src="_images/CICD-by-Zufar-4.png" style="width: 557.5px; height: 142.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“EC2” AWS service</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Click the button <strong>Launch Instance</strong>.</p>
+<figure class="align-default" id="id20">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-5.png"><img alt="_images/CICD-by-Zufar-5.png" src="_images/CICD-by-Zufar-5.png" style="width: 267.5px; height: 88.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Launch instance” button</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-configure-name-and-tags-section"><strong>Step 4: Configure “Name and tags“
+section</strong></p>
+<p>Go to the <strong>“Name and tags”</strong> section.</p>
+<figure class="align-default" id="id21">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-6.png"><img alt="_images/CICD-by-Zufar-6.png" src="_images/CICD-by-Zufar-6.png" style="width: 182.5px; height: 53.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Name and tags” section</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Provide a name for a new AWS EC2 Virtual Server
+instance in the <strong>“Name”</strong> section.</p>
+<figure class="align-default" id="id22">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-7.png"><img alt="_images/CICD-by-Zufar-7.png" src="_images/CICD-by-Zufar-7.png" style="width: 394.0px; height: 95.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Name” input box in “Name and tags” section</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can also add additional tags for your virtual
+server by clicking <strong>”Add additional tags”</strong>.</p>
+<p class="rubric" id="h-step-5-configure-application-and-os-images-amazon-machine-image-section"><strong>Step 5: Configure “Application and OS
+Images (Amazon Machine Image)“ section</strong></p>
+<p>Go to the <strong>“Application and OS Images (Amazon Machine
+Image)”</strong> section.</p>
+<figure class="align-default" id="id23">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-8.png"><img alt="_images/CICD-by-Zufar-8.png" src="_images/CICD-by-Zufar-8.png" style="width: 414.0px; height: 64.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Application and OS Images (Amazon Machine Image)”
+section</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To play with the virtual server for <strong>FREE</strong>:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Select the operating system for your virtual</dt><dd><p>server - <strong>Amazon Linux</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>In the <strong>Amazon Machine Image (AMI)</strong> section,</dt><dd><p>select a machine with the <strong>Free tier eligible
+tag</strong>.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<figure class="align-default" id="id24">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-9.png"><img alt="_images/CICD-by-Zufar-9.png" src="_images/CICD-by-Zufar-9.png" style="width: 402.0px; height: 357.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“OS” and “Machine type” buttons in “Application and
+OS Images (Amazon Machine Image)” section</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-6-configure-instance-type-section"><strong>Step 6: Configure “Instance type“
+section</strong></p>
+<p>Go to the <strong>”Instance type”</strong> section.</p>
+<figure class="align-default" id="id25">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-10.png"><img alt="_images/CICD-by-Zufar-10.png" src="_images/CICD-by-Zufar-10.png" style="width: 414.0px; height: 43.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Instance type” section</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>To play with the virtual server for <strong>FREE</strong>:</p>
+<p>Select a type with the <strong>Free tier eligible
+tag</strong> in the <strong>Instance type</strong> section.</p>
+<p>For me it is <strong>t2.micro (Family: t2 1cCPU 1 GiB
+Memory Current generation:true)</strong>.</p>
+<figure class="align-default" id="id26">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-11.png"><img alt="_images/CICD-by-Zufar-11.png" src="_images/CICD-by-Zufar-11.png" style="width: 411.0px; height: 133.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Instance type” dropdown in “Instance type” section</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-7-configure-configure-storage-section"><strong>Step 7: Configure “Configure storage“
+section</strong></p>
+<p>Go to the <strong>”Configure storage”</strong> section.</p>
+<figure class="align-default" id="id27">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-12.png"><img alt="_images/CICD-by-Zufar-12.png" src="_images/CICD-by-Zufar-12.png" style="width: 411.5px; height: 37.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Configure storage” section</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To play with the virtual server for <strong>FREE</strong>:
+Do not change default settings. Free tier eligible
+customers can get <strong>30 GB of EBS General Purpose
+(SSD) or Magnetic storage</strong>.</p>
+</div>
+<figure class="align-default" id="id28">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-13.png"><img alt="_images/CICD-by-Zufar-13.png" src="_images/CICD-by-Zufar-13.png" style="width: 401.0px; height: 164.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+storage possible configurations in “Configure
+storage” section</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-8-configure-network-settings-section"><strong>Step 8: Configure “Network settings“
+section</strong></p>
+<p>Go to the <strong>“Network settings“</strong> section.</p>
+<figure class="align-default" id="id29">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-14.png"><img alt="_images/CICD-by-Zufar-14.png" src="_images/CICD-by-Zufar-14.png" style="width: 414.0px; height: 42.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Network settings” section</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You need to set up the security of your virtual
+server. To do this,</p>
+<ol class="arabic simple">
+<li><p>Click on the <strong>“Create security group”</strong> button.</p></li>
+</ol>
+<p>#. Add the name of your new security group in
+the <strong>“Security group name”</strong> section.
+#. Add a description of your new security group in
+the <strong>“Description”</strong> section.</p>
+<p>By default, your virtual server is accessible via
+(<strong>Type - SSH, Protocol - TCP, Port - 22</strong>). If you
+need additional connection types, add them by adding
+additional inbound security group rules.</p>
+<figure class="align-default" id="id30">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-15.png"><img alt="_images/CICD-by-Zufar-15.png" src="_images/CICD-by-Zufar-15.png" style="width: 382.5px; height: 451.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Security group” in “Network settings” section</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-9-configure-key-pair-login-section"><strong>Step 9: Configure “Key pair (login)“
+section</strong></p>
+<p>Go to the <strong>”Key pair (Login)”</strong> section.</p>
+<figure class="align-default" id="id31">
+<img alt="_images/CICD-by-Zufar-16.png" src="_images/CICD-by-Zufar-16.png" />
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Ket pair (login)” section</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Create a new key-pair if you haven’t created it yet.</p>
+<figure class="align-default" id="id32">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-17.png"><img alt="_images/CICD-by-Zufar-17.png" src="_images/CICD-by-Zufar-17.png" style="width: 333.0px; height: 351.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Key pair name”, “Key pair type”, “Private key file
+format” in “Ket pair (login)” section</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>If you haven’t created <strong>“key-pair”</strong> yet:</p>
+<ol class="arabic simple">
+<li><p>Click the <strong>“Create new key pair”</strong> button.</p></li>
+<li><p>Give your new key-pair a name in the <strong>“Key pair
+name”</strong> section.</p></li>
+<li><p>Select key-pair type <strong>RSA</strong> or <strong>ED25519</strong>. I
+choose the <strong>RSA</strong> type.</p></li>
+<li><p>Select Private key file format. Choice
+of <strong>.pem</strong> and <strong>.ppk</strong>. I choose
+the <strong>.pem</strong> format.</p></li>
+<li><p>Click on the <strong>“Create key pair”</strong> button.</p></li>
+<li><p>You will get a pop-up window that will prompt you
+to download the Private key file. Agree and
+download the file to your computer.</p></li>
+</ol>
+<p class="rubric" id="h-step-10-launch-the-ec-2-virtual-server-instance"><strong>Step 10: Launch the EC2 Virtual Server
+Instance</strong></p>
+<p>Launch the EC2 Virtual Server instance by clicking the
+button <strong>“Launch instance”</strong>.</p>
+<figure class="align-default" id="id33">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-18.png"><img alt="_images/CICD-by-Zufar-18.png" src="_images/CICD-by-Zufar-18.png" style="width: 186.5px; height: 54.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Launch Instance” button</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>After the completion of the EC2 Virtual Server
+instance creation process, you will see the following.</p>
+<figure class="align-default" id="id34">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-19.png"><img alt="_images/CICD-by-Zufar-19.png" src="_images/CICD-by-Zufar-19.png" style="width: 240.5px; height: 69.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the AWS web page displaying a
+‘Success’ notification, indicating the successful
+completion of the EC2 Virtual Server instance
+creation process</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you should go to the <strong>“Instances“</strong> section by
+clicking <strong>“View all instances”</strong> button.</p>
+<figure class="align-default" id="id35">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-20.png"><img alt="_images/CICD-by-Zufar-20.png" src="_images/CICD-by-Zufar-20.png" style="width: 424.5px; height: 83.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+running EC2 instance</span><a class="headerlink" href="#id35" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see that your AWS EC2 Virtual Server
+instance is running.</p>
+<hr class="docutils" />
+<p class="rubric" id="h-module-2-jenkins-server"><strong>[Module 2]: Jenkins Server</strong></p>
+<p>Now, let’s configure JenkinsServer on the EC2 Virtual
+Server instance.</p>
+<p class="rubric" id="h-step-1-create-an-aws-ec-2-virtual-server-instance"><strong>Step 1: Create an AWS EC2 Virtual Server
+instance</strong></p>
+<p>You need a virtual server to run Jenkins.</p>
+<p>Follow instructions from <strong>[Module 1]: AWS EC2 Virtual
+Server</strong> section of this tutorial to finish this step
+and create an EC2 virtual server instance with the
+name JenkinsServer.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to add a security group setup. It
+allows <strong>Jenkins</strong> and <strong>SSH</strong> to work on
+port <strong>8080</strong> and <strong>22</strong> respectively.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the name <strong>“JenkinsServer”</strong> to distinguish
+your EC2 Virtual Server instance.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Create <strong>“CI_CD_Pipeline”</strong> security group
+and <strong>“CI_CD_Pipeline_Key_Pair“</strong> for a
+new <strong>“JenkinsServer”</strong> AWS EC2 instance. You can
+reuse them further in the article.</p>
+</div>
+<p class="rubric" id="h-step-2-connect-to-an-aws-ec-2-virtual-server-instance"><strong>Step 2: Connect to an AWS EC2 Virtual
+Server instance</strong></p>
+<p>Go to <strong>AWS Console home page</strong> → <strong>EC2 Management
+Console Dashboard</strong> → <strong>Instances.</strong></p>
+<p>Then you should choose <strong>JenkinsServer</strong> and then
+click the <strong>“Connect”</strong> button.</p>
+<figure class="align-default" id="id36">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-21.png"><img alt="_images/CICD-by-Zufar-21.png" src="_images/CICD-by-Zufar-21.png" style="width: 259.5px; height: 60.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS “Instances” web page with the
+pointer to “Connect” button</span><a class="headerlink" href="#id36" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you will see this web page. You should again
+click the <strong>“Connect”</strong> button.</p>
+<figure class="align-default" id="id37">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-22.png"><img alt="_images/CICD-by-Zufar-22.png" src="_images/CICD-by-Zufar-22.png" style="width: 452.0px; height: 383.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS “Connect to Instance” web
+page with the pointer to “Connect” button</span><a class="headerlink" href="#id37" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see EC2 virtual server instance online
+terminal.</p>
+<figure class="align-default" id="id38">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-23.png"><img alt="_images/CICD-by-Zufar-23.png" src="_images/CICD-by-Zufar-23.png" style="width: 413.0px; height: 199.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal</span><a class="headerlink" href="#id38" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-3-download-the-jenkins-repository"><strong>Step 3: Download the Jenkins
+repository</strong></p>
+<p>Now you need to download Jenkins on your EC2 virtual
+server instance.</p>
+<p>Follow these instructions:</p>
+<ol class="arabic simple">
+<li><p>Go to Jenkins
+download <a class="reference external" href="https://www.jenkins.io/download">webpage</a>.</p></li>
+<li><p>You can see Stable (LTS) and Regular releases
+(Weekly) options. Choose <a class="reference external" href="https://pkg.jenkins.io/redhat-stable">Red
+Hat/Fedora/Alma/Rocky/CentOS</a>LTS
+option.</p></li>
+</ol>
+<p>You will see this web page.</p>
+<figure class="align-default" id="id39">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-24.png"><img alt="_images/CICD-by-Zufar-24.png" src="_images/CICD-by-Zufar-24.png" style="width: 561.5px; height: 323.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins download web page</span><a class="headerlink" href="#id39" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>Copy <strong>“sudo get..”</strong> command and execute it to
+download Jenkins files from the Jenkins repository
+on the Internet and save them to the specified
+location on your EC2 virtual server instance.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>/etc/yum.repos.d/jenkins.repo<span class="w"> </span>https://pkg.jenkins.io/redhat-stable/jenkins.repo
+</pre></div>
+</div>
+<p>Now Jenkins is downloaded.</p>
+<p class="rubric" id="h-step-4-import-jenkins-key"><strong>Step 4: Import Jenkins key</strong></p>
+<p>To finish the Jenkins installation, we need to import
+the Jenkins key.</p>
+<p>To import the Jenkins key we need to copy the <strong>“sudo
+rpm..”</strong> command and execute it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>rpm<span class="w"> </span>--import<span class="w"> </span>https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+</pre></div>
+</div>
+<div class="notice notice-info docutils container">
+<p>This way <strong>“rpm”</strong> package manager can verify that
+the Jenkins packages you install are exactly the
+ones published by the Jenkins project, and that
+they haven’t been tampered with or corrupted.</p>
+</div>
+<p class="rubric" id="h-step-5-install-java"><strong>Step 5: Install Java</strong></p>
+<p>To run Jenkins, we need to install <strong>Java</strong> on our EC2
+virtual server instance.</p>
+<p>To install <strong>Java</strong>, use this command.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>amazon-linux-extras<span class="w"> </span>install<span class="w"> </span>java-openjdk11<span class="w"> </span>-y
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Verify whether
+<strong>Java</strong>
+was installed correctly using this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>java<span class="w"> </span>-version
+</pre></div>
+</div>
+<p>You will see something like that.</p>
+<figure class="align-default" id="id40">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-25.png"><img alt="_images/CICD-by-Zufar-25.png" src="_images/CICD-by-Zufar-25.png" style="width: 955.0px; height: 237.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with installed JDK 11</span><a class="headerlink" href="#id40" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-6-install-fontconfig"><strong>Step 6: Install fontconfig</strong></p>
+<p>To run Jenkins, you need to install <strong>fontconfig</strong> on
+our EC2 virtual server instance.</p>
+<p>Use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>fontconfig<span class="w"> </span>java-11-openjdk<span class="w"> </span>-y
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fontconfig is a library designed to provide
+system-wide font configuration, customization and
+application access. It’s required by Jenkins
+because Jenkins has features that render fonts.</p>
+</div>
+<p class="rubric" id="h-step-7-install-jenkins"><strong>Step 7: Install Jenkins</strong></p>
+<p>In earlier steps, you configured your EC2 virtual
+server instance to use a specific Jenkins repository
+and then you imported the GPG key associated with this
+repository. Now, you need to run the command that will
+search all the repositories it knows about, including
+the Jenkins one you added, to find the Jenkins
+package. Once it finds the Jenkins package in the
+Jenkins repository, it will download and install it.</p>
+<p>Let’s run this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>jenkins<span class="w"> </span>-y
+</pre></div>
+</div>
+<p class="rubric" id="h-step-8-start-jenkins"><strong>Step 8: Start Jenkins</strong></p>
+<p>You can start Jenkins using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>jenkins
+</pre></div>
+</div>
+<p>To check that Jenkins is running use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>jenkins
+</pre></div>
+</div>
+<p>You will see the output as it is on the screenshot
+below:</p>
+<figure class="align-default" id="id41">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-26.png"><img alt="_images/CICD-by-Zufar-26.png" src="_images/CICD-by-Zufar-26.png" style="width: 1114.0px; height: 545.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with installed Jenkins</span><a class="headerlink" href="#id41" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Jenkins should now be up and running.</p>
+<p class="rubric" id="h-step-9-access-jenkins"><strong>Step 9: Access Jenkins</strong></p>
+<p>To access the Jenkins application, open any web
+browser and enter your EC2 instance’s public IP
+address or domain name followed by port 8080.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://&lt;your-ec2-ip&gt;:8080
+</pre></div>
+</div>
+<p>The first time you access Jenkins, it will be locked
+with an autogenerated password.</p>
+<figure class="align-default" id="id42">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-27.png"><img alt="_images/CICD-by-Zufar-27.png" src="_images/CICD-by-Zufar-27.png" style="width: 492.5px; height: 202.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Administrator
+password</span><a class="headerlink" href="#id42" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You need to display this password using the following
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cat<span class="w"> </span>/var/lib/jenkins/secrets/initialAdminPassword
+</pre></div>
+</div>
+<p>Copy this password, return to your browser, paste it
+into the Administrator password field, and click
+“Continue”.</p>
+<p>Then you will be able to see this web page.</p>
+<figure class="align-default" id="id43">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-28.png"><img alt="_images/CICD-by-Zufar-28.png" src="_images/CICD-by-Zufar-28.png" style="width: 490.5px; height: 237.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to “Customize
+Jenkins” web page</span><a class="headerlink" href="#id43" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now, you can use your Jenkins Server.</p>
+<p class="rubric" id="h-step-10-create-new-jenkins-pipeline"><strong>Step 10: Create new Jenkins pipeline</strong></p>
+<p>Now, as Jenkins is working fine, you can start
+creating the Jenkins pipeline. To create Jenkins
+pipeline you need to create a new “Freestyle project”.
+To create a new “Freestyle project” you need to go to
+the Jenkins dashboard and click the <strong>“New
+Item”</strong> button.</p>
+<figure class="align-default" id="id44">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-29.png"><img alt="_images/CICD-by-Zufar-29.png" src="_images/CICD-by-Zufar-29.png" style="width: 177.5px; height: 177.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Dashboard web page with
+the pointer to “New Item” button</span><a class="headerlink" href="#id44" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Enter the name of the Github “Freestyle project”
+(“pipeline” name is going to be used further) and then
+click the button <strong>“OK”</strong>.</p>
+<figure class="align-default" id="id45">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-30.png"><img alt="_images/CICD-by-Zufar-30.png" src="_images/CICD-by-Zufar-30.png" style="width: 206.0px; height: 199.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins New Item web page with
+the pointer to “Item name” item box</span><a class="headerlink" href="#id45" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then provide the <strong>Description</strong> of the pipeline.</p>
+<figure class="align-default" id="id46">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-31.png"><img alt="_images/CICD-by-Zufar-31.png" src="_images/CICD-by-Zufar-31.png" style="width: 416.0px; height: 270.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Job configuration web
+page with the pointer to “Description” input box</span><a class="headerlink" href="#id46" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then click the button “Apply” and “Save”. After that,
+it means you created the fundament of the pipeline
+which is going to be built in this tutorial.</p>
+<p class="rubric" id="h-module-3-git-and-github"><strong>[Module 3]: Git and Github</strong></p>
+<p>Now as Jenkins is running on AWS EC2 Virtual Server
+instance, you can configure Git with the pipeline.</p>
+<div class="notice notice-info docutils container">
+<p>Git is a <a class="reference external" href="https://git-scm.com/about/free-and-open-source">free and open
+source</a> distributed
+version control system (VCS) designed to help
+software teams keep track of every modification to
+the code in a special kind of database. If a
+mistake is made, developers can turn back the clock
+and compare earlier versions of the code to help
+fix the mistake while minimizing disruption to all
+team members. VCS is especially useful
+for <a class="reference external" href="https://www.atlassian.com/devops/what-is-devops">DevOps</a> teams
+since they help them to reduce development time and
+increase successful deployments [1].</p>
+</div>
+<p>Git as the most popular version control system enables
+us to pull the latest code from your project Github
+repository to your EC2 virtual server instance where
+your Jenkins is installed.</p>
+<p class="rubric" id="h-step-1-install-git"><strong>Step 1: Install Git</strong></p>
+<p>Use this command to install Git.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>Now verify Git is working, using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Now Git is working fine on EC2 Virtual Server
+instance.</p>
+<p class="rubric" id="h-step-2-open-jenkins-dashboard"><strong>Step 2: Open Jenkins dashboard</strong></p>
+<p>As Git is working fine on EC2 Virtual Server instance,
+we can integrate Jenkins with Git now.</p>
+<p>To start this integration let’s install Jenkins Github
+plugin.</p>
+<p>Go to Jenkins dashboard section.</p>
+<figure class="align-default" id="id47">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-32.png"><img alt="_images/CICD-by-Zufar-32.png" src="_images/CICD-by-Zufar-32.png" style="width: 753.5px; height: 359.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins dashboard</span><a class="headerlink" href="#id47" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-3-open-jenkins-plugin-manager"><strong>Step 3: Open Jenkins Plugin Manager</strong></p>
+<p>Click the button <strong>“Manage Jenkins”</strong> and then click
+the button <strong>“Manage Plugins”</strong>.</p>
+<figure class="align-default" id="id48">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-33.png"><img alt="_images/CICD-by-Zufar-33.png" src="_images/CICD-by-Zufar-33.png" style="width: 763.0px; height: 319.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins dashboard with the
+pointer to “Manage Plugins” button</span><a class="headerlink" href="#id48" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-find-github-jenkins-plugin"><strong>Step 4: Find Github Jenkins plugin</strong></p>
+<p>Click the button <strong>“Available plugins”</strong>.</p>
+<figure class="align-default" id="id49">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-34.png"><img alt="_images/CICD-by-Zufar-34.png" src="_images/CICD-by-Zufar-34.png" style="width: 525.0px; height: 237.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Available plugins” button</span><a class="headerlink" href="#id49" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Find the <strong>Github</strong> plugin Search box.</p>
+<figure class="align-default" id="id50">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-35.png"><img alt="_images/CICD-by-Zufar-35.png" src="_images/CICD-by-Zufar-35.png" style="width: 419.5px; height: 278.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Github” plugin</span><a class="headerlink" href="#id50" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Select <strong>Github</strong> plugin.</p>
+<p class="rubric" id="h-step-5-install-github-jenkins-plugin"><strong>Step 5: Install Github Jenkins plugin</strong></p>
+<p>Select <strong>Github</strong> plugin. And then click the
+button <strong>“Install without restart”</strong>.</p>
+<figure class="align-default" id="id51">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-36.png"><img alt="_images/CICD-by-Zufar-36.png" src="_images/CICD-by-Zufar-36.png" style="width: 421.0px; height: 437.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Install without restart”
+button</span><a class="headerlink" href="#id51" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Wait for the end of the Github plugin downloading.</p>
+<figure class="align-default" id="id52">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-37.png"><img alt="_images/CICD-by-Zufar-37.png" src="_images/CICD-by-Zufar-37.png" style="width: 476.5px; height: 245.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the downloading Github plugin</span><a class="headerlink" href="#id52" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Yes! The Jenkins Github plugin is installed.</p>
+<p class="rubric" id="h-step-6-configure-github-jenkins-plugin"><strong>Step 6: Configure Github Jenkins
+Plugin</strong></p>
+<p>Now as the GitHub Jenkins plugin is installed, you can
+configure this plugin to integrate Jenkins with Git
+finally. To do that you need to return to the main
+page by clicking the button “Go back to the top page”.</p>
+<figure class="align-default" id="id53">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-38.png"><img alt="_images/CICD-by-Zufar-38.png" src="_images/CICD-by-Zufar-38.png" style="width: 341.0px; height: 111.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Go back to the top page”
+button</span><a class="headerlink" href="#id53" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then on the main page, you need to click the
+button <strong>“Manage Jenkins”</strong> and then click the
+button <strong>“Global tool configuration”</strong>.</p>
+<figure class="align-default" id="id54">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-39.png"><img alt="_images/CICD-by-Zufar-39.png" src="_images/CICD-by-Zufar-39.png" style="width: 564.0px; height: 306.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Global tool configuration”
+button</span><a class="headerlink" href="#id54" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then on the Global Tool Configuration web page you
+should go to the Git section.</p>
+<figure class="align-default" id="id55">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-40.png"><img alt="_images/CICD-by-Zufar-40.png" src="_images/CICD-by-Zufar-40.png" style="width: 238.5px; height: 222.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Global Tool Configuration
+web page with the pointer to “Name” and “Path to
+Git executable” input boxes</span><a class="headerlink" href="#id55" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the Git section, you need to configure Git by
+providing the name and path to Git on the computer.</p>
+<p>Then click the
+<strong>“Apply”</strong> and <strong>“Save”</strong> buttons**.**</p>
+<p>Here, you have finished configuring the Jenkins Github
+plugin.</p>
+<p class="rubric" id="h-step-7-integrate-git-into-the-pipeline"><strong>Step 7: Integrate Git into the
+pipeline</strong></p>
+<p>Now, as the Jenkins Github plugin is installed and
+configured, you’re now able to utilize this plugin
+within your pipeline. This will allow your pipeline
+which you created in module 2 to pull your project
+code from the specified GitHub repository.</p>
+<p>Well, to integrate this plugin into your pipeline you
+need to go to the Source Code Management section and
+choose Git in your pipeline. Then you need to provide
+your project repository URL. If your project
+repository is public on Github, you do not need to
+provide credentials. If the project repository is
+private on Github, you need to provide credentials.</p>
+<figure class="align-default" id="id56">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-41.png"><img alt="_images/CICD-by-Zufar-41.png" src="_images/CICD-by-Zufar-41.png" style="width: 257.0px; height: 420.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Job configuration web
+page with “Source Code Management” settings</span><a class="headerlink" href="#id56" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can use my project with the next Repositiry
+URL: <a class="reference external" href="https://github.com/Sunagatov/Hello.git">https://github.com/Sunagatov/Hello.git</a>.</p>
+<p>Just copy and paste it to the “<strong>Repository
+URL”</strong> input. Then click the
+<strong>“Apply”</strong> and <strong>“Save”</strong> buttons to finish the
+integration Git with the pipeline.</p>
+<p class="rubric" id="h-step-8-test-git-integrated-into-the-pipeline"><strong>Step 8: Test Git integrated into the
+pipeline</strong></p>
+<p>Now you can use your updated pipeline to pull a
+project from Github. To do that you need to click
+the <a href="#id1"><span class="problematic" id="id2">**</span></a>“Build Now”<a href="#id3"><span class="problematic" id="id4">**</span></a>button. As a result, you will see a
+successful build in the build history.</p>
+<figure class="align-default" id="id57">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-42.png"><img alt="_images/CICD-by-Zufar-42.png" src="_images/CICD-by-Zufar-42.png" style="width: 170.5px; height: 247.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins web page with pointers to
+“Build Now” button and “Build History” section</span><a class="headerlink" href="#id57" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Open the first build from the build history.</p>
+<figure class="align-default" id="id58">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-43.png"><img alt="_images/CICD-by-Zufar-43.png" src="_images/CICD-by-Zufar-43.png" style="width: 428.5px; height: 244.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Pull_Code_From_Github_Job
+with successful job result</span><a class="headerlink" href="#id58" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see the successful job result of the first
+build. If you open your AWS EC2 terminal. You can
+check that the pipeline works well.</p>
+<p>Just use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/var/lib/jenkins/workspace/<span class="o">{</span>your<span class="w"> </span>pipeline<span class="w"> </span>name<span class="o">}</span>
+</pre></div>
+</div>
+<p>This way you can see that your project from Github was
+pulled to your AWS EC2 virtual server instance.</p>
+<figure class="align-default" id="id59">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-44.png"><img alt="_images/CICD-by-Zufar-44.png" src="_images/CICD-by-Zufar-44.png" style="width: 260.5px; height: 33.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Github project downloaded into
+EC2 instance terminal</span><a class="headerlink" href="#id59" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-module-4-apache-maven"><strong>[Module 4]: Apache Maven</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Apache Maven</strong> is a widely used build automation
+and project management tool in software
+development. It streamlines the process of
+compiling, testing, and packaging code by managing
+project dependencies and providing a consistent
+build lifecycle. Maven employs XML-based
+configuration files (POM files) to define project
+structure, dependencies, and tasks, enabling
+developers to efficiently manage and deploy complex
+software projects.</p>
+</div>
+<p>Now that you have integrated Git into the pipeline,
+you can enhance the pipeline further by incorporating
+Apache Maven which enables you to build, test, and
+package your project. To do that you need to install
+Apache Maven on your AWS EC2 Virtual Server instance
+where Jenkins and Git were installed.</p>
+<p class="rubric" id="h-step-1-download-apache-maven"><strong>Step 1: Download Apache Maven</strong></p>
+<p>To download Apache Maven go to the
+<strong>“/opt”</strong> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/opt
+</pre></div>
+</div>
+<p>And then use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>wget<span class="w"> </span>https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+</pre></div>
+</div>
+<p>This command will download the latest official Apache
+Maven (check the latest version on the official Apache
+Maven website). To find the latest official Apache
+Maven release, use the
+link <a class="reference external" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a>.</p>
+<p class="rubric" id="h-step-2-extract-apache-maven-from-the-archive"><strong>Step 2: Extract Apache Maven from the
+archive</strong></p>
+<p>Use this command, to extract Apache Maven from the
+downloaded archive:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>tar<span class="w"> </span>-xvzf<span class="w"> </span>apache-maven-*.tar.gz
+</pre></div>
+</div>
+<p class="rubric" id="h-step-3-add-java-home-and-m-2-home"><strong>Step 3: Add JAVA_HOME and M2_HOME</strong></p>
+<p>Move to the root folder using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
+</pre></div>
+</div>
+<p>Edit <strong>.bash_profile</strong> file using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>.bash_profile
+</pre></div>
+</div>
+<p>Add <strong>JAVA_HOME</strong> and M2_HOME variables.</p>
+<p>Assign the path to JDK11 for <strong>JAVA_HOME</strong> and path to
+the maven directory for <strong>M2_HOME</strong> variable.</p>
+<p>To find JDK path, use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>find<span class="w"> </span>/<span class="w"> </span>-name<span class="w"> </span>java
+</pre></div>
+</div>
+<figure class="align-default" id="id60">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-45.png"><img alt="_images/CICD-by-Zufar-45.png" src="_images/CICD-by-Zufar-45.png" style="width: 762.0px; height: 349.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal web page with .bash_profile file</span><a class="headerlink" href="#id60" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>How to use VIM</strong></p>
+<ul class="simple">
+<li><p>To <strong>edit</strong> the file press the keyboard
+button <strong>“ I “</strong> to insert data.</p></li>
+<li><p>To <strong>save</strong> the file press the keyboard button “
+esc “ and enter “:w“.</p></li>
+<li><p>To <strong>exit</strong> from the file press the keyboard
+button <strong>“ esc “</strong> and enter <strong>“:q”</strong>.</p></li>
+</ul>
+</div>
+<p>Save the changes.</p>
+<p>Then, execute this command to refresh system
+variables.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>.bash_profile
+</pre></div>
+</div>
+<p>To verify <strong>$PATH</strong>, use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p>To verify <strong>Apache Maven</strong>, use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>If you have done everything correctly, you will be
+able to view the version of Apache Maven.</p>
+<figure class="align-default" id="id61">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-46.png"><img alt="_images/CICD-by-Zufar-46.png" src="_images/CICD-by-Zufar-46.png" style="width: 1044.0px; height: 113.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal web page with the version of Apache Maven</span><a class="headerlink" href="#id61" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-install-apache-maven-jenkins-plugin"><strong>Step 4: Install Apache Maven Jenkins
+plugin</strong></p>
+<p>Since Apache Maven can be used on an EC2 instance, you
+can install the Apache Maven plugin to integrate it
+with the pipeline.</p>
+<p><strong>To achieve this, follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Dashboard“</strong> <strong>→ “Manage Jenkins“ →
+“Manage Plugins“ → “Available”.</strong></p></li>
+<li><p>In the search box, enter <strong>“Maven”</strong>.</p></li>
+<li><p>Choose <strong>“Maven Integration”</strong> plugin.</p></li>
+</ol>
+<figure class="align-default" id="id62">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-47.png"><img alt="_images/CICD-by-Zufar-47.png" src="_images/CICD-by-Zufar-47.png" style="width: 629.5px; height: 640.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Maven plugin</span><a class="headerlink" href="#id62" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Wait for the end of the downloading process.</p>
+<p>And then click the button <strong>“Go back to the top
+page”</strong>.</p>
+<figure class="align-default" id="id63">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-48.png"><img alt="_images/CICD-by-Zufar-48.png" src="_images/CICD-by-Zufar-48.png" style="width: 640.0px; height: 630.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Maven plugin
+downloading process</span><a class="headerlink" href="#id63" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-5-configure-apache-maven-jenkins-plugin"><strong>Step 5: Configure Apache Maven Jenkins
+plugin</strong></p>
+<p>With the successful installation of the Apache Maven
+Jenkins plugin, you are now able to utilize this
+plugin within the pipeline which you created and
+updated in modules 2 and 3.</p>
+<p><strong>To do so, follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Go to <strong>“Dashboard“</strong> <strong>→ “Manage Jenkins“ →
+“Global Tool Coonfiguration“ → “JDK”</strong></p></li>
+<li><p>Click the button <strong>“Add JDK”.</strong></p></li>
+<li><p>Uncheck <strong>“Install automatically”.</strong></p></li>
+</ol>
+<figure class="align-default" id="id64">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-49.png"><img alt="_images/CICD-by-Zufar-49.png" src="_images/CICD-by-Zufar-49.png" style="width: 640.0px; height: 459.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to JDK
+configuration</span><a class="headerlink" href="#id64" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then go to <strong>“Maven”</strong> section. Click the
+button <strong>“Add Maven”</strong>. Uncheck <strong>“Install
+automatically”.</strong></p>
+<p>Then add <strong>name</strong> and <strong>MAVEN_HOME</strong> path.</p>
+<figure class="align-default" id="id65">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-50.png"><img alt="_images/CICD-by-Zufar-50.png" src="_images/CICD-by-Zufar-50.png" style="width: 340.5px; height: 640.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Apache Maven
+configuration</span><a class="headerlink" href="#id65" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Click the <strong>“Apply”</strong> and <strong>“Save”</strong> buttons.</p>
+<p>Here, you have finished configuring the Apache Maven
+Jenkins plugin.</p>
+<p class="rubric" id="h-step-6-integrate-apache-maven-into-the-pipeline"><strong>Step 6: Integrate Apache Maven into the
+pipeline</strong></p>
+<p>Now as the Apache Maven GitHub plugin is installed and
+configured, you’re now able to utilize Apache Maven
+within your pipeline. This will allow your pipeline
+which you created in the “[module 2]: Jenkins Server”
+to build your project code to create a jar artifact.</p>
+<p><strong>To integrate Apache Maven into the pipeline you need
+to follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Dashboard“</strong> <strong>→ “CI_CD_Pipeline“ →
+“Configure“ → “Build Steps”.</strong></p></li>
+<li><p>Click <strong>“Add build step”</strong> button.</p></li>
+<li><p>Choose <strong>“Invoke top-level Maven targets”</strong> option.</p></li>
+<li><p>Choose <strong>“Apache-Maven”</strong> as <strong>“Maven Version”.</strong></p></li>
+<li><p>Add <strong>“clean package”</strong> command
+to <strong>“Goals”</strong> input.</p></li>
+<li><p>Click <strong>“Advanced“</strong> button.</p></li>
+<li><p>Add “pom.xml” to <strong>“POM”</strong> input.</p></li>
+</ol>
+<figure class="align-default" id="id66">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-51.png"><img alt="_images/CICD-by-Zufar-51.png" src="_images/CICD-by-Zufar-51.png" style="width: 262.5px; height: 406.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “Build Steps” section in the
+pipeline configuration with pointers to “Apply” and
+“Save” buttons</span><a class="headerlink" href="#id66" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Finally, you should
+click <strong>“Apply”</strong> and <strong>“Save”</strong> buttons to finish the
+integration of Apache Maven with the pipeline.</p>
+<p class="rubric" id="h-step-7-test-apache-maven-integrated-into-the-pipeline"><strong>Step 7: Test Apache Maven integrated
+into the pipeline</strong></p>
+<p>Now you can use your updated pipeline to build your
+Github project. To do that you need to click
+the <a href="#id5"><span class="problematic" id="id6">**</span></a>“Build Now”<a href="#id7"><span class="problematic" id="id8">**</span></a>button. As a result, you will see a
+successful job result in the build history.</p>
+<p>If you open your AWS EC2 terminal. You can check that
+the pipeline works well.</p>
+<p>Just use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/var/lib/jenkins/workspace/<span class="o">{</span>your<span class="w"> </span>pipeline<span class="w"> </span>name<span class="o">}</span>/target
+</pre></div>
+</div>
+<p>This way you can see the JAR artifact, indicating the
+successful build of your project from GitHub.</p>
+<p class="rubric" id="h-module-5-docker"><strong>[Module 5]: Docker</strong></p>
+<p>Now let’s create a new EC2 instance with the name
+“Ansible Server” where you are going to install Docker
+and Ansible.</p>
+<p class="rubric" id="h-step-1-launch-an-aws-ec-2-virtual-server-instance"><strong>Step 1: Launch an AWS EC2 Virtual Server
+instance</strong></p>
+<p>Use instructions from “<strong>Launch an AWS EC2 Virtual
+Server instance”</strong> section of this tutorial to finish
+this step. Do not forget to add a security group
+setup. It allows Docker and SSH to work on ports 8080
+and 22 respectively.</p>
+<p class="rubric" id="id9"><strong>Step 2: Connect to an AWS EC2 Virtual
+Server instance</strong></p>
+<p>Click the “Connect” button.</p>
+<figure class="align-default" id="id67">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-52.png"><img alt="_images/CICD-by-Zufar-52.png" src="_images/CICD-by-Zufar-52.png" style="width: 259.5px; height: 60.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Connect” button</span><a class="headerlink" href="#id67" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see the EC2 Virtual Server instance online
+terminal.</p>
+<figure class="align-default" id="id68">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-53.png"><img alt="_images/CICD-by-Zufar-53.png" src="_images/CICD-by-Zufar-53.png" style="width: 413.0px; height: 199.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal</span><a class="headerlink" href="#id68" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chown<span class="w"> </span>ansible-admin:ansible-admin<span class="w"> </span>/opt/docker
+</pre></div>
+</div>
+<p class="rubric" id="h-step-3-install-docker-on-the-ansible-ec-2-virtual-server"><strong>Step 3: Install Docker on the Ansible
+EC2 virtual server.</strong></p>
+<p>Now you need to install docker on your Ansible EC2
+instance. To do that you need to create a new docker
+folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/opt/docker
+</pre></div>
+</div>
+<p>Then, install docker by executing the next command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>docker<span class="w"> </span>-y
+</pre></div>
+</div>
+<p class="rubric" id="h-step-4-add-current-user-to-docker-group-on-ansible-ec-2-virtual-server"><strong>Step 4: Add current user to Docker group
+on Ansible EC2 virtual server</strong></p>
+<p>You need to add the current
+user <strong>“ansible-admin”</strong> to the Docker group on the
+<strong>“AnsibleServer”</strong> EC2 virtual server to give Docker
+admin privileges.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>docker<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>You will need to logout and log back in for these
+changes to take effect.</p>
+<p>Then you can execute the next command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>id<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>to see that the new docker user exists.</p>
+<figure class="align-default" id="id69">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-54.png"><img alt="_images/CICD-by-Zufar-54.png" src="_images/CICD-by-Zufar-54.png" style="width: 640.0px; height: 39.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Ansible EC2 instance with the
+pointer to the docker user</span><a class="headerlink" href="#id69" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-5-launch-docker"><strong>Step 5: Launch Docker</strong></p>
+<p>Now as Docker is installed on the Ansible EC2 instance
+you can launch it by executing the next command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+</pre></div>
+</div>
+<p>As Docker is started you can execute the next command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>docker
+</pre></div>
+</div>
+<p>to see that docker is active and running now.</p>
+<figure class="align-default" id="id70">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-55.png"><img alt="_images/CICD-by-Zufar-55.png" src="_images/CICD-by-Zufar-55.png" style="width: 640.0px; height: 297.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Ansible EC2 instance with the
+active docker status</span><a class="headerlink" href="#id70" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-6-create-dockerfile"><strong>Step 6: Create Dockerfile</strong></p>
+<p>In the final version of the pipeline, the process will
+involve creating a new Docker image from your GitHub
+project and pushing it to Docker Hub. To accomplish
+this, your GitHub project should contain a Dockerfile.</p>
+<p>If you used the project <strong>“Hello”</strong> which was offered
+in “<strong>[Module 3]: Git and Github”</strong> module, then you
+don’t need to create a new Dockerfile as this project
+repository has already contained Dockerfile.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>FROM<span class="w"> </span>eclipse-temurin:17-jre-jammy
+ENV<span class="w"> </span><span class="nv">HOME</span><span class="o">=</span>/opt/app
+WORKDIR<span class="w"> </span><span class="nv">$HOME</span>
+ADD<span class="w"> </span>hello-0.0.1-SNAPSHOT.jar<span class="w"> </span><span class="nv">$HOME</span>
+ENTRYPOINT<span class="w"> </span><span class="o">[</span><span class="s2">&quot;java&quot;</span>,<span class="w"> </span><span class="s2">&quot;-jar&quot;</span>,<span class="w"> </span><span class="s2">&quot;/opt/app/hello-0.0.1-SNAPSHOT.jar&quot;</span><span class="w"> </span><span class="o">]</span>
+</pre></div>
+</div>
+<p>If you used your own project repository and it didn’t
+contain a Dockerfile, you will need to create a new
+Dockerfile.</p>
+<p>To create a new Dockerfile, execute the following
+command, which will create the new file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>touch<span class="w"> </span>Dockerfile
+</pre></div>
+</div>
+<p>Then you can fill this file with a sequence of
+commands that describe how to build a containerized
+application environment. These commands include
+actions like copying files into the image, installing
+software, setting environment variables, and
+configuring the container.</p>
+<p>To fill the Dockerfile with these commands, execute
+the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim<span class="w"> </span>Dockerfile
+</pre></div>
+</div>
+<p>The Dockerfile is ready to use.</p>
+<p class="rubric" id="h-step-7-login-docker"><strong>Step 7: Login Docker</strong></p>
+<p>Now that your Dockerfile is prepared for use, proceed
+by copying your project’s JAR artifact from
+the <strong>“JenkinsServer”**EC2 instance and pasting it
+onto the **”AnsibleServer”</strong> EC2 instance. It is
+important to note that this transfer will be automated
+through the pipeline further.</p>
+<p>By completing this step, you’ll be ready to test your
+Dockerfile along with the Docker environment you’ve
+set up.</p>
+<p>Before you begin testing, make sure to authenticate
+yourself on Dockerhub. Execute the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>login
+</pre></div>
+</div>
+<p>This command will prompt you to provide your Dockerhub
+login credentials, including your username and
+password.</p>
+<figure class="align-default" id="id71">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-56.png"><img alt="_images/CICD-by-Zufar-56.png" src="_images/CICD-by-Zufar-56.png" style="width: 369.5px; height: 99.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of successful docker login in
+“AnsibleServer” EC2 instance</span><a class="headerlink" href="#id71" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>With this, you have completed the process of logging
+into
+<a class="reference external" href="https://hackernoon.com/306-stories-to-learn-about-docker">Docker</a>
+and are now ready to proceed with testing.</p>
+<p class="rubric" id="h-step-8-testing-the-docker-environment-and-dockerfile"><strong>Step 8:</strong> Testing the Docker environment
+and Dockerfile</p>
+<p>With your successful login to Dockerhub completed, you
+are now ready to begin testing the Dockerfile you have
+prepared.</p>
+<p>Execute this command to create a docker image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>hello:latest<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Next, execute the subsequent command to establish a
+tag that will facilitate the image’s upload to
+Dockerhub:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>tag<span class="w"> </span>hello:latest<span class="w"> </span>zufarexplainedit/hello:latest
+</pre></div>
+</div>
+<p>Finally, proceed to push the Docker image to Dockerhub
+through the execution of this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>push<span class="w"> </span>zufarexplainedit/hello:latest
+</pre></div>
+</div>
+<p>Following these steps, navigate to your Dockerhub
+account to verify whether you can see a new image or
+not.</p>
+<figure class="align-default" id="id72">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-57.png"><img alt="_images/CICD-by-Zufar-57.png" src="_images/CICD-by-Zufar-57.png" style="width: 365.0px; height: 243.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Dockerhub account with the new
+image added</span><a class="headerlink" href="#id72" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You should now observe that the image has been
+effectively added. This outcome confirms the
+successful installation of the Docker environment and
+that your Dockerfile is correct.</p>
+<p class="rubric" id="h-module-6-ansible"><strong>[Module 6]: Ansible</strong></p>
+<p>Now let us configure the Ansible Server on the EC2
+Virtual Server instance.</p>
+<p class="rubric" id="id10"><strong>Step 1: Create an AWS EC2 Virtual Server
+instance</strong></p>
+<p>You need a virtual server to run Ansible.</p>
+<p>Follow instructions from <strong>[Module 1]: AWS EC2 Virtual
+Server</strong> section of this tutorial to finish this step
+and create an EC2 virtual server instance for Ansible.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to add a security group setup. It
+allows <strong>Ansible</strong> and <strong>SSH</strong> to work on
+port <strong>8080</strong> and <strong>22</strong> respectively.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the name <strong>“AnsibleServer”</strong> to distinguish
+your EC2 Virtual Server instance.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can reuse <strong>“CI_CD_Pipeline”</strong> security group
+and <strong>“CI_CD_Pipeline_Key_Pair“</strong> for a
+new <strong>“AnsibleServer”</strong> EC2 instance.</p>
+</div>
+<p class="rubric" id="id11"><strong>Step 2: Connect to an AWS EC2 Virtual
+Server instance</strong></p>
+<p>Go to AWS Console home page → EC2 Management Console
+Dashboard → Instances → AnsibleServer.</p>
+<p>Then click the <strong>“Connect”</strong> button.</p>
+<figure class="align-default" id="id73">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-58.png"><img alt="_images/CICD-by-Zufar-58.png" src="_images/CICD-by-Zufar-58.png" style="width: 259.5px; height: 60.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Connect” button</span><a class="headerlink" href="#id73" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you will see this web page. You should again
+click the <strong>“Connect”</strong> button.</p>
+<figure class="align-default" id="id74">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-59.png"><img alt="_images/CICD-by-Zufar-59.png" src="_images/CICD-by-Zufar-59.png" style="width: 452.0px; height: 383.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS “Connect to Instance” web
+page with the pointer to “Connect” button</span><a class="headerlink" href="#id74" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see the EC2 virtual server instance online
+terminal.</p>
+<figure class="align-default" id="id75">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-60.png"><img alt="_images/CICD-by-Zufar-60.png" src="_images/CICD-by-Zufar-60.png" style="width: 413.0px; height: 199.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal</span><a class="headerlink" href="#id75" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now let’s configure Ansible Server on EC2 virtual
+server instance.</p>
+<p class="rubric" id="h-step-3-change-the-hostname-of-ansible-server-aws-ec-2-virtual-server-instance"><strong>Step 3: Change the hostname of
+“AnsibleServer” AWS EC2 Virtual Server instance</strong></p>
+<p>The first thing you need to do when you want to
+configure AnsibleServer on EC2 virtual server instance
+is changing its hostname.</p>
+<p>Let’s do it. Execute this command to open hostname
+file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/hostname
+</pre></div>
+</div>
+<p>You should see something like this:</p>
+<figure class="align-default" id="id76">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-61.png"><img alt="_images/CICD-by-Zufar-61.png" src="_images/CICD-by-Zufar-61.png" style="width: 368.0px; height: 101.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+with hostname file</span><a class="headerlink" href="#id76" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Replace this hostname with <strong>“ansible-server”.</strong> Then,
+reboot it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>init<span class="w"> </span><span class="m">6</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id77">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-62.png"><img alt="_images/CICD-by-Zufar-62.png" src="_images/CICD-by-Zufar-62.png" style="width: 379.0px; height: 219.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to hostname</span><a class="headerlink" href="#id77" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-add-and-configure-a-new-user-in-ansible-server-aws-ec-2-virtual-server-instance"><strong>Step 4: Add and configure a new user in
+“AnsibleServer” AWS EC2 Virtual Server instance</strong></p>
+<p>Now let’s add a new <strong>ansible-admin</strong> user to the AWS
+EC2 Virtual Server instance.</p>
+<p>To do that use this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>useradd<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>Then, set the password for <strong>ansible-admin</strong> user.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>passwd<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>Also, you need to configure user privileges by editing
+the <strong>sudoers</strong> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>visudo
+</pre></div>
+</div>
+<p>Add <strong>“ansible-admin ALL=(ALL) ALL”</strong> to
+this <strong>sudoers</strong> file.</p>
+<figure class="align-default" id="id78">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-63.png"><img alt="_images/CICD-by-Zufar-63.png" src="_images/CICD-by-Zufar-63.png" style="width: 761.0px; height: 552.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to admin privileges</span><a class="headerlink" href="#id78" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Also, you need to edit <strong>/etc/ssh/sshd_config</strong> file
+to enable PasswordAuthentication.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/ssh/sshd_config
+</pre></div>
+</div>
+<figure class="align-default" id="id79">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-64.png"><img alt="_images/CICD-by-Zufar-64.png" src="_images/CICD-by-Zufar-64.png" style="width: 726.0px; height: 445.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to admin settings</span><a class="headerlink" href="#id79" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you need to reload the service to confirm these
+changes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>sshd<span class="w"> </span>reload
+</pre></div>
+</div>
+<p>As a result of executing this command, you will see:</p>
+<figure class="align-default" id="id80">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-65.png"><img alt="_images/CICD-by-Zufar-65.png" src="_images/CICD-by-Zufar-65.png" style="width: 511.0px; height: 57.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to sshd reload result</span><a class="headerlink" href="#id80" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now you can use this command to avoid adding sudo
+for all further commands.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>su<span class="w"> </span>-<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+</div>
+<p class="rubric" id="h-step-5-generate-key-in-an-aws-ec-2-virtual-server-instance"><strong>Step 5: Generate key in an AWS EC2
+Virtual Server instance</strong></p>
+<p>You are planning to manage remote servers such as K8s
+EC2 virtual server instances further in this article.
+That is why you need to set up SSH keys.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen
+</pre></div>
+</div>
+<p>As a result of executing this command, you will see:</p>
+<figure class="align-default" id="id81">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-66.png"><img alt="_images/CICD-by-Zufar-66.png" src="_images/CICD-by-Zufar-66.png" style="width: 731.0px; height: 586.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to ssh-keygen result</span><a class="headerlink" href="#id81" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now SSH keys are generated and ready to use.</p>
+<p class="rubric" id="h-step-6-install-ansible"><strong>Step 6: Install Ansible</strong></p>
+<p>Now you can install Ansible on
+your <strong>“AnsibleServer”</strong> EC2 virtual server instance.</p>
+<p>Let’s do it.</p>
+<p>Execute this command to install Ansible.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>amazon-linux-extras<span class="w"> </span>install<span class="w"> </span>ansible2
+</pre></div>
+</div>
+<p>To verify Ansible, use this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>As a result of executing this command, you will see:</p>
+<figure class="align-default" id="id82">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-67.png"><img alt="_images/CICD-by-Zufar-67.png" src="_images/CICD-by-Zufar-67.png" style="width: 1057.0px; height: 146.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to sudo yum install
+ansible result</span><a class="headerlink" href="#id82" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-7-install-jenkins-publish-over-ssh-plugin-on-jenkins-server-ec-2-instance"><strong>Step 7: Install Jenkins “Publish over
+SSH“ plugin on JenkinsServer EC2 instance</strong></p>
+<p>As Ansible is installed on
+your <strong>“AnsibleServer”</strong> EC2 virtual server instance,
+you can configure Jenkins to integrate it with
+Ansible. You need to install the <strong>“Publish over
+SSH”</strong> plugin to integrate Jenkins with the EC2
+Virtual Server instance where Ansible is installed and
+with other EC2 Virtual Server instances where
+<a class="reference external" href="https://hackernoon.com/419-stories-to-learn-about-kubernetes">Kubernetes</a>
+is installed.</p>
+<p>Go to <strong>“Dashboard”</strong> → “<strong>Manage
+Jenkins”</strong> → <strong>“Configure System”</strong> → <strong>“Available
+plugins”</strong>.</p>
+<p>Then enter <strong>“Publish over SSH“</strong> in the search box.</p>
+<figure class="align-default" id="id83">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-68.png"><img alt="_images/CICD-by-Zufar-68.png" src="_images/CICD-by-Zufar-68.png" style="width: 800.0px; height: 444.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to “Available
+plugins” web page</span><a class="headerlink" href="#id83" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Click the button <strong>“Install without restart”</strong>. Wait
+for the end of the downloading process.</p>
+<figure class="align-default" id="id84">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-69.png"><img alt="_images/CICD-by-Zufar-69.png" src="_images/CICD-by-Zufar-69.png" style="width: 943.0px; height: 493.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to “Download
+progress” web page</span><a class="headerlink" href="#id84" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now the “Publish over SSH” plugin is installed on the
+Jenkins EC2 Virtual Server instance.</p>
+<p class="rubric" id="h-step-8-configure-jenkins-publish-over-ssh-plugin"><strong>Step 8: Configure Jenkins “Publish over
+SSH“ plugin</strong></p>
+<p>With the successful installation of the Apache Maven
+Jenkins plugin, you are now able to utilize this
+plugin within the pipeline which you created and
+updated in modules 2 and 3.</p>
+<p><strong>To do so, follow these steps:</strong></p>
+<p>Go to <strong>“Dashboard“</strong> → <strong>“Manage
+Jenkins”</strong> → <strong>“Configure System”</strong> → <strong>“Publish over
+SSH”</strong>.</p>
+<figure class="align-default" id="id85">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-70.png"><img alt="_images/CICD-by-Zufar-70.png" src="_images/CICD-by-Zufar-70.png" style="width: 348.0px; height: 755.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the “Publish over SSH” plugin</span><a class="headerlink" href="#id85" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Enter all required data as it is on the screenshot,
+including hostname, username, and private key (or
+password if applicable).</p>
+<figure class="align-default" id="id86">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-71.png"><img alt="_images/CICD-by-Zufar-71.png" src="_images/CICD-by-Zufar-71.png" style="width: 513.0px; height: 901.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the “Publish over SSH” plugin</span><a class="headerlink" href="#id86" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then click the <strong>“Apply”</strong> and <strong>“Save”</strong> buttons.</p>
+<p>Here you have finished configuring the <strong>“Publish over
+SSH“</strong> Jenkins plugin.</p>
+<p>Next, click “Test Configuration” to validate that the
+plugin is working correctly.</p>
+<figure class="align-default" id="id87">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-72.png"><img alt="_images/CICD-by-Zufar-72.png" src="_images/CICD-by-Zufar-72.png" style="width: 1405.0px; height: 98.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the “Publish over SSH” plugin
+with the button “Test Configuration”</span><a class="headerlink" href="#id87" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>On the left side you can see that the test plugin
+configuration status is “Success”. It means the plugin
+configuration is correct.</p>
+<p class="rubric" id="h-step-9-create-new-docker-directory-in-ansible-server"><strong>Step 9: Create new Docker directory in
+AnsibleServer</strong></p>
+<p>You need to make a new folder on the AnsibleServer EC2
+instance where the project JAR will be stored. This
+jar will be used for creating a Docker image later.</p>
+<p>Let’s start.</p>
+<p>Go to <strong>“/opt”</strong> folder in AnsibleServer EC2 instance.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/opt
+</pre></div>
+</div>
+<p>Create a new folder <strong>“docker”</strong> there.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mkdir<span class="w"> </span>docker
+</pre></div>
+</div>
+<p>Give privileges to this <strong>“docker”</strong> folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chown<span class="w"> </span>ansible-admin:ansible-admin<span class="w"> </span>docker
+</pre></div>
+</div>
+<p>Now, check the <strong>“docker”</strong> folder privileges by
+executing this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ll
+</pre></div>
+</div>
+<p>You can see that the <strong>“docker”</strong> folder is accessible
+with the <strong>“ansible-admin”</strong> user.</p>
+<figure class="align-default" id="id88">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-73.png"><img alt="_images/CICD-by-Zufar-73.png" src="_images/CICD-by-Zufar-73.png" style="width: 295.0px; height: 45.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “docker” folder in
+“AnsibleServer” EC2 instance</span><a class="headerlink" href="#id88" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-10-integrate-publish-over-ssh-github-plugin-into-the-pipeline"><strong>Step 10: Integrate “Publish over
+SSH“</strong> Github plugin into <strong>the pipeline</strong></p>
+<p>Now as <strong>“Publish over SSH“</strong> Github plugin is
+installed and configured, you’re now able to integrate
+it into the pipeline which you created in the “[module
+2]: Jenkins Server” to transfer a project jar artifact
+from “<strong>JenkinsServer”</strong> to <strong>“AnsibleServer”</strong>.</p>
+<p>Well, to integrate <strong>“Publish over SSH“</strong> Github
+plugin into the pipeline you need to follow these
+steps:</p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Dashboard“</strong> <strong>→ “CI_CD_Pipeline“ →
+“Configure“ → “Post-build Actions”.</strong></p></li>
+<li><p>Click <strong>“Add post-build action”</strong> button.</p></li>
+<li><p>Choose <strong>“Send build artifacts over SSH”</strong> option.</p></li>
+<li><p>Add <strong>“AnsibleServer”</strong> into <strong>“Name”</strong> input
+in <strong>“SSH Server”</strong> section**.**</p></li>
+<li><p>Add  <strong>“target/*.jar”</strong> into <strong>“Source
+files”</strong> input in <strong>“Transfer Set”</strong> section**.**</p></li>
+<li><p>Add  <strong>“target/”</strong> into <strong>“Remove prefix”</strong> input
+in <strong>“Transfer Set”</strong> section**.**</p></li>
+<li><p>Add  <strong>“//opt/docker/”</strong> into <strong>“Remote
+directory”</strong> input in <strong>“Transfer
+Set”</strong> section**.**</p></li>
+<li><p>For now, simply put an empty string in the ‘Exec
+command’ input under the ‘Transfer Set’ section.</p></li>
+</ol>
+<figure class="align-default" id="id89">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-74.png"><img alt="_images/CICD-by-Zufar-74.png" src="_images/CICD-by-Zufar-74.png" style="width: 370.5px; height: 441.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “Send build artifact over SSH”
+section in the pipeline configuration</span><a class="headerlink" href="#id89" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Finally, you should
+click <strong>“Apply”</strong> and <strong>“Save”</strong> buttons to finish the
+integration <strong>“Publish over SSH“</strong> plugin with the
+pipeline.</p>
+<p class="rubric" id="h-step-11-test-publish-over-ssh-github-plugin-integrated-into-the-pipeline"><strong>Step 11: Test “Publish over
+SSH“</strong> Github plugin <strong>integrated into the
+pipeline</strong></p>
+<p>Now you can use your updated pipeline to transfer a
+project jar artifact from
+“<strong>JenkinsServer”</strong> to <strong>“AnsibleServer”</strong>. To do
+that you need to click the <strong>“Build Now”</strong> button. As
+a result you will see a successful job result in the
+build history.</p>
+<p>If you open your <strong>“AnsibleServer”</strong> AWS EC2 terminal.
+You can check that the pipeline works well.</p>
+<p>Just use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/opt/docker
+</pre></div>
+</div>
+<p>This way you can see the JAR artifact, indicating the
+successful build of your project from GitHub.</p>
+<figure class="align-default" id="id90">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-75.png"><img alt="_images/CICD-by-Zufar-75.png" src="_images/CICD-by-Zufar-75.png" style="width: 394.5px; height: 54.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of /opt/docker directory with the
+project jar artifact</span><a class="headerlink" href="#id90" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-12-configure-ansible-hosts"><strong>Step 12: Configure Ansible hosts</strong></p>
+<p>When you run an Ansible playbook, you specify the
+hosts it should run on. You can do this in two ways:</p>
+<ol class="arabic simple">
+<li><p><strong>Specify hosts directly in the playbook:</strong> In your
+playbook, you can set the <code class="docutils literal notranslate"><span class="pre">hosts</span></code> parameter to a
+list of IP addresses or hostnames.</p></li>
+<li><p><strong>Use an inventory file:</strong> Ansible allows you to
+define a list of hosts in an inventory file and
+reference this file when running your playbook. The
+default inventory file is <code class="docutils literal notranslate"><span class="pre">/etc/ansible/hosts</span></code>.</p></li>
+</ol>
+<p>By editing <code class="docutils literal notranslate"><span class="pre">/etc/ansible/hosts</span></code>, you can easily
+manage groups of hosts without having to write out
+their IP addresses each time you run a playbook.</p>
+<p>Let’s find out the AnsibleServer EC2 instance host by
+executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ifconfig
+</pre></div>
+</div>
+<figure class="align-default" id="id91">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-76.png"><img alt="_images/CICD-by-Zufar-76.png" src="_images/CICD-by-Zufar-76.png" style="width: 677.0px; height: 524.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the network interface setting of
+AnsibleServer EC2 instance</span><a class="headerlink" href="#id91" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>After you find out AnsibleServer EC2 instance host,
+you can add it to the Ansible hosts file by executing
+the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/ansible/hosts
+</pre></div>
+</div>
+<p>You can also add “[ansible]” as a reference</p>
+<figure class="align-default" id="id92">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-77.png"><img alt="_images/CICD-by-Zufar-77.png" src="_images/CICD-by-Zufar-77.png" style="width: 217.0px; height: 126.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Ansible hosts file</span><a class="headerlink" href="#id92" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re managing a cluster of servers and you
+want to apply a playbook to all of them, instead of
+specifying each server’s IP address in the
+playbook, you can simply add all the servers to a
+group in the inventory file and then specify the
+group in the playbook.</p>
+</div>
+<p class="rubric" id="h-step-13-configure-passwordless-ssh-authentication-to-localhost-for-ansible"><strong>Step 13: Configure</strong> Passwordless SSH
+authentication to localhost for Ansible</p>
+<p>Ansible is designed for automating tasks on remote
+servers. Passwordless SSH authentication empowers
+Ansible to connect to those servers without the need
+for manual password entry.</p>
+<p>Execute this command to create a secure connection
+from your computer to another computer (like the one
+at IP address 172.31.34.41), using the ansible-admin
+user’s SSH key.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>/home/<span class="o">{</span>your<span class="w"> </span>user<span class="w"> </span>name<span class="o">}</span>/.ssh/id_rsa.pub<span class="w"> </span><span class="o">{</span>your<span class="w"> </span>user<span class="w"> </span>name<span class="o">}</span>@<span class="o">{</span>your<span class="w"> </span>host<span class="w"> </span>address<span class="o">}</span>
+</pre></div>
+</div>
+<p>In my case, it looks like this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>/home/ansible-admin/.ssh/id_rsa.pub<span class="w"> </span>ansible-admin@172.31.34.41
+</pre></div>
+</div>
+<figure class="align-default" id="id93">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-78.png"><img alt="_images/CICD-by-Zufar-78.png" src="_images/CICD-by-Zufar-78.png" style="width: 1054.0px; height: 347.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the successful passwordless ssh
+authentication installation result</span><a class="headerlink" href="#id93" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see <strong>“Number of key(s) added: 1”</strong>. It
+means that the passwordless SSH authentication
+installation was successfully completed.</p>
+<p class="rubric" id="h-step-14-create-a-new-ansible-playbook-for-docker-tasks"><strong>Step 14: Create a new Ansible playbook
+for Docker tasks</strong></p>
+<p>Now that Ansible is all set up and good to go, you can
+make a new Ansible playbook for your pipeline. This
+playbook will let Ansible create and send a new Docker
+image to Dockerhub.</p>
+<p>Here’s how you can do it:</p>
+<ol class="arabic simple">
+<li><p>Start by creating a new Ansible playbook file. Just
+use this command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Then, edit the newly made <code class="docutils literal notranslate"><span class="pre">hello-app.yml</span></code> file.
+Open it up for editing with this command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Inside the file, type in the following stuff.</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">  </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create docker image</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker build -t hello:latest .</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">chdir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/docker</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create tag to push image onto dockerhub</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker tag hello:latest zufarexplainedit/hello:latest</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">push docker image onto dockerhub</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker push zufarexplainedit/hello:latest</span>
+</pre></div>
+</div>
+<p>The Ansible playbook for Docker tasks is ready to use.</p>
+<p class="rubric" id="h-step-13-test-the-ansible-playbook-with-docker-tasks"><strong>Step 13: Test the Ansible playbook with
+Docker tasks</strong></p>
+<p>With Ansible, Ansible playbook, AnsibleServer, and
+JenkinsServer all properly configured, it is time to
+test the Ansible playbook.</p>
+<p>Navigate to the location of your Ansible playbook.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/opt/docker
+</pre></div>
+</div>
+<p>Then, execute the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-u<span class="w"> </span>ansible-admin<span class="w"> </span>ansible-playbook<span class="w"> </span>/opt/docker/hello-app.yml
+</pre></div>
+</div>
+<p>Upon completion, you will see the successful execution
+outcome of your Ansible playbook.</p>
+<figure class="align-default" id="id94">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-79.png"><img alt="_images/CICD-by-Zufar-79.png" src="_images/CICD-by-Zufar-79.png" style="width: 525.0px; height: 212.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the successful execution result
+of the ansible playbook for docker tasks</span><a class="headerlink" href="#id94" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Furthermore, take a moment to visit your Dockerhub
+account and verify whether a new image is now visible.</p>
+<figure class="align-default" id="id95">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-80.png"><img alt="_images/CICD-by-Zufar-80.png" src="_images/CICD-by-Zufar-80.png" style="width: 365.0px; height: 243.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Dockerhub account with the new
+image added</span><a class="headerlink" href="#id95" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You should see the newly added image. This outcome
+confirms that your Ansible playbook is correct.</p>
+<p class="rubric" id="h-step-14-integrate-ansible-docker-tasks-into-the-pipeline"><strong>Step 14: Integrate Ansible Docker
+tasks</strong> into <strong>the pipeline</strong></p>
+<p>Now as <strong>“Publish over SSH“</strong> Github plugin, Ansible
+and Docker are installed and configured, you’re now
+able to integrate them all into the pipeline which you
+created in the “[module 2]: Jenkins Server” to
+transfer a project jar artifact from
+“<strong>JenkinsServer”</strong> to <strong>“AnsibleServer”</strong> and then
+build a new Docker image from your project and then
+push this Docker image onto Dockerhub.</p>
+<p><strong>To achieve it you need to follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Dashboard“</strong> <strong>→ “CI_CD_Pipeline“ →
+“Configure“ → “Post-build Actions” → “Send build
+artifacts over SSH” .</strong></p></li>
+<li><p>Add <strong>“sudo -u ansible-admin ansible-playbook
+/opt/docker/hello-app.yml”</strong> command into <strong>“Exec
+command”</strong> input.</p></li>
+</ol>
+<figure class="align-default" id="id96">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-81.png"><img alt="_images/CICD-by-Zufar-81.png" src="_images/CICD-by-Zufar-81.png" style="width: 434.0px; height: 446.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “Send build artifact over SSH”
+section in the pipeline configuration</span><a class="headerlink" href="#id96" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Finally, click <strong>“Apply”</strong> and <strong>“Save”</strong> buttons to
+finish the integration Ansible Docker tasks with the
+pipeline.</p>
+<p class="rubric" id="h-step-15-test-ansible-playbook-with-docker-tasks-integrated-into-the-pipeline"><strong>Step 15: Test “Ansible playbook with
+Docker tasks</strong>“ <strong>integrated into the pipeline</strong></p>
+<p>Now you can test your upgraded pipeline to seamlessly
+transfer a project jar artifact from
+“<strong>JenkinsServer”</strong> to <strong>“AnsibleServer”</strong> then
+build a new Docker image from your project and then
+push this Docker image onto Dockerhub. To do that you
+need to click the <strong>“Build Now”</strong> button. As a result
+you will see a successful job result in the build
+history.</p>
+<p>Furthermore, take a moment to visit your Dockerhub
+account and verify whether a new image is now visible.</p>
+<p>The screenshot of Dockerhub account with the new
+image added</p>
+<figure class="align-default" id="id97">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-82.png"><img alt="_images/CICD-by-Zufar-82.png" src="_images/CICD-by-Zufar-82.png" style="width: 365.0px; height: 243.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">You should see the newly added image. This outcome
+confirms that your Ansible playbook with Docker tasks
+was successfully integrated into the pipeline.</span><a class="headerlink" href="#id97" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-module-7-kubernetes"><strong>[Module 7]: Kubernetes</strong></p>
+<p>Now let’s configure K8s on the EC2 instance. You are
+going to create a new EC2 instance and install their
+kubectl command-line tool for interacting with a
+<a class="reference external" href="https://hackernoon.com/419-stories-to-learn-about-kubernetes">Kubernetes</a>
+cluster further.</p>
+<p class="rubric" id="id12"><strong>Step 1: Launch an AWS EC2 Virtual Server
+instance</strong></p>
+<p>Use instructions from “<strong>Launch an AWS EC2 Virtual
+Server instance”</strong> section of this tutorial to finish
+this step.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to add a security group setup. It
+allows <strong>all tools</strong> and <strong>SSH</strong> to work on
+port <strong>8080</strong> and <strong>22</strong> respectively.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the name <strong>“K8sServer”</strong> to distinguish your
+EC2 Virtual Server instance.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can reuse <strong>“CI_CD_Pipeline”</strong> security group
+and <strong>“CI_CD_Pipeline_Key_Pair“</strong> for a
+new <strong>“K8sServer”</strong> EC2 instance.</p>
+</div>
+<p class="rubric" id="id13"><strong>Step 2: Connect to an AWS EC2 Virtual
+Server instance</strong></p>
+<p>Click the “Connect” button.</p>
+<figure class="align-default" id="id98">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-83.png"><img alt="_images/CICD-by-Zufar-83.png" src="_images/CICD-by-Zufar-83.png" style="width: 259.5px; height: 60.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Connect” button</span><a class="headerlink" href="#id98" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see the EC2 Virtual Server instance online
+terminal.</p>
+<figure class="align-default" id="id99">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-84.png"><img alt="_images/CICD-by-Zufar-84.png" src="_images/CICD-by-Zufar-84.png" style="width: 413.0px; height: 199.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal</span><a class="headerlink" href="#id99" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-3-change-the-hostname-of-kubernetes-server-aws-ec-2-virtual-server-instance"><strong>Step 3: Change the hostname of
+“KubernetesServer” AWS EC2 Virtual Server
+instance</strong></p>
+<p>The first thing you need to do when you want to
+configure KuberenetesServer on EC2 virtual server
+instance is to change its hostname.</p>
+<p>Let’s do it. Execute this command to open hostname
+file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/hostname
+</pre></div>
+</div>
+<p>You should see something like this.</p>
+<figure class="align-default" id="id100">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-85.png"><img alt="_images/CICD-by-Zufar-85.png" src="_images/CICD-by-Zufar-85.png" style="width: 368.0px; height: 101.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+with hostname file</span><a class="headerlink" href="#id100" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Replace this hostname with <strong>“kubernetes-server” and</strong>
+then reboot it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>init<span class="w"> </span><span class="m">6</span>
+</pre></div>
+</div>
+<p>You will hostname was changed.</p>
+<figure class="align-default" id="id101">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-86.png"><img alt="_images/CICD-by-Zufar-86.png" src="_images/CICD-by-Zufar-86.png" style="width: 177.0px; height: 98.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to hostname</span><a class="headerlink" href="#id101" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-check-aws-cli-version"><strong>Step 4: Check AWS CLI version</strong></p>
+<p>Use this command to check the
+<a class="reference external" href="https://hackernoon.com/467-stories-to-learn-about-aws">AWS</a>
+version.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>This way you can see your current aws-cli version.</p>
+<figure class="align-default" id="id102">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-87.png"><img alt="_images/CICD-by-Zufar-87.png" src="_images/CICD-by-Zufar-87.png" style="width: 771.0px; height: 61.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with aws version command result</span><a class="headerlink" href="#id102" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>If you can see version <strong>aws-cli/1.18</strong>, you should
+download the latest version.</p>
+<p class="rubric" id="h-step-5-update-aws-cli"><strong>Step 5: Update AWS CLI</strong></p>
+<p>Now as you found out that you have an old aws-cli
+version on your EC2 instance you need to update it. To
+that go to AWS → Documentation → AWS Command Line
+Interface → User Guide for Version 2.</p>
+<figure class="align-default" id="id103">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-88.png"><img alt="_images/CICD-by-Zufar-88.png" src="_images/CICD-by-Zufar-88.png" style="width: 718.0px; height: 477.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+webpage with User Guide for Version 2</span><a class="headerlink" href="#id103" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Copy-paste <strong>the curl command</strong>.</p>
+<p>First, execute this command to download awscli version
+2.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span><span class="s2">&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;awscliv2.zip&quot;</span>
+</pre></div>
+</div>
+<p>Wait for the downloading process to commence.</p>
+<p>You should see something like this.</p>
+<figure class="align-default" id="id104">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-89.png"><img alt="_images/CICD-by-Zufar-89.png" src="_images/CICD-by-Zufar-89.png" style="width: 656.0px; height: 265.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with downloading aws version 2
+result</span><a class="headerlink" href="#id104" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Second, you need to execute this command to unzip
+awscli version 2 archive.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>awscliv2.zip
+</pre></div>
+</div>
+<p>Third, you should execute this command to install
+awscli version 2.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./aws/install
+</pre></div>
+</div>
+<p>Then, reload the Kubernetes EC2 Virtual Server
+instance online terminal.</p>
+<p>Next, use this command to check the AWS version</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>You can see that aws cli has aws-cli/2.</p>
+<figure class="align-default" id="id105">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-90.png"><img alt="_images/CICD-by-Zufar-90.png" src="_images/CICD-by-Zufar-90.png" style="width: 862.0px; height: 74.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with aws version coommand result</span><a class="headerlink" href="#id105" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-6-install-kubectl"><strong>Step 6: Install kubectl</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Kubectl</strong> is a fundamental command-line tool for
+interacting with any Kubernetes cluster, regardless
+of the underlying infrastructure. It allows you to
+manage resources, deploy applications, configure
+networking, access logs, and perform various other
+tasks within a Kubernetes cluster.</p>
+</div>
+<p>Now you need to install kubectl command-line tool for
+interacting with a Kubernetes cluster further. To that
+you need to go to <strong>AWS</strong> → <strong>Documentation</strong> →
+<strong>Amazon</strong> <strong>EKS</strong> → <strong>User</strong> <strong>Guide</strong> →
+<strong>Installing</strong> or <strong>updating</strong> <strong>kubectl</strong> →
+<strong>Linux</strong>.</p>
+<p>Or just click the
+link <a href="#id14"><span class="problematic" id="id15">`</span></a><a class="reference external" href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html">https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html</a></p>
+<figure class="align-default" id="id106">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-91.png"><img alt="_images/CICD-by-Zufar-91.png" src="_images/CICD-by-Zufar-91.png" style="width: 935.5px; height: 270.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EKS User Guide</span><a class="headerlink" href="#id106" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>First, execute this command to download kubectl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-O<span class="w"> </span>https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
+</pre></div>
+</div>
+<p>Wait for the downloading process.</p>
+<p>You will see something like this.</p>
+<figure class="align-default" id="id107">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-92.png"><img alt="_images/CICD-by-Zufar-92.png" src="_images/CICD-by-Zufar-92.png" style="width: 1137.0px; height: 139.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with downloading kubectl result</span><a class="headerlink" href="#id107" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Give permission to kubectl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>kubectl
+</pre></div>
+</div>
+<p>Move kubectl to /usr/local/bin folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mv<span class="w"> </span>kubectl<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
+<p>Check the version of kubectl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>version<span class="w"> </span>--output<span class="o">=</span>yaml
+</pre></div>
+</div>
+<p class="rubric" id="h-step-7-install-eksctl"><strong>Step 7: Install eksctl</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Eksctl</strong> is an another command-line tool which is
+tailored specifically to the Amazon EKS service.
+Eksctl can be used to create AWS EKS clusters,
+manage node groups, and perform tasks specific to
+EKS, such as integrating with IAM roles and other
+AWS services by abstracting away much of the AWS
+infrastructure setup and management.</p>
+</div>
+<p>Execute the command to download kubectl.</p>
+<p>Move eksctl to /usr/local/bin folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/eksctl<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
+<p>Check the version of eksctl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>version
+</pre></div>
+</div>
+<figure class="align-default" id="id108">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-93.png"><img alt="_images/CICD-by-Zufar-93.png" src="_images/CICD-by-Zufar-93.png" style="width: 424.0px; height: 38.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with eksctl version</span><a class="headerlink" href="#id108" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-8-create-iam-role-for-eksctl"><strong>Step 8: Create IAM Role for eksctl</strong></p>
+<p>You need to create an IAM role and attach it to your
+<strong>“KubernetesServer”</strong> EC2 instance.</p>
+<p>To do that you need to find EC2 in the search box.</p>
+<p>Choose EC2 Virtual Server by clicking the
+link <a class="reference external" href="https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1">https://us-east-1.console.aws.amazon.com/ec2</a>/.</p>
+<figure class="align-default" id="id109">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-94.png"><img alt="_images/CICD-by-Zufar-94.png" src="_images/CICD-by-Zufar-94.png" style="width: 1120.0px; height: 344.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“IAM”</span><a class="headerlink" href="#id109" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Go to <strong>IAM</strong> <strong>Dashboard</strong> → <strong>Roles</strong>.</p>
+<figure class="align-default" id="id110">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-95.png"><img alt="_images/CICD-by-Zufar-95.png" src="_images/CICD-by-Zufar-95.png" style="width: 729.0px; height: 467.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“IAM Roles”</span><a class="headerlink" href="#id110" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Click the button <strong>“Create role”</strong> on the
+<strong>IAM</strong> roles web page.</p>
+<p>Then choose <strong>“AWS service” , “EC2”.</strong> And the
+click <strong>“Next”</strong> button.</p>
+<figure class="align-default" id="id111">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-96.png"><img alt="_images/CICD-by-Zufar-96.png" src="_images/CICD-by-Zufar-96.png" style="width: 1658.0px; height: 771.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“IAM Roles configuration”</span><a class="headerlink" href="#id111" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then, find <strong>“AmazonEC2FullAccess”</strong>,
+<strong>“AmazonEC2FullAccess“</strong>, <strong>“IAMFullAccess“</strong>,
+<strong>“AWSCloudFormationFullAccess“</strong> in the search box
+and then click the <strong>“Add permissions”</strong> button.</p>
+<p>And then click the <strong>“Next”</strong> button.</p>
+<figure class="align-default" id="id112">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-97.png"><img alt="_images/CICD-by-Zufar-97.png" src="_images/CICD-by-Zufar-97.png" style="width: 1067.0px; height: 389.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AdministratorAccess permission</span><a class="headerlink" href="#id112" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then type <strong>“Eksctl_Role”</strong> into <strong>“Role name”</strong>
+input.</p>
+<p>And the click <strong>“Create role”</strong> button.</p>
+<figure class="align-default" id="id113">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-98.png"><img alt="_images/CICD-by-Zufar-98.png" src="_images/CICD-by-Zufar-98.png" style="width: 795.0px; height: 425.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+permission role configuration</span><a class="headerlink" href="#id113" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The role is created finally.</p>
+<p class="rubric" id="h-step-9-connect-iam-role-with-eksctl"><strong>Step 9: Connect IAM Role with eksctl</strong></p>
+<p>Go to the AWS EC2 instance web page.
+Choose <strong>“KuberbetesServer”.</strong> Then click
+<strong>“Actions”</strong> → <strong>“Security”</strong> → <strong>“Modify IAM
+Role”.</strong></p>
+<figure class="align-default" id="id114">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-99.png"><img alt="_images/CICD-by-Zufar-99.png" src="_images/CICD-by-Zufar-99.png" style="width: 466.5px; height: 337.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+KubernetesServer Security button</span><a class="headerlink" href="#id114" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Choose <strong>“Eksctl_Role”</strong> and then click the <strong>“Update
+IAM role”</strong> button.</p>
+<figure class="align-default" id="id115">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-100.png"><img alt="_images/CICD-by-Zufar-100.png" src="_images/CICD-by-Zufar-100.png" style="width: 942.0px; height: 544.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+Elsctl_Role IAM role</span><a class="headerlink" href="#id115" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now your IAM Role is connected with your
+<strong>“EKS_Server”</strong> and eksctl tool.</p>
+<p class="rubric" id="h-step-10-create-eksctl-cluster"><strong>Step 10: Create eksctl cluster</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>An Amazon EKS (Elastic Kubernetes
+Service)</strong> cluster is a managed Kubernetes
+environment on AWS, automating intricate
+infrastructure tasks like setup, scaling, and
+maintenance. It’s essential as it provides an
+efficient, secure, and AWS-optimized platform for
+deploying, managing, and scaling containerized
+applications, streamlining operations and freeing
+developers to focus on coding rather than managing
+underlying infrastructure.</p>
+</div>
+<p>Now, it’s time to set up your EKS cluster.</p>
+<p><strong>To achieve this, follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Modify the following command with your specific
+information.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>cluster-name<span class="w">  </span><span class="se">\</span>
+--region<span class="w"> </span>region-name<span class="w"> </span><span class="se">\</span>
+--node-type<span class="w"> </span>instance-type<span class="w"> </span><span class="se">\</span>
+--nodes-min<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+--nodes-max<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+--zones<span class="w"> </span>&lt;AZ-1&gt;,&lt;AZ-2&gt;
+</pre></div>
+</div>
+<p>For example, in my case, it looks like this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>zufarexplainedit<span class="w">  </span><span class="se">\</span>
+--region<span class="w"> </span>eu-north-1<span class="w"> </span><span class="se">\</span>
+--node-type<span class="w"> </span>t3.micro
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Execute the modified command and patiently await
+the completion of the cluster creation process. You
+will notice that the EKS cluster status is
+indicated as <strong>“creating”</strong> on the AWS
+CloudFormation web page.</p></li>
+</ol>
+<figure class="align-default" id="id116">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-101.png"><img alt="_images/CICD-by-Zufar-101.png" src="_images/CICD-by-Zufar-101.png" style="width: 1169.0px; height: 417.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AWS CloudFormation where you can see EKS cluster
+“creating” status</span><a class="headerlink" href="#id116" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The cluster creation procedure typically takes around
+20 minutes. Once completed, the terminal will display
+the outcome of the process.</p>
+<figure class="align-default" id="id117">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-102.png"><img alt="_images/CICD-by-Zufar-102.png" src="_images/CICD-by-Zufar-102.png" style="width: 1017.0px; height: 406.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AWS EC2 terminal where you can see EKS cluster
+creation result</span><a class="headerlink" href="#id117" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Furthermore, you can verify the successful <strong>EKS</strong>
+cluster creation status on the AWS CloudFormation web page.</p>
+<figure class="align-default" id="id118">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-103.png"><img alt="_images/CICD-by-Zufar-103.png" src="_images/CICD-by-Zufar-103.png" style="width: 1147.0px; height: 372.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AWS CloudFormation where you can see EKS cluster
+creation result</span><a class="headerlink" href="#id118" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-11-create-kubernetes-deployment-yaml-file"><strong>Step 11: Create Kubernetes Deployment
+yaml file</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>A Kubernetes Deployment YAML file</strong> is a
+configuration script written in YAML format that
+defines how to manage and maintain a specific
+application or service within a Kubernetes cluster.
+It encapsulates instructions for orchestrating the
+deployment, scaling, updating, and monitoring of
+containers running the application. This file
+includes details such as the container image, the
+desired number of replicas, resource limits,
+environment variables, networking settings, and
+more. When applied to a Kubernetes cluster, the
+Deployment YAML file ensures the desired state of
+the application, automatically managing the
+creation, scaling, and recovery of containers to
+maintain the desired level of availability and
+reliability.</p>
+</div>
+<p>Now, as Kubernetes cluster, eksctl, kubectl are
+installed and configured, you can create a Kubernetes
+Deployment yaml file.</p>
+<p>You can do that by executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>hello-app-deployment.yaml
+</pre></div>
+</div>
+<p>Then, edit this file by executing the following
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>hello-app-deployment.yaml
+</pre></div>
+</div>
+<p>Add this content to the hello-app-deployment.yaml.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zufarexplainedit-hello-app</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zufarexplainedit/hello</span>
+<span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RollingUpdate</span>
+<span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<p>Now hello-app-deployment.yaml is created and ready to
+use.</p>
+<p class="rubric" id="h-step-12-create-kubernetes-service-yaml-file"><strong>Step 12: Create Kubernetes Service yaml
+file</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>A Kubernetes Service YAML file</strong> is a
+configuration script written in YAML format that
+defines a network abstraction for a set of pods,
+allowing them to be accessed consistently within a
+Kubernetes cluster. This file outlines how the
+service should be discovered, accessed, and
+load-balanced by other services or external
+clients. It includes specifications like the
+service type (ClusterIP, NodePort, LoadBalancer),
+port numbers, selectors to identify pods, and more.
+When applied to a Kubernetes cluster, the Service
+YAML file creates a virtual IP and port that routes
+traffic to the appropriate pods, abstracting the
+underlying pod changes and providing a stable
+endpoint for communication, enabling seamless
+connectivity and dynamic scaling.</p>
+</div>
+<p>As Kubernetes cluster, eksctl, kubectl are installed
+and configured, you can create Kubernetes Service yaml
+file.</p>
+<p>To do that you need to create a Kubernetes Service
+yaml file by executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>hello-app-service.yaml
+</pre></div>
+</div>
+<p>Then, edit this file by executing the following
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>hello-app-service.yaml
+</pre></div>
+</div>
+<p>Add this content to the hello-app-deployment.yaml.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zufarexplainedit-hello-app-service</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+</pre></div>
+</div>
+<p>Now hello-app-service.yaml is created and ready to
+use.</p>
+<p class="rubric" id="h-step-13-test-kubernetes-cluster-using-kubectl"><strong>Step 13: Test Kubernetes cluster using
+kubectl</strong></p>
+<p>With your Kubernetes EKS cluster successfully
+installed, and configured, and your Kubernetes service
+and deployment files ready, it’s time to put things to
+the test using kubectl commands.</p>
+<ol class="arabic">
+<li><p><strong>Apply Deployment.</strong></p>
+<p>Use the following command to apply the deployment
+configuration.</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>hello-app-deployment.yaml
+</pre></div>
+</div>
+<p>This will create a deployment with the specified
+number of replicas and a rolling update strategy,
+ensuring your application’s availability and
+manageability.</p>
+<p><strong>2. Apply Service.</strong></p>
+<p>Next, apply the service configuration.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>hello-app-service.yaml
+</pre></div>
+</div>
+<p>This will set up a LoadBalancer type service, exposing
+your application to the internet.</p>
+<p>Note that it might take a short while for the
+LoadBalancer to be provisioned and acquire an external
+IP address.</p>
+<ol class="arabic" start="3">
+<li><p><strong>Check LoadBalancer Status.</strong></p>
+<p>Monitor the status of your service using.</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>get<span class="w"> </span>service<span class="w"> </span>zufarexplainedit-hello-app-service
+</pre></div>
+</div>
+<p>When an external IP is assigned, you’re almost ready
+to access your application.</p>
+<ol class="arabic" start="4">
+<li><p><strong>Access Your Application.</strong></p>
+<p>Using a web browser, enter the assigned external IP
+address followed by :8080. After a brief moment,
+the page will load, displaying the “HelloWorld”
+message. Keep in mind that the initial loading
+might take a few seconds.</p>
+</li>
+</ol>
+<figure class="align-default" id="id119">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-104.png"><img alt="_images/CICD-by-Zufar-104.png" src="_images/CICD-by-Zufar-104.png" style="width: 101.0px; height: 33.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Hello app web page</span><a class="headerlink" href="#id119" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="rubric" id="h-cleaning-up-with-kubectl-commands">Cleaning Up with kubectl Commands</p>
+<p>When you need to tidy up resources within your
+Kubernetes environment, you can use the following
+kubectl commands to effectively remove deployments,
+pods, and services.</p>
+</div>
+<p><strong>1. Delete All Deployments</strong>.</p>
+<p>To delete all deployments, you can use the
+following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>deployments<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>This action ensures that no active deployment
+instances are left in your cluster.</p>
+<p><strong>2. Delete All Pods</strong>.</p>
+<p>If you need to delete all pods, whether they are
+managed by a deployment or not, you can use the
+following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>pods<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>Clearing pods can help reset your cluster state or
+prepare for new deployments.</p>
+<p><strong>3. Delete All Services</strong>.</p>
+<p>To clean up services that expose your applications
+to the network, you can use the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>services<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>Removing services may involve downtime, so consider
+the implications before proceeding.</p>
+<p class="rubric" id="h-deleting-an-amazon-eks-cluster"><strong>Deleting an Amazon EKS Cluster</strong></p>
+<p>To remove all the resources associated with the
+specified Amazon EKS cluster created with
+<code class="docutils literal notranslate"><span class="pre">eksctl</span></code>, including worker nodes, networking
+components, and other resources, you can use the
+following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>delete<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span><span class="o">{</span>your<span class="w"> </span>cluster<span class="w"> </span>name<span class="o">}</span><span class="w"> </span>--region<span class="w"> </span><span class="o">{</span>your<span class="w"> </span>region<span class="w"> </span>name<span class="o">}</span>
+</pre></div>
+</div>
+<p>For me it is.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>delete<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>zufarexplainedit<span class="w"> </span>--region<span class="w"> </span>eu-north-1
+</pre></div>
+</div>
+<p>Make sure you are certain about stopping the
+cluster, as this action is irreversible and will
+result in data loss.</p>
+<p class="rubric" id="h-step-14-add-and-configure-a-new-user-in-kubernetes-server-aws-ec-2-virtual-server-instance"><strong>Step 14: Add and configure a new user in
+“KubernetesServer” AWS EC2 Virtual Server
+instance</strong></p>
+<p>Now let’s add a new <strong>ansible-admin</strong> user to
+<strong>“KubernetesServer”</strong> AWS EC2 Virtual Server
+instance.</p>
+<p>To do that use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>useradd<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>Then, set the password for <strong>ansible-admin</strong> user.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>passwd<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>Also, you need to configure user privileges by editing
+the <strong>sudoers</strong> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>visudo
+</pre></div>
+</div>
+<p>Add <strong>“ansible-admin ALL=(ALL) ALL”</strong> to
+this <strong>sudoers</strong> file.</p>
+<figure class="align-default" id="id120">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-105.png"><img alt="_images/CICD-by-Zufar-105.png" src="_images/CICD-by-Zufar-105.png" style="width: 761.0px; height: 552.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to admin privileges</span><a class="headerlink" href="#id120" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Also, you need to edit <strong>/etc/ssh/sshd_config</strong> file
+to enable PasswordAuthentication.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/ssh/sshd_config
+</pre></div>
+</div>
+<figure class="align-default" id="id121">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-106.png"><img alt="_images/CICD-by-Zufar-106.png" src="_images/CICD-by-Zufar-106.png" style="width: 726.0px; height: 445.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to admin settings</span><a class="headerlink" href="#id121" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you need to reload the service to make these
+changes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>sshd<span class="w"> </span>reload
+</pre></div>
+</div>
+<p>As a result of executing this command, you will see:</p>
+<figure class="align-default" id="id122">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-107.png"><img alt="_images/CICD-by-Zufar-107.png" src="_images/CICD-by-Zufar-107.png" style="width: 307.5px; height: 107.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to sshd reload result</span><a class="headerlink" href="#id122" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now you can use this command to avoid adding sudo
+for all further commands.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>su<span class="w"> </span>-<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p class="rubric" id="h-step-15-generate-key-in-an-aws-ec-2-virtual-server-instance"><strong>Step 15: Generate key in an AWS EC2
+Virtual Server instance</strong></p>
+<p>You are planning to manage remote servers such as
+<strong>K8s</strong> EC2 virtual server instance further in this article.
+That is why you need to set up SSH keys.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen
+</pre></div>
+</div>
+<p>As a result of executing this command, you will see:</p>
+<figure class="align-default" id="id123">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-108.png"><img alt="_images/CICD-by-Zufar-108.png" src="_images/CICD-by-Zufar-108.png" style="width: 375.0px; height: 206.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to ssh-keygen result</span><a class="headerlink" href="#id123" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now SSH keys are generated and ready to use.</p>
+<p class="rubric" id="h-step-16-configure-passwordless-ssh-authentication-to-localhost-for-ansible"><strong>Step 16: Configure</strong> Passwordless SSH
+authentication to localhost for Ansible</p>
+<p>Ansible is designed for automating tasks on remote
+servers. Passwordless SSH authentication empowers
+Ansible to connect to those servers without the need
+for manual password entry.</p>
+<p>Execute this command to create a secure connection
+from your computer to another computer (like the one
+at IP address 172.31.34.41), using the ansible-admin
+user’s SSH key.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>/home/<span class="o">{</span>your<span class="w"> </span>user<span class="w"> </span>name<span class="o">}</span>/.ssh/id_rsa.pub<span class="w"> </span><span class="o">{</span>your<span class="w"> </span>user<span class="w"> </span>name<span class="o">}</span>@<span class="o">{</span>your<span class="w"> </span>host<span class="w"> </span>address<span class="o">}</span>
+</pre></div>
+</div>
+<p>In my case, it looks like this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>/home/ansible-admin/.ssh/id_rsa.pub<span class="w"> </span>ansible-admin@172.31.34.41
+</pre></div>
+</div>
+<figure class="align-default" id="id124">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-109.png"><img alt="_images/CICD-by-Zufar-109.png" src="_images/CICD-by-Zufar-109.png" style="width: 539.5px; height: 113.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the successful passwordless ssh
+authentication installation result</span><a class="headerlink" href="#id124" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see <strong>“Number of key(s) added: 1”</strong>. It
+means that the passwordless SSH authentication
+installation was successfully completed.</p>
+<p class="rubric" id="h-step-17-configure-ansible-hosts-in-ansible-server-ec-2-instance"><strong>Step 17: Configure Ansible hosts in
+AnsibleServer EC2 instance</strong></p>
+<p>When you run an Ansible playbook, you specify the
+hosts it should run on. In this step you need to
+specify KubernetesServer EC2 instance host. To do that
+you need to repeat the same steps which you passed in
+“<strong>[Module 6]: Ansible”.</strong></p>
+<p>Let’s find out the KubernetesServer EC2 instance host
+by executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ifconfig
+</pre></div>
+</div>
+<figure class="align-default" id="id125">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-110.png"><img alt="_images/CICD-by-Zufar-110.png" src="_images/CICD-by-Zufar-110.png" style="width: 331.5px; height: 173.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “ifconfig” file</span><a class="headerlink" href="#id125" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>After you find the KubernetesServer EC2 instance host,
+you can add it to the Ansible hosts file by executing
+the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/ansible/hosts
+</pre></div>
+</div>
+<figure class="align-default" id="id126">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-111.png"><img alt="_images/CICD-by-Zufar-111.png" src="_images/CICD-by-Zufar-111.png" style="width: 226.0px; height: 95.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “hosts” files with ansible and
+kubernetes hosts</span><a class="headerlink" href="#id126" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can also add “[kubernetes]” as a reference</p>
+<p class="rubric" id="h-step-18-create-a-new-ansible-playbook-for-kubernetes-tasks"><strong>Step 18: Create a new Ansible playbook
+for Kubernetes tasks</strong></p>
+<p>Now that Kubernetes is all setup and good to go, you
+can make a new Ansible playbook with Kubernetes tasks
+for your pipeline. This playbook will let Ansible run
+your app on the Kubernetes cluster with kubectl
+commands.</p>
+<p>Here’s how you can do it:</p>
+<ol class="arabic simple">
+<li><p>Start by creating a new Ansible playbook file. Just
+use this command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>kubernetes-hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Then, edit the newly made <code class="docutils literal notranslate"><span class="pre">hello-app.yml</span></code> file.
+Open it up for editing with this command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>kubernetes-hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Inside the file, type in the following:</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy regapp on kubernetes</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubectl apply -f hello-app-deployment.yaml</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create service for regapp</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubectl apply -f hello-app-service.yaml</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update deployment with new pods if image updated in docker hub</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubectl rollout restart deployment.apps/zufarexplainedit-hello-app</span>
+</pre></div>
+</div>
+<p>The Ansible playbook for Kubernetes tasks is ready to
+use.</p>
+<p class="rubric" id="h-step-19-integrate-a-new-ansible-playbook-for-kubernetes-tasks-with-jenkins"><strong>Step 19: Integrate a new Ansible
+playbook for Kubernetes tasks with Jenkins</strong></p>
+<p>Now that Kubernetes, Ansible, and Ansible playbook for
+Kubernetes tasks are all set up and good to go, you
+can integrate it with Jenkins.</p>
+<ol class="arabic simple">
+<li><p>Go to JenkinsServer → Jenkins dashboard → New Item.</p></li>
+<li><p>Create new Jenkins Freestyle project with the name
+“CD-Job”.</p></li>
+</ol>
+<figure class="align-default" id="id127">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-112.png"><img alt="_images/CICD-by-Zufar-112.png" src="_images/CICD-by-Zufar-112.png" style="width: 396.5px; height: 421.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of a new Jenkins freestyle
+project “CD-Job”</span><a class="headerlink" href="#id127" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>Click “OK” button.</p></li>
+<li><p>Go to “Post-build Actions” section.</p></li>
+<li><p>Click the “Add post-build action” button.</p></li>
+<li><p>Choose “Send build artifacts over SSH” option.</p></li>
+<li><p>Choose “AnsibleServer” as SSH Server.</p></li>
+<li><p>Add this command to “exec command” input.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-u<span class="w"> </span>ansible-admin<span class="w"> </span>ansible-playbook<span class="w"> </span>/opt/docker/kubernetes-hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>Click “Apply” and “Save” buttons.</p></li>
+<li><p>Go to Jenkins dashboard → “CI_CD_Pipeline” →
+Configure → “Post-build Actions” section.</p></li>
+<li><p>Click the “Add post-build action” button.</p></li>
+<li><p>Choose “Build other projects” option.</p></li>
+<li><p>Go to “Build other projects” section.</p></li>
+<li><p>Choose “Trigger only if build is stable” option.</p></li>
+<li><p>Add “CD-Job” to “Project to build” input.</p></li>
+</ol>
+<figure class="align-default" id="id128">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-113.png"><img alt="_images/CICD-by-Zufar-113.png" src="_images/CICD-by-Zufar-113.png" style="width: 339.0px; height: 306.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “Build other projects”
+section</span><a class="headerlink" href="#id128" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="16">
+<li><p>Click “Apply” and “Save” buttons.</p></li>
+</ol>
+<p>Now you can consider that the pipeline is completely
+finished and ready to use.</p>
+<p class="rubric" id="h-step-20-testing-the-final-pipeline-version"><strong>Step 20: Testing the Final Pipeline
+Version</strong></p>
+<p>Now is the time to put the final pipeline version to
+the test.</p>
+<p>Navigate to Jenkins → Jenkins dashboard →
+“CI_CD_Pipeline”.</p>
+<p>Click the “Build Now” button.</p>
+<p>To see the results, review the build console logs.</p>
+<figure class="align-default" id="id129">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-114.png"><img alt="_images/CICD-by-Zufar-114.png" src="_images/CICD-by-Zufar-114.png" style="width: 328.0px; height: 144.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the build console logs</span><a class="headerlink" href="#id129" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You will notice that the “CD-Job” was triggered in the
+build console logs, and the final status is marked as
+SUCCESS.</p>
+<p>4</p>
+<p>Moreover, you can head to Dockerhub to confirm the
+addition of the new Docker image.</p>
+<p>And finally, you can access your application using a
+web browser. Enter the assigned external IP address
+followed by “:8080”. After a brief moment, the page
+will load, showing the “HelloWorld” message.</p>
+<p class="rubric" id="h-conclusion"><strong>Conclusion</strong></p>
+<p>Well done on setting up this modern CI/CD pipeline!</p>
+<p>You’ve done an awesome job, and you’re a real hero!</p>
+<p>Thanks for all your effort!</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CICD-6-Cloud.html" class="btn btn-neutral float-left" title="Cloud" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="VM-RAID-Minikube.html" class="btn btn-neutral float-right" title="VM-RAID-Minikube" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

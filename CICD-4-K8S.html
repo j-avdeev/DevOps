@@ -1,0 +1,1029 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a CI/CD Pipeline. Part4 Kubernetes &mdash; DevOps 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ce236e8" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Monitoring - Prometheus Grafana" href="CICD-5-Monitoring.html" />
+    <link rel="prev" title="Building a CI/CD Pipeline. Part3 Nexus Ansible" href="CICD-3-Nexus.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DevOps
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lectures.html">Lectures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="assignments.html">Assignments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CICD-1-Git-Jenkins.html">Building a CI/CD Pipeline. Part1 Git-Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-1-Git-Jenkins%20%28on%20premise%29.html">Building a CI/CD Pipeline. Part1 Git-Jenkins (on premise)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-2-Docker.html">Building a CI/CD Pipeline. Part2 Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-3-Nexus.html">Building a CI/CD Pipeline. Part3 Nexus Ansible</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building a CI/CD Pipeline. Part4 Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-5-Monitoring.html">Monitoring - Prometheus Grafana</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-6-Cloud.html">Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-by-Zufar.html">Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VM-RAID-Minikube.html">VM-RAID-Minikube</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DevOps</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="assignments.html">Assignments</a></li>
+      <li class="breadcrumb-item active">Building a CI/CD Pipeline. Part4 Kubernetes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CICD-4-K8S.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-a-ci-cd-pipeline-part4-kubernetes">
+<h1>Building a CI/CD Pipeline. Part4 Kubernetes<a class="headerlink" href="#building-a-ci-cd-pipeline-part4-kubernetes" title="Link to this heading"></a></h1>
+<ol class="arabic simple">
+<li><p>Setup “minikube” or kubernetes cloud service.</p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">hello-app-deployment.yaml</span></code> file with hello-app
+docker image deployment to kubernetes</p></li>
+<li><p>Add image deployment step into Jenkins pipline
+through Ansible (if you want) or directly without Ansible</p></li>
+<li><p>Create screenshot of successful finished pipeline of Jenkins window.</p></li>
+</ol>
+<p>—</p>
+<dl class="simple">
+<dt>For “on-premise” option - setup kubernetes with <strong>minikube</strong></dt><dd><ul class="simple">
+<li><p>For minicube - you can use steps from <cite>Kubernetes install Tools</cite> <a class="reference external" href="https://kubernetes.io/docs/tasks/tools/">https://kubernetes.io/docs/tasks/tools/</a></p></li>
+</ul>
+</dd>
+<dt>To run minikube you will need:</dt><dd><ul class="simple">
+<li><p>at least 20 GB of free space on your VM hard drive</p></li>
+<li><p>CPU: 2 core or more</p></li>
+<li><p>RAM: ~1900 MB (1800 MB min for minikube + OS)</p></li>
+</ul>
+</dd>
+</dl>
+<p>—</p>
+<p class="rubric" id="h-module-7-kubernetes"><strong>[Module 7]: Kubernetes</strong></p>
+<p>Now let’s configure K8s on the EC2 instance. You are
+going to create a new EC2 instance and install their
+kubectl command-line tool for interacting with a
+<a class="reference external" href="https://hackernoon.com/419-stories-to-learn-about-kubernetes">Kubernetes</a>
+cluster further.</p>
+<p class="rubric" id="h-step-1-launch-an-aws-ec-2-virtual-server-instance"><strong>Step 1: Launch an AWS EC2 Virtual Server
+instance</strong></p>
+<p>Use instructions from “<strong>Launch an AWS EC2 Virtual
+Server instance”</strong> section of this tutorial to finish
+this step.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to add a security group setup. It
+allows <strong>all tools</strong> and <strong>SSH</strong> to work on
+port <strong>8080</strong> and <strong>22</strong> respectively.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the name <strong>“K8sServer”</strong> to distinguish your
+EC2 Virtual Server instance.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can reuse <strong>“CI_CD_Pipeline”</strong> security group
+and <strong>“CI_CD_Pipeline_Key_Pair“</strong> for a
+new <strong>“K8sServer”</strong> EC2 instance.</p>
+</div>
+<p class="rubric" id="h-step-2-connect-to-an-aws-ec-2-virtual-server-instance"><strong>Step 2: Connect to an AWS EC2 Virtual
+Server instance</strong></p>
+<p>Click the “Connect” button.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-83.png"><img alt="_images/CICD-by-Zufar-83.png" src="_images/CICD-by-Zufar-83.png" style="width: 259.5px; height: 60.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Connect” button</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see the EC2 Virtual Server instance online
+terminal.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-84.png"><img alt="_images/CICD-by-Zufar-84.png" src="_images/CICD-by-Zufar-84.png" style="width: 413.0px; height: 199.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-3-change-the-hostname-of-kubernetes-server-aws-ec-2-virtual-server-instance"><strong>Step 3: Change the hostname of
+“KubernetesServer” AWS EC2 Virtual Server
+instance</strong></p>
+<p>The first thing you need to do when you want to
+configure KuberenetesServer on EC2 virtual server
+instance is to change its hostname.</p>
+<p>Let’s do it. Execute this command to open hostname
+file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/hostname
+</pre></div>
+</div>
+<p>You should see something like this.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-85.png"><img alt="_images/CICD-by-Zufar-85.png" src="_images/CICD-by-Zufar-85.png" style="width: 368.0px; height: 101.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+with hostname file</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Replace this hostname with <strong>“kubernetes-server” and</strong>
+then reboot it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>init<span class="w"> </span><span class="m">6</span>
+</pre></div>
+</div>
+<p>You will hostname was changed.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-86.png"><img alt="_images/CICD-by-Zufar-86.png" src="_images/CICD-by-Zufar-86.png" style="width: 177.0px; height: 98.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to hostname</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-check-aws-cli-version"><strong>Step 4: Check AWS CLI version</strong></p>
+<p>Use this command to check the
+<a class="reference external" href="https://hackernoon.com/467-stories-to-learn-about-aws">AWS</a>
+version.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>This way you can see your current aws-cli version.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-87.png"><img alt="_images/CICD-by-Zufar-87.png" src="_images/CICD-by-Zufar-87.png" style="width: 771.0px; height: 61.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with aws version command result</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>If you can see version <strong>aws-cli/1.18</strong>, you should
+download the latest version.</p>
+<p class="rubric" id="h-step-5-update-aws-cli"><strong>Step 5: Update AWS CLI</strong></p>
+<p>Now as you found out that you have an old aws-cli
+version on your EC2 instance you need to update it. To
+that go to AWS → Documentation → AWS Command Line
+Interface → User Guide for Version 2.</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-88.png"><img alt="_images/CICD-by-Zufar-88.png" src="_images/CICD-by-Zufar-88.png" style="width: 718.0px; height: 477.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+webpage with User Guide for Version 2</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Copy-paste <strong>the curl command</strong>.</p>
+<p>First, execute this command to download awscli version
+2.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span><span class="s2">&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;awscliv2.zip&quot;</span>
+</pre></div>
+</div>
+<p>Wait for the downloading process to commence.</p>
+<p>You should see something like this.</p>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-89.png"><img alt="_images/CICD-by-Zufar-89.png" src="_images/CICD-by-Zufar-89.png" style="width: 656.0px; height: 265.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with downloading aws version 2
+result</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Second, you need to execute this command to unzip
+awscli version 2 archive.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>awscliv2.zip
+</pre></div>
+</div>
+<p>Third, you should execute this command to install
+awscli version 2.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./aws/install
+</pre></div>
+</div>
+<p>Then, reload the Kubernetes EC2 Virtual Server
+instance online terminal.</p>
+<p>Next, use this command to check the AWS version</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>You can see that aws cli has aws-cli/2.</p>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-90.png"><img alt="_images/CICD-by-Zufar-90.png" src="_images/CICD-by-Zufar-90.png" style="width: 862.0px; height: 74.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with aws version coommand result</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-6-install-kubectl"><strong>Step 6: Install kubectl</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Kubectl</strong> is a fundamental command-line tool for
+interacting with any Kubernetes cluster, regardless
+of the underlying infrastructure. It allows you to
+manage resources, deploy applications, configure
+networking, access logs, and perform various other
+tasks within a Kubernetes cluster.</p>
+</div>
+<p>Now you need to install kubectl command-line tool for
+interacting with a Kubernetes cluster further. To that
+you need to go to <strong>AWS</strong> → <strong>Documentation</strong> →
+<strong>Amazon</strong> <strong>EKS</strong> → <strong>User</strong> <strong>Guide</strong> →
+<strong>Installing</strong> or <strong>updating</strong> <strong>kubectl</strong> →
+<strong>Linux</strong>.</p>
+<p>Or just click the
+link <a href="#id1"><span class="problematic" id="id2">`</span></a><a class="reference external" href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html">https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html</a></p>
+<figure class="align-default" id="id11">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-91.png"><img alt="_images/CICD-by-Zufar-91.png" src="_images/CICD-by-Zufar-91.png" style="width: 935.5px; height: 270.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EKS User Guide</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>First, execute this command to download kubectl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-O<span class="w"> </span>https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
+</pre></div>
+</div>
+<p>Wait for the downloading process.</p>
+<p>You will see something like this.</p>
+<figure class="align-default" id="id12">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-92.png"><img alt="_images/CICD-by-Zufar-92.png" src="_images/CICD-by-Zufar-92.png" style="width: 1137.0px; height: 139.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with downloading kubectl result</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Give permission to kubectl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>kubectl
+</pre></div>
+</div>
+<p>Move kubectl to /usr/local/bin folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mv<span class="w"> </span>kubectl<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
+<p>Check the version of kubectl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>version<span class="w"> </span>--output<span class="o">=</span>yaml
+</pre></div>
+</div>
+<p class="rubric" id="h-step-7-install-eksctl"><strong>Step 7: Install eksctl</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Eksctl</strong> is an another command-line tool which is
+tailored specifically to the Amazon EKS service.
+Eksctl can be used to create AWS EKS clusters,
+manage node groups, and perform tasks specific to
+EKS, such as integrating with IAM roles and other
+AWS services by abstracting away much of the AWS
+infrastructure setup and management.</p>
+</div>
+<p>Execute the command to download kubectl.</p>
+<p>Move eksctl to /usr/local/bin folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/eksctl<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
+<p>Check the version of eksctl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>version
+</pre></div>
+</div>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-93.png"><img alt="_images/CICD-by-Zufar-93.png" src="_images/CICD-by-Zufar-93.png" style="width: 424.0px; height: 38.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with eksctl version</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-8-create-iam-role-for-eksctl"><strong>Step 8: Create IAM Role for eksctl</strong></p>
+<p>You need to create an IAM role and attach it to your
+<strong>“KubernetesServer”</strong> EC2 instance.</p>
+<p>To do that you need to find EC2 in the search box.</p>
+<p>Choose EC2 Virtual Server by clicking the
+link <a class="reference external" href="https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1">https://us-east-1.console.aws.amazon.com/ec2</a>/.</p>
+<figure class="align-default" id="id14">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-94.png"><img alt="_images/CICD-by-Zufar-94.png" src="_images/CICD-by-Zufar-94.png" style="width: 1120.0px; height: 344.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“IAM”</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Go to <strong>IAM</strong> <strong>Dashboard</strong> → <strong>Roles</strong>.</p>
+<figure class="align-default" id="id15">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-95.png"><img alt="_images/CICD-by-Zufar-95.png" src="_images/CICD-by-Zufar-95.png" style="width: 729.0px; height: 467.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“IAM Roles”</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Click the button <strong>“Create role”</strong> on the
+<strong>IAM</strong> roles web page.</p>
+<p>Then choose <strong>“AWS service” , “EC2”.</strong> And the
+click <strong>“Next”</strong> button.</p>
+<figure class="align-default" id="id16">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-96.png"><img alt="_images/CICD-by-Zufar-96.png" src="_images/CICD-by-Zufar-96.png" style="width: 1658.0px; height: 771.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“IAM Roles configuration”</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then, find <strong>“AmazonEC2FullAccess”</strong>,
+<strong>“AmazonEC2FullAccess“</strong>, <strong>“IAMFullAccess“</strong>,
+<strong>“AWSCloudFormationFullAccess“</strong> in the search box
+and then click the <strong>“Add permissions”</strong> button.</p>
+<p>And then click the <strong>“Next”</strong> button.</p>
+<figure class="align-default" id="id17">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-97.png"><img alt="_images/CICD-by-Zufar-97.png" src="_images/CICD-by-Zufar-97.png" style="width: 1067.0px; height: 389.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AdministratorAccess permission</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then type <strong>“Eksctl_Role”</strong> into <strong>“Role name”</strong>
+input.</p>
+<p>And the click <strong>“Create role”</strong> button.</p>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-98.png"><img alt="_images/CICD-by-Zufar-98.png" src="_images/CICD-by-Zufar-98.png" style="width: 795.0px; height: 425.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+permission role configuration</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The role is created finally.</p>
+<p class="rubric" id="h-step-9-connect-iam-role-with-eksctl"><strong>Step 9: Connect IAM Role with eksctl</strong></p>
+<p>Go to the AWS EC2 instance web page.
+Choose <strong>“KuberbetesServer”.</strong> Then click
+<strong>“Actions”</strong> → <strong>“Security”</strong> → <strong>“Modify IAM
+Role”.</strong></p>
+<figure class="align-default" id="id19">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-99.png"><img alt="_images/CICD-by-Zufar-99.png" src="_images/CICD-by-Zufar-99.png" style="width: 466.5px; height: 337.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+KubernetesServer Security button</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Choose <strong>“Eksctl_Role”</strong> and then click the <strong>“Update
+IAM role”</strong> button.</p>
+<figure class="align-default" id="id20">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-100.png"><img alt="_images/CICD-by-Zufar-100.png" src="_images/CICD-by-Zufar-100.png" style="width: 942.0px; height: 544.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+Elsctl_Role IAM role</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now your IAM Role is connected with your
+<strong>“EKS_Server”</strong> and eksctl tool.</p>
+<p class="rubric" id="h-step-10-create-eksctl-cluster"><strong>Step 10: Create eksctl cluster</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>An Amazon EKS (Elastic Kubernetes
+Service)</strong> cluster is a managed Kubernetes
+environment on AWS, automating intricate
+infrastructure tasks like setup, scaling, and
+maintenance. It’s essential as it provides an
+efficient, secure, and AWS-optimized platform for
+deploying, managing, and scaling containerized
+applications, streamlining operations and freeing
+developers to focus on coding rather than managing
+underlying infrastructure.</p>
+</div>
+<p>Now, it’s time to set up your EKS cluster.</p>
+<p><strong>To achieve this, follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Modify the following command with your specific
+information.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>cluster-name<span class="w">  </span><span class="se">\</span>
+--region<span class="w"> </span>region-name<span class="w"> </span><span class="se">\</span>
+--node-type<span class="w"> </span>instance-type<span class="w"> </span><span class="se">\</span>
+--nodes-min<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+--nodes-max<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+--zones<span class="w"> </span>&lt;AZ-1&gt;,&lt;AZ-2&gt;
+</pre></div>
+</div>
+<p>For example, in my case, it looks like this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>zufarexplainedit<span class="w">  </span><span class="se">\</span>
+--region<span class="w"> </span>eu-north-1<span class="w"> </span><span class="se">\</span>
+--node-type<span class="w"> </span>t3.micro
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Execute the modified command and patiently await
+the completion of the cluster creation process. You
+will notice that the EKS cluster status is
+indicated as <strong>“creating”</strong> on the AWS
+CloudFormation web page.</p></li>
+</ol>
+<figure class="align-default" id="id21">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-101.png"><img alt="_images/CICD-by-Zufar-101.png" src="_images/CICD-by-Zufar-101.png" style="width: 1169.0px; height: 417.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AWS CloudFormation where you can see EKS cluster
+“creating” status</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The cluster creation procedure typically takes around
+20 minutes. Once completed, the terminal will display
+the outcome of the process.</p>
+<figure class="align-default" id="id22">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-102.png"><img alt="_images/CICD-by-Zufar-102.png" src="_images/CICD-by-Zufar-102.png" style="width: 1017.0px; height: 406.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AWS EC2 terminal where you can see EKS cluster
+creation result</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Furthermore, you can verify the successful <strong>EKS</strong>
+cluster creation status on the AWS CloudFormation web page.</p>
+<figure class="align-default" id="id23">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-103.png"><img alt="_images/CICD-by-Zufar-103.png" src="_images/CICD-by-Zufar-103.png" style="width: 1147.0px; height: 372.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+AWS CloudFormation where you can see EKS cluster
+creation result</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-11-create-kubernetes-deployment-yaml-file"><strong>Step 11: Create Kubernetes Deployment
+yaml file</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>A Kubernetes Deployment YAML file</strong> is a
+configuration script written in YAML format that
+defines how to manage and maintain a specific
+application or service within a Kubernetes cluster.
+It encapsulates instructions for orchestrating the
+deployment, scaling, updating, and monitoring of
+containers running the application. This file
+includes details such as the container image, the
+desired number of replicas, resource limits,
+environment variables, networking settings, and
+more. When applied to a Kubernetes cluster, the
+Deployment YAML file ensures the desired state of
+the application, automatically managing the
+creation, scaling, and recovery of containers to
+maintain the desired level of availability and
+reliability.</p>
+</div>
+<p>Now, as Kubernetes cluster, eksctl, kubectl are
+installed and configured, you can create a Kubernetes
+Deployment yaml file.</p>
+<p>You can do that by executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>hello-app-deployment.yaml
+</pre></div>
+</div>
+<p>Then, edit this file by executing the following
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>hello-app-deployment.yaml
+</pre></div>
+</div>
+<p>Add this content to the hello-app-deployment.yaml.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zufarexplainedit-hello-app</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zufarexplainedit/hello</span>
+<span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RollingUpdate</span>
+<span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<p>Now hello-app-deployment.yaml is created and ready to
+use.</p>
+<p class="rubric" id="h-step-12-create-kubernetes-service-yaml-file"><strong>Step 12: Create Kubernetes Service yaml
+file</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>A Kubernetes Service YAML file</strong> is a
+configuration script written in YAML format that
+defines a network abstraction for a set of pods,
+allowing them to be accessed consistently within a
+Kubernetes cluster. This file outlines how the
+service should be discovered, accessed, and
+load-balanced by other services or external
+clients. It includes specifications like the
+service type (ClusterIP, NodePort, LoadBalancer),
+port numbers, selectors to identify pods, and more.
+When applied to a Kubernetes cluster, the Service
+YAML file creates a virtual IP and port that routes
+traffic to the appropriate pods, abstracting the
+underlying pod changes and providing a stable
+endpoint for communication, enabling seamless
+connectivity and dynamic scaling.</p>
+</div>
+<p>As Kubernetes cluster, eksctl, kubectl are installed
+and configured, you can create Kubernetes Service yaml
+file.</p>
+<p>To do that you need to create a Kubernetes Service
+yaml file by executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>hello-app-service.yaml
+</pre></div>
+</div>
+<p>Then, edit this file by executing the following
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>hello-app-service.yaml
+</pre></div>
+</div>
+<p>Add this content to the hello-app-deployment.yaml.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zufarexplainedit-hello-app-service</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-app</span>
+
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+</pre></div>
+</div>
+<p>Now hello-app-service.yaml is created and ready to
+use.</p>
+<p class="rubric" id="h-step-13-test-kubernetes-cluster-using-kubectl"><strong>Step 13: Test Kubernetes cluster using
+kubectl</strong></p>
+<p>With your Kubernetes EKS cluster successfully
+installed, and configured, and your Kubernetes service
+and deployment files ready, it’s time to put things to
+the test using kubectl commands.</p>
+<ol class="arabic">
+<li><p><strong>Apply Deployment.</strong></p>
+<p>Use the following command to apply the deployment
+configuration.</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>hello-app-deployment.yaml
+</pre></div>
+</div>
+<p>This will create a deployment with the specified
+number of replicas and a rolling update strategy,
+ensuring your application’s availability and
+manageability.</p>
+<p><strong>2. Apply Service.</strong></p>
+<p>Next, apply the service configuration.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>hello-app-service.yaml
+</pre></div>
+</div>
+<p>This will set up a LoadBalancer type service, exposing
+your application to the internet.</p>
+<p>Note that it might take a short while for the
+LoadBalancer to be provisioned and acquire an external
+IP address.</p>
+<ol class="arabic" start="3">
+<li><p><strong>Check LoadBalancer Status.</strong></p>
+<p>Monitor the status of your service using.</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>get<span class="w"> </span>service<span class="w"> </span>zufarexplainedit-hello-app-service
+</pre></div>
+</div>
+<p>When an external IP is assigned, you’re almost ready
+to access your application.</p>
+<ol class="arabic" start="4">
+<li><p><strong>Access Your Application.</strong></p>
+<p>Using a web browser, enter the assigned external IP
+address followed by :8080. After a brief moment,
+the page will load, displaying the “HelloWorld”
+message. Keep in mind that the initial loading
+might take a few seconds.</p>
+</li>
+</ol>
+<figure class="align-default" id="id24">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-104.png"><img alt="_images/CICD-by-Zufar-104.png" src="_images/CICD-by-Zufar-104.png" style="width: 101.0px; height: 33.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Hello app web page</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="rubric" id="h-cleaning-up-with-kubectl-commands">Cleaning Up with kubectl Commands</p>
+<p>When you need to tidy up resources within your
+Kubernetes environment, you can use the following
+kubectl commands to effectively remove deployments,
+pods, and services.</p>
+</div>
+<p><strong>1. Delete All Deployments</strong>.</p>
+<p>To delete all deployments, you can use the
+following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>deployments<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>This action ensures that no active deployment
+instances are left in your cluster.</p>
+<p><strong>2. Delete All Pods</strong>.</p>
+<p>If you need to delete all pods, whether they are
+managed by a deployment or not, you can use the
+following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>pods<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>Clearing pods can help reset your cluster state or
+prepare for new deployments.</p>
+<p><strong>3. Delete All Services</strong>.</p>
+<p>To clean up services that expose your applications
+to the network, you can use the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>services<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>Removing services may involve downtime, so consider
+the implications before proceeding.</p>
+<p class="rubric" id="h-deleting-an-amazon-eks-cluster"><strong>Deleting an Amazon EKS Cluster</strong></p>
+<p>To remove all the resources associated with the
+specified Amazon EKS cluster created with
+<code class="docutils literal notranslate"><span class="pre">eksctl</span></code>, including worker nodes, networking
+components, and other resources, you can use the
+following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>delete<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span><span class="o">{</span>your<span class="w"> </span>cluster<span class="w"> </span>name<span class="o">}</span><span class="w"> </span>--region<span class="w"> </span><span class="o">{</span>your<span class="w"> </span>region<span class="w"> </span>name<span class="o">}</span>
+</pre></div>
+</div>
+<p>For me it is.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eksctl<span class="w"> </span>delete<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>zufarexplainedit<span class="w"> </span>--region<span class="w"> </span>eu-north-1
+</pre></div>
+</div>
+<p>Make sure you are certain about stopping the
+cluster, as this action is irreversible and will
+result in data loss.</p>
+<p class="rubric" id="h-step-14-add-and-configure-a-new-user-in-kubernetes-server-aws-ec-2-virtual-server-instance"><strong>Step 14: Add and configure a new user in
+“KubernetesServer” AWS EC2 Virtual Server
+instance</strong></p>
+<p>Now let’s add a new <strong>ansible-admin</strong> user to
+<strong>“KubernetesServer”</strong> AWS EC2 Virtual Server
+instance.</p>
+<p>To do that use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>useradd<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>Then, set the password for <strong>ansible-admin</strong> user.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>passwd<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p>Also, you need to configure user privileges by editing
+the <strong>sudoers</strong> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>visudo
+</pre></div>
+</div>
+<p>Add <strong>“ansible-admin ALL=(ALL) ALL”</strong> to
+this <strong>sudoers</strong> file.</p>
+<figure class="align-default" id="id25">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-105.png"><img alt="_images/CICD-by-Zufar-105.png" src="_images/CICD-by-Zufar-105.png" style="width: 761.0px; height: 552.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to admin privileges</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Also, you need to edit <strong>/etc/ssh/sshd_config</strong> file
+to enable PasswordAuthentication.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/ssh/sshd_config
+</pre></div>
+</div>
+<figure class="align-default" id="id26">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-106.png"><img alt="_images/CICD-by-Zufar-106.png" src="_images/CICD-by-Zufar-106.png" style="width: 726.0px; height: 445.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to admin settings</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you need to reload the service to make these
+changes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>service<span class="w"> </span>sshd<span class="w"> </span>reload
+</pre></div>
+</div>
+<p>As a result of executing this command, you will see:</p>
+<figure class="align-default" id="id27">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-107.png"><img alt="_images/CICD-by-Zufar-107.png" src="_images/CICD-by-Zufar-107.png" style="width: 307.5px; height: 107.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to sshd reload result</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now you can use this command to avoid adding sudo
+for all further commands.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>su<span class="w"> </span>-<span class="w"> </span>ansible-admin
+</pre></div>
+</div>
+<p class="rubric" id="h-step-15-generate-key-in-an-aws-ec-2-virtual-server-instance"><strong>Step 15: Generate key in an AWS EC2
+Virtual Server instance</strong></p>
+<p>You are planning to manage remote servers such as
+<strong>K8s</strong> EC2 virtual server instance further in this article.
+That is why you need to set up SSH keys.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen
+</pre></div>
+</div>
+<p>As a result of executing this command, you will see:</p>
+<figure class="align-default" id="id28">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-108.png"><img alt="_images/CICD-by-Zufar-108.png" src="_images/CICD-by-Zufar-108.png" style="width: 375.0px; height: 206.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal with the pointer to ssh-keygen result</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now SSH keys are generated and ready to use.</p>
+<p class="rubric" id="h-step-16-configure-passwordless-ssh-authentication-to-localhost-for-ansible"><strong>Step 16: Configure</strong> Passwordless SSH
+authentication to localhost for Ansible</p>
+<p>Ansible is designed for automating tasks on remote
+servers. Passwordless SSH authentication empowers
+Ansible to connect to those servers without the need
+for manual password entry.</p>
+<p>Execute this command to create a secure connection
+from your computer to another computer (like the one
+at IP address 172.31.34.41), using the ansible-admin
+user’s SSH key.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>/home/<span class="o">{</span>your<span class="w"> </span>user<span class="w"> </span>name<span class="o">}</span>/.ssh/id_rsa.pub<span class="w"> </span><span class="o">{</span>your<span class="w"> </span>user<span class="w"> </span>name<span class="o">}</span>@<span class="o">{</span>your<span class="w"> </span>host<span class="w"> </span>address<span class="o">}</span>
+</pre></div>
+</div>
+<p>In my case, it looks like this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>/home/ansible-admin/.ssh/id_rsa.pub<span class="w"> </span>ansible-admin@172.31.34.41
+</pre></div>
+</div>
+<figure class="align-default" id="id29">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-109.png"><img alt="_images/CICD-by-Zufar-109.png" src="_images/CICD-by-Zufar-109.png" style="width: 539.5px; height: 113.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the successful passwordless ssh
+authentication installation result</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see <strong>“Number of key(s) added: 1”</strong>. It
+means that the passwordless SSH authentication
+installation was successfully completed.</p>
+<p class="rubric" id="h-step-17-configure-ansible-hosts-in-ansible-server-ec-2-instance"><strong>Step 17: Configure Ansible hosts in
+AnsibleServer EC2 instance</strong></p>
+<p>When you run an Ansible playbook, you specify the
+hosts it should run on. In this step you need to
+specify KubernetesServer EC2 instance host. To do that
+you need to repeat the same steps which you passed in
+“<strong>[Module 6]: Ansible”.</strong></p>
+<p>Let’s find out the KubernetesServer EC2 instance host
+by executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ifconfig
+</pre></div>
+</div>
+<figure class="align-default" id="id30">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-110.png"><img alt="_images/CICD-by-Zufar-110.png" src="_images/CICD-by-Zufar-110.png" style="width: 331.5px; height: 173.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “ifconfig” file</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>After you find the KubernetesServer EC2 instance host,
+you can add it to the Ansible hosts file by executing
+the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/ansible/hosts
+</pre></div>
+</div>
+<figure class="align-default" id="id31">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-111.png"><img alt="_images/CICD-by-Zufar-111.png" src="_images/CICD-by-Zufar-111.png" style="width: 226.0px; height: 95.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “hosts” files with ansible and
+kubernetes hosts</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can also add “[kubernetes]” as a reference</p>
+<p class="rubric" id="h-step-18-create-a-new-ansible-playbook-for-kubernetes-tasks"><strong>Step 18: Create a new Ansible playbook
+for Kubernetes tasks</strong></p>
+<p>Now that Kubernetes is all setup and good to go, you
+can make a new Ansible playbook with Kubernetes tasks
+for your pipeline. This playbook will let Ansible run
+your app on the Kubernetes cluster with kubectl
+commands.</p>
+<p>Here’s how you can do it:</p>
+<ol class="arabic simple">
+<li><p>Start by creating a new Ansible playbook file. Just
+use this command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>kubernetes-hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Then, edit the newly made <code class="docutils literal notranslate"><span class="pre">hello-app.yml</span></code> file.
+Open it up for editing with this command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>kubernetes-hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Inside the file, type in the following:</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy regapp on kubernetes</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubectl apply -f hello-app-deployment.yaml</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create service for regapp</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubectl apply -f hello-app-service.yaml</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update deployment with new pods if image updated in docker hub</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubectl rollout restart deployment.apps/zufarexplainedit-hello-app</span>
+</pre></div>
+</div>
+<p>The Ansible playbook for Kubernetes tasks is ready to
+use.</p>
+<p class="rubric" id="h-step-19-integrate-a-new-ansible-playbook-for-kubernetes-tasks-with-jenkins"><strong>Step 19: Integrate a new Ansible
+playbook for Kubernetes tasks with Jenkins</strong></p>
+<p>Now that Kubernetes, Ansible, and Ansible playbook for
+Kubernetes tasks are all set up and good to go, you
+can integrate it with Jenkins.</p>
+<ol class="arabic simple">
+<li><p>Go to JenkinsServer → Jenkins dashboard → New Item.</p></li>
+<li><p>Create new Jenkins Freestyle project with the name
+“CD-Job”.</p></li>
+</ol>
+<figure class="align-default" id="id32">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-112.png"><img alt="_images/CICD-by-Zufar-112.png" src="_images/CICD-by-Zufar-112.png" style="width: 396.5px; height: 421.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of a new Jenkins freestyle
+project “CD-Job”</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>Click “OK” button.</p></li>
+<li><p>Go to “Post-build Actions” section.</p></li>
+<li><p>Click the “Add post-build action” button.</p></li>
+<li><p>Choose “Send build artifacts over SSH” option.</p></li>
+<li><p>Choose “AnsibleServer” as SSH Server.</p></li>
+<li><p>Add this command to “exec command” input.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-u<span class="w"> </span>ansible-admin<span class="w"> </span>ansible-playbook<span class="w"> </span>/opt/docker/kubernetes-hello-app.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>Click “Apply” and “Save” buttons.</p></li>
+<li><p>Go to Jenkins dashboard → “CI_CD_Pipeline” →
+Configure → “Post-build Actions” section.</p></li>
+<li><p>Click the “Add post-build action” button.</p></li>
+<li><p>Choose “Build other projects” option.</p></li>
+<li><p>Go to “Build other projects” section.</p></li>
+<li><p>Choose “Trigger only if build is stable” option.</p></li>
+<li><p>Add “CD-Job” to “Project to build” input.</p></li>
+</ol>
+<figure class="align-default" id="id33">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-113.png"><img alt="_images/CICD-by-Zufar-113.png" src="_images/CICD-by-Zufar-113.png" style="width: 339.0px; height: 306.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “Build other projects”
+section</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="16">
+<li><p>Click “Apply” and “Save” buttons.</p></li>
+</ol>
+<p>Now you can consider that the pipeline is completely
+finished and ready to use.</p>
+<p class="rubric" id="h-step-20-testing-the-final-pipeline-version"><strong>Step 20: Testing the Final Pipeline
+Version</strong></p>
+<p>Now is the time to put the final pipeline version to
+the test.</p>
+<p>Navigate to Jenkins → Jenkins dashboard →
+“CI_CD_Pipeline”.</p>
+<p>Click the “Build Now” button.</p>
+<p>To see the results, review the build console logs.</p>
+<figure class="align-default" id="id34">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-114.png"><img alt="_images/CICD-by-Zufar-114.png" src="_images/CICD-by-Zufar-114.png" style="width: 328.0px; height: 144.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the build console logs</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You will notice that the “CD-Job” was triggered in the
+build console logs, and the final status is marked as
+SUCCESS.</p>
+<p>4</p>
+<p>Moreover, you can head to Dockerhub to confirm the
+addition of the new Docker image.</p>
+<p>And finally, you can access your application using a
+web browser. Enter the assigned external IP address
+followed by “:8080”. After a brief moment, the page
+will load, showing the “HelloWorld” message.</p>
+<p class="rubric" id="h-conclusion"><strong>Conclusion</strong></p>
+<p>Well done on setting up this modern CI/CD pipeline!</p>
+<p>You’ve done an awesome job, and you’re a real hero!</p>
+<p>Thanks for all your effort!</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CICD-3-Nexus.html" class="btn btn-neutral float-left" title="Building a CI/CD Pipeline. Part3 Nexus Ansible" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CICD-5-Monitoring.html" class="btn btn-neutral float-right" title="Monitoring - Prometheus Grafana" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

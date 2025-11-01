@@ -1,0 +1,1136 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a CI/CD Pipeline. Part1 Git-Jenkins &mdash; DevOps 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ce236e8" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building a CI/CD Pipeline. Part1 Git-Jenkins (on premise)" href="CICD-1-Git-Jenkins%20%28on%20premise%29.html" />
+    <link rel="prev" title="Assignments" href="assignments.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DevOps
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lectures.html">Lectures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="assignments.html">Assignments</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building a CI/CD Pipeline. Part1 Git-Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-1-Git-Jenkins%20%28on%20premise%29.html">Building a CI/CD Pipeline. Part1 Git-Jenkins (on premise)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-2-Docker.html">Building a CI/CD Pipeline. Part2 Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-3-Nexus.html">Building a CI/CD Pipeline. Part3 Nexus Ansible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-4-K8S.html">Building a CI/CD Pipeline. Part4 Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-5-Monitoring.html">Monitoring - Prometheus Grafana</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-6-Cloud.html">Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-by-Zufar.html">Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VM-RAID-Minikube.html">VM-RAID-Minikube</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DevOps</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="assignments.html">Assignments</a></li>
+      <li class="breadcrumb-item active">Building a CI/CD Pipeline. Part1 Git-Jenkins</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CICD-1-Git-Jenkins.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-a-ci-cd-pipeline-part1-git-jenkins">
+<h1>Building a CI/CD Pipeline. Part1 Git-Jenkins<a class="headerlink" href="#building-a-ci-cd-pipeline-part1-git-jenkins" title="Link to this heading"></a></h1>
+<p>Source: <a class="reference external" href="https://hackernoon.com/building-a-cicd-pipeline-with-aws-k8s-docker-ansible-git-github-apache-maven-and-jenkins">https://hackernoon.com/building-a-cicd-pipeline-with-aws-k8s-docker-ansible-git-github-apache-maven-and-jenkins</a></p>
+<p class="rubric" id="h-motivation"><strong>Motivation</strong></p>
+<p>CI/CD is a technique for delivering apps to customers,
+achieved by adding automation to different stages of
+app development. I believe that grasping CI/CD
+(Continuous Integration and Continuous Deployment) can
+empower developers to gain a better understanding of
+how backend project artifacts exist beyond the
+boundaries of the project repository. This
+comprehension can also create a fundamental shift in a
+developer’s perspective. Instead of merely viewing
+their work as lines of code, they can start to embrace
+the broader context of their project as a valuable
+product.</p>
+<p>In this article, we aim to demystify the CI/CD process
+through practical application. We’ll take you through
+a step-by-step tutorial, breaking it down module by
+module, where you’ll build a CI/CD pipeline manually.
+To do this, we’ll harness the power of contemporary
+DevOps tools like <strong>AWS, Docker, Kubernetes, Ansible,
+Git, Apache Maven,</strong> and <strong>Jenkins</strong>. So, let’s begin
+this journey!</p>
+<p class="rubric" id="h-module-1-aws-ec-2-virtual-server"><strong>[Module 1]: AWS EC2 Virtual Server</strong></p>
+<p>This module is dedicated to the creation of an AWS EC2
+Virtual Server instance. As part of this article, you
+will be setting up three EC2 instances for Jenkins,
+Ansible, and Kubernetes. For now, you can proceed with
+the next modules and revisit this module in “[module
+2]: Jenkins”, “[module 6]: Ansible” and “[module 7]:
+Kubernetes” sections.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="h-step-1-create-an-aws-account"><strong>Step 1: Create an AWS Account</strong></p>
+<p>Go to <a class="reference external" href="https://aws.amazon.com">https://aws.amazon.com</a>.</p>
+<p>Click the button <strong>Create an AWS Account</strong>.</p>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-1.png"><img alt="_images/CICD-by-Zufar-1.png" src="_images/CICD-by-Zufar-1.png" style="width: 600.0px; height: 88.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS main web page with the
+pointer to “Create an AWS Account” button</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Follow the instructions on the create account web
+page.</p>
+<p class="rubric" id="h-step-2-sign-in-to-your-aws-account"><strong>Step 2: Sign In to your AWS Account</strong></p>
+<p>Go to <a class="reference external" href="https://console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>.
+Click the <strong>Sign In</strong> button.</p>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-2.png"><img alt="_images/CICD-by-Zufar-2.png" src="_images/CICD-by-Zufar-2.png" style="width: 600.0px; height: 89.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS main web page with the
+pointer to “Sign In” button</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Enter all necessary credentials on this web page.</p>
+<p class="rubric" id="h-step-3-find-ec-2-virtual-server"><strong>Step 3: Find EC2 Virtual Server</strong></p>
+<p>Find EC2 in the search box.</p>
+<figure class="align-default" id="id11">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-3.png"><img alt="_images/CICD-by-Zufar-3.png" src="_images/CICD-by-Zufar-3.png" style="width: 353.5px; height: 32.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+the search box</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Choose EC2 Virtual Server by clicking <strong>EC2 Service</strong>.</p>
+<figure class="align-default" id="id12">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-4.png"><img alt="_images/CICD-by-Zufar-4.png" src="_images/CICD-by-Zufar-4.png" style="width: 557.5px; height: 142.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“EC2” AWS service</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Click the button <strong>Launch Instance</strong>.</p>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-5.png"><img alt="_images/CICD-by-Zufar-5.png" src="_images/CICD-by-Zufar-5.png" style="width: 267.5px; height: 88.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Launch instance” button</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-configure-name-and-tags-section"><strong>Step 4: Configure “Name and tags“
+section</strong></p>
+<p>Go to the <strong>“Name and tags”</strong> section.</p>
+<figure class="align-default" id="id14">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-6.png"><img alt="_images/CICD-by-Zufar-6.png" src="_images/CICD-by-Zufar-6.png" style="width: 182.5px; height: 53.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Name and tags” section</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Provide a name for a new AWS EC2 Virtual Server
+instance in the <strong>“Name”</strong> section.</p>
+<figure class="align-default" id="id15">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-7.png"><img alt="_images/CICD-by-Zufar-7.png" src="_images/CICD-by-Zufar-7.png" style="width: 394.0px; height: 95.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Name” input box in “Name and tags” section</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can also add additional tags for your virtual
+server by clicking <strong>”Add additional tags”</strong>.</p>
+<p class="rubric" id="h-step-5-configure-application-and-os-images-amazon-machine-image-section"><strong>Step 5: Configure “Application and OS
+Images (Amazon Machine Image)“ section</strong></p>
+<p>Go to the <strong>“Application and OS Images (Amazon Machine
+Image)”</strong> section.</p>
+<figure class="align-default" id="id16">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-8.png"><img alt="_images/CICD-by-Zufar-8.png" src="_images/CICD-by-Zufar-8.png" style="width: 414.0px; height: 64.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Application and OS Images (Amazon Machine Image)”
+section</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To play with the virtual server for <strong>FREE</strong>:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Select the operating system for your virtual</dt><dd><p>server - <strong>Amazon Linux</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>In the <strong>Amazon Machine Image (AMI)</strong> section,</dt><dd><p>select a machine with the <strong>Free tier eligible
+tag</strong>.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<figure class="align-default" id="id17">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-9.png"><img alt="_images/CICD-by-Zufar-9.png" src="_images/CICD-by-Zufar-9.png" style="width: 402.0px; height: 357.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“OS” and “Machine type” buttons in “Application and
+OS Images (Amazon Machine Image)” section</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-6-configure-instance-type-section"><strong>Step 6: Configure “Instance type“
+section</strong></p>
+<p>Go to the <strong>”Instance type”</strong> section.</p>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-10.png"><img alt="_images/CICD-by-Zufar-10.png" src="_images/CICD-by-Zufar-10.png" style="width: 414.0px; height: 43.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Instance type” section</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>To play with the virtual server for <strong>FREE</strong>:</p>
+<p>Select a type with the <strong>Free tier eligible
+tag</strong> in the <strong>Instance type</strong> section.</p>
+<p>For me it is <strong>t2.micro (Family: t2 1cCPU 1 GiB
+Memory Current generation:true)</strong>.</p>
+<figure class="align-default" id="id19">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-11.png"><img alt="_images/CICD-by-Zufar-11.png" src="_images/CICD-by-Zufar-11.png" style="width: 411.0px; height: 133.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Instance type” dropdown in “Instance type” section</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-7-configure-configure-storage-section"><strong>Step 7: Configure “Configure storage“
+section</strong></p>
+<p>Go to the <strong>”Configure storage”</strong> section.</p>
+<figure class="align-default" id="id20">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-12.png"><img alt="_images/CICD-by-Zufar-12.png" src="_images/CICD-by-Zufar-12.png" style="width: 411.5px; height: 37.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Configure storage” section</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To play with the virtual server for <strong>FREE</strong>:
+Do not change default settings. Free tier eligible
+customers can get <strong>30 GB of EBS General Purpose
+(SSD) or Magnetic storage</strong>.</p>
+</div>
+<figure class="align-default" id="id21">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-13.png"><img alt="_images/CICD-by-Zufar-13.png" src="_images/CICD-by-Zufar-13.png" style="width: 401.0px; height: 164.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+storage possible configurations in “Configure
+storage” section</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-8-configure-network-settings-section"><strong>Step 8: Configure “Network settings“
+section</strong></p>
+<p>Go to the <strong>“Network settings“</strong> section.</p>
+<figure class="align-default" id="id22">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-14.png"><img alt="_images/CICD-by-Zufar-14.png" src="_images/CICD-by-Zufar-14.png" style="width: 414.0px; height: 42.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Network settings” section</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You need to set up the security of your virtual
+server. To do this,</p>
+<ol class="arabic simple">
+<li><p>Click on the <strong>“Create security group”</strong> button.</p></li>
+</ol>
+<p>#. Add the name of your new security group in
+the <strong>“Security group name”</strong> section.
+#. Add a description of your new security group in
+the <strong>“Description”</strong> section.</p>
+<p>By default, your virtual server is accessible via
+(<strong>Type - SSH, Protocol - TCP, Port - 22</strong>). If you
+need additional connection types, add them by adding
+additional inbound security group rules.</p>
+<figure class="align-default" id="id23">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-15.png"><img alt="_images/CICD-by-Zufar-15.png" src="_images/CICD-by-Zufar-15.png" style="width: 382.5px; height: 451.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Security group” in “Network settings” section</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-9-configure-key-pair-login-section"><strong>Step 9: Configure “Key pair (login)“
+section</strong></p>
+<p>Go to the <strong>”Key pair (Login)”</strong> section.</p>
+<figure class="align-default" id="id24">
+<img alt="_images/CICD-by-Zufar-16.png" src="_images/CICD-by-Zufar-16.png" />
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Ket pair (login)” section</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Create a new key-pair if you haven’t created it yet.</p>
+<figure class="align-default" id="id25">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-17.png"><img alt="_images/CICD-by-Zufar-17.png" src="_images/CICD-by-Zufar-17.png" style="width: 333.0px; height: 351.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Key pair name”, “Key pair type”, “Private key file
+format” in “Ket pair (login)” section</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>If you haven’t created <strong>“key-pair”</strong> yet:</p>
+<ol class="arabic simple">
+<li><p>Click the <strong>“Create new key pair”</strong> button.</p></li>
+<li><p>Give your new key-pair a name in the <strong>“Key pair
+name”</strong> section.</p></li>
+<li><p>Select key-pair type <strong>RSA</strong> or <strong>ED25519</strong>. I
+choose the <strong>RSA</strong> type.</p></li>
+<li><p>Select Private key file format. Choice
+of <strong>.pem</strong> and <strong>.ppk</strong>. I choose
+the <strong>.pem</strong> format.</p></li>
+<li><p>Click on the <strong>“Create key pair”</strong> button.</p></li>
+<li><p>You will get a pop-up window that will prompt you
+to download the Private key file. Agree and
+download the file to your computer.</p></li>
+</ol>
+<p class="rubric" id="h-step-10-launch-the-ec-2-virtual-server-instance"><strong>Step 10: Launch the EC2 Virtual Server
+Instance</strong></p>
+<p>Launch the EC2 Virtual Server instance by clicking the
+button <strong>“Launch instance”</strong>.</p>
+<figure class="align-default" id="id26">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-18.png"><img alt="_images/CICD-by-Zufar-18.png" src="_images/CICD-by-Zufar-18.png" style="width: 186.5px; height: 54.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+“Launch Instance” button</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>After the completion of the EC2 Virtual Server
+instance creation process, you will see the following.</p>
+<figure class="align-default" id="id27">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-19.png"><img alt="_images/CICD-by-Zufar-19.png" src="_images/CICD-by-Zufar-19.png" style="width: 240.5px; height: 69.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of the AWS web page displaying a
+‘Success’ notification, indicating the successful
+completion of the EC2 Virtual Server instance
+creation process</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you should go to the <strong>“Instances“</strong> section by
+clicking <strong>“View all instances”</strong> button.</p>
+<figure class="align-default" id="id28">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-20.png"><img alt="_images/CICD-by-Zufar-20.png" src="_images/CICD-by-Zufar-20.png" style="width: 424.5px; height: 83.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS web page with the pointer to
+running EC2 instance</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see that your AWS EC2 Virtual Server
+instance is running.</p>
+<hr class="docutils" />
+<p class="rubric" id="h-module-2-jenkins-server"><strong>[Module 2]: Jenkins Server</strong></p>
+<p>Now, let’s configure JenkinsServer on the EC2 Virtual
+Server instance.</p>
+<p class="rubric" id="h-step-1-create-an-aws-ec-2-virtual-server-instance"><strong>Step 1: Create an AWS EC2 Virtual Server
+instance</strong></p>
+<p>You need a virtual server to run Jenkins.</p>
+<p>Follow instructions from <strong>[Module 1]: AWS EC2 Virtual
+Server</strong> section of this tutorial to finish this step
+and create an EC2 virtual server instance with the
+name JenkinsServer.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to add a security group setup. It
+allows <strong>Jenkins</strong> and <strong>SSH</strong> to work on
+port <strong>8080</strong> and <strong>22</strong> respectively.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the name <strong>“JenkinsServer”</strong> to distinguish
+your EC2 Virtual Server instance.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Create <strong>“CI_CD_Pipeline”</strong> security group
+and <strong>“CI_CD_Pipeline_Key_Pair“</strong> for a
+new <strong>“JenkinsServer”</strong> AWS EC2 instance. You can
+reuse them further in the article.</p>
+</div>
+<p class="rubric" id="h-step-2-connect-to-an-aws-ec-2-virtual-server-instance"><strong>Step 2: Connect to an AWS EC2 Virtual
+Server instance</strong></p>
+<p>Go to <strong>AWS Console home page</strong> → <strong>EC2 Management
+Console Dashboard</strong> → <strong>Instances.</strong></p>
+<p>Then you should choose <strong>JenkinsServer</strong> and then
+click the <strong>“Connect”</strong> button.</p>
+<figure class="align-default" id="id29">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-21.png"><img alt="_images/CICD-by-Zufar-21.png" src="_images/CICD-by-Zufar-21.png" style="width: 259.5px; height: 60.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS “Instances” web page with the
+pointer to “Connect” button</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then you will see this web page. You should again
+click the <strong>“Connect”</strong> button.</p>
+<figure class="align-default" id="id30">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-22.png"><img alt="_images/CICD-by-Zufar-22.png" src="_images/CICD-by-Zufar-22.png" style="width: 452.0px; height: 383.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS “Connect to Instance” web
+page with the pointer to “Connect” button</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see EC2 virtual server instance online
+terminal.</p>
+<figure class="align-default" id="id31">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-23.png"><img alt="_images/CICD-by-Zufar-23.png" src="_images/CICD-by-Zufar-23.png" style="width: 413.0px; height: 199.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-3-download-the-jenkins-repository"><strong>Step 3: Download the Jenkins
+repository</strong></p>
+<p>Now you need to download Jenkins on your EC2 virtual
+server instance.</p>
+<p>Follow these instructions:</p>
+<ol class="arabic simple">
+<li><p>Go to Jenkins
+download <a class="reference external" href="https://www.jenkins.io/download">webpage</a>.</p></li>
+<li><p>You can see Stable (LTS) and Regular releases
+(Weekly) options. Choose <a class="reference external" href="https://pkg.jenkins.io/redhat-stable">Red
+Hat/Fedora/Alma/Rocky/CentOS</a>LTS
+option.</p></li>
+</ol>
+<p>You will see this web page.</p>
+<figure class="align-default" id="id32">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-24.png"><img alt="_images/CICD-by-Zufar-24.png" src="_images/CICD-by-Zufar-24.png" style="width: 561.5px; height: 323.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins download web page</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>Copy <strong>“sudo get..”</strong> command and execute it to
+download Jenkins files from the Jenkins repository
+on the Internet and save them to the specified
+location on your EC2 virtual server instance.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>/etc/yum.repos.d/jenkins.repo<span class="w"> </span>https://pkg.jenkins.io/redhat-stable/jenkins.repo
+</pre></div>
+</div>
+<p>Now Jenkins is downloaded.</p>
+<p class="rubric" id="h-step-4-import-jenkins-key"><strong>Step 4: Import Jenkins key</strong></p>
+<p>To finish the Jenkins installation, we need to import
+the Jenkins key.</p>
+<p>To import the Jenkins key we need to copy the <strong>“sudo
+rpm..”</strong> command and execute it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>rpm<span class="w"> </span>--import<span class="w"> </span>https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+</pre></div>
+</div>
+<div class="notice notice-info docutils container">
+<p>This way <strong>“rpm”</strong> package manager can verify that
+the Jenkins packages you install are exactly the
+ones published by the Jenkins project, and that
+they haven’t been tampered with or corrupted.</p>
+</div>
+<p class="rubric" id="h-step-5-install-java"><strong>Step 5: Install Java</strong></p>
+<p>To run Jenkins, we need to install <strong>Java</strong> on our EC2
+virtual server instance.</p>
+<p>To install <strong>Java</strong>, use this command.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>amazon-linux-extras<span class="w"> </span>install<span class="w"> </span>java-openjdk11<span class="w"> </span>-y
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Verify whether
+<strong>Java</strong>
+was installed correctly using this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>java<span class="w"> </span>-version
+</pre></div>
+</div>
+<p>You will see something like that.</p>
+<figure class="align-default" id="id33">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-25.png"><img alt="_images/CICD-by-Zufar-25.png" src="_images/CICD-by-Zufar-25.png" style="width: 955.0px; height: 237.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with installed JDK 11</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-6-install-fontconfig"><strong>Step 6: Install fontconfig</strong></p>
+<p>To run Jenkins, you need to install <strong>fontconfig</strong> on
+our EC2 virtual server instance.</p>
+<p>Use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>fontconfig<span class="w"> </span>java-11-openjdk<span class="w"> </span>-y
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fontconfig is a library designed to provide
+system-wide font configuration, customization and
+application access. It’s required by Jenkins
+because Jenkins has features that render fonts.</p>
+</div>
+<p class="rubric" id="h-step-7-install-jenkins"><strong>Step 7: Install Jenkins</strong></p>
+<p>In earlier steps, you configured your EC2 virtual
+server instance to use a specific Jenkins repository
+and then you imported the GPG key associated with this
+repository. Now, you need to run the command that will
+search all the repositories it knows about, including
+the Jenkins one you added, to find the Jenkins
+package. Once it finds the Jenkins package in the
+Jenkins repository, it will download and install it.</p>
+<p>Let’s run this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>jenkins<span class="w"> </span>-y
+</pre></div>
+</div>
+<p class="rubric" id="h-step-8-start-jenkins"><strong>Step 8: Start Jenkins</strong></p>
+<p>You can start Jenkins using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>jenkins
+</pre></div>
+</div>
+<p>To check that Jenkins is running use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>jenkins
+</pre></div>
+</div>
+<p>You will see the output as it is on the screenshot
+below:</p>
+<figure class="align-default" id="id34">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-26.png"><img alt="_images/CICD-by-Zufar-26.png" src="_images/CICD-by-Zufar-26.png" style="width: 1114.0px; height: 545.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+online terminal with installed Jenkins</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Jenkins should now be up and running.</p>
+<p class="rubric" id="h-step-9-access-jenkins"><strong>Step 9: Access Jenkins</strong></p>
+<p>To access the Jenkins application, open any web
+browser and enter your EC2 instance’s public IP
+address or domain name followed by port 8080.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://&lt;your-ec2-ip&gt;:8080
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you care about security, change your admin’s
+password after all interaction with Jenkins via
+http.</p>
+<p>Using ssh, paste into &lt;passwordHash&gt; element at
+/var/lib/jenkins/users/&lt;username&gt;/config.xml
+something of type #jbcrypt:hash.</p>
+<p>Example for password test:</p>
+<blockquote>
+<div><p>&lt;passwordHash&gt;#jbcrypt:$2a$10$razd3L1aXndFfBNHO95aj.IVrFydsxkcQCcLmujmFQzll3hcUrY7S&lt;/passwordHash&gt;</p>
+</div></blockquote>
+<p>Restart Jenkins, then try logging in with password test.
+And then reset your password to something else.</p>
+<p>For hash-making you can use any online bcrypt encoder.</p>
+</div>
+<p>The first time you access Jenkins, it will be locked
+with an autogenerated password.</p>
+<figure class="align-default" id="id35">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-27.png"><img alt="_images/CICD-by-Zufar-27.png" src="_images/CICD-by-Zufar-27.png" style="width: 492.5px; height: 202.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Administrator
+password</span><a class="headerlink" href="#id35" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You need to display this password using the following
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cat<span class="w"> </span>/var/lib/jenkins/secrets/initialAdminPassword
+</pre></div>
+</div>
+<p>Copy this password, return to your browser, paste it
+into the Administrator password field, and click
+“Continue”.</p>
+<p>Then you will be able to see this web page.</p>
+<figure class="align-default" id="id36">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-28.png"><img alt="_images/CICD-by-Zufar-28.png" src="_images/CICD-by-Zufar-28.png" style="width: 490.5px; height: 237.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to “Customize
+Jenkins” web page</span><a class="headerlink" href="#id36" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now, you can use your Jenkins Server.</p>
+<p class="rubric" id="h-step-10-create-new-jenkins-pipeline"><strong>Step 10: Create new Jenkins pipeline</strong></p>
+<p>Now, as Jenkins is working fine, you can start
+creating the Jenkins pipeline. To create Jenkins
+pipeline you need to create a new “Freestyle project”.
+To create a new “Freestyle project” you need to go to
+the Jenkins dashboard and click the <strong>“New
+Item”</strong> button.</p>
+<figure class="align-default" id="id37">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-29.png"><img alt="_images/CICD-by-Zufar-29.png" src="_images/CICD-by-Zufar-29.png" style="width: 177.5px; height: 177.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Dashboard web page with
+the pointer to “New Item” button</span><a class="headerlink" href="#id37" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Enter the name of the Github “Freestyle project”
+(“pipeline” name is going to be used further) and then
+click the button <strong>“OK”</strong>.</p>
+<figure class="align-default" id="id38">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-30.png"><img alt="_images/CICD-by-Zufar-30.png" src="_images/CICD-by-Zufar-30.png" style="width: 206.0px; height: 199.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins New Item web page with
+the pointer to “Item name” item box</span><a class="headerlink" href="#id38" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then provide the <strong>Description</strong> of the pipeline.</p>
+<figure class="align-default" id="id39">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-31.png"><img alt="_images/CICD-by-Zufar-31.png" src="_images/CICD-by-Zufar-31.png" style="width: 416.0px; height: 270.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Job configuration web
+page with the pointer to “Description” input box</span><a class="headerlink" href="#id39" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then click the button “Apply” and “Save”. After that,
+it means you created the fundament of the pipeline
+which is going to be built in this tutorial.</p>
+<p class="rubric" id="h-module-3-git-and-github"><strong>[Module 3]: Git and Github</strong></p>
+<p>Now as Jenkins is running on AWS EC2 Virtual Server
+instance, you can configure Git with the pipeline.</p>
+<div class="notice notice-info docutils container">
+<p>Git is a <a class="reference external" href="https://git-scm.com/about/free-and-open-source">free and open
+source</a> distributed
+version control system (VCS) designed to help
+software teams keep track of every modification to
+the code in a special kind of database. If a
+mistake is made, developers can turn back the clock
+and compare earlier versions of the code to help
+fix the mistake while minimizing disruption to all
+team members. VCS is especially useful
+for <a class="reference external" href="https://www.atlassian.com/devops/what-is-devops">DevOps</a> teams
+since they help them to reduce development time and
+increase successful deployments [1].</p>
+</div>
+<p>Git as the most popular version control system enables
+us to pull the latest code from your project Github
+repository to your EC2 virtual server instance where
+your Jenkins is installed.</p>
+<p class="rubric" id="h-step-1-install-git"><strong>Step 1: Install Git</strong></p>
+<p>Use this command to install Git.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>Now verify Git is working, using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Now Git is working fine on EC2 Virtual Server
+instance.</p>
+<p class="rubric" id="h-step-2-open-jenkins-dashboard"><strong>Step 2: Open Jenkins dashboard</strong></p>
+<p>As Git is working fine on EC2 Virtual Server instance,
+we can integrate Jenkins with Git now.</p>
+<p>To start this integration let’s install Jenkins Github
+plugin.</p>
+<p>Go to Jenkins dashboard section.</p>
+<figure class="align-default" id="id40">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-32.png"><img alt="_images/CICD-by-Zufar-32.png" src="_images/CICD-by-Zufar-32.png" style="width: 753.5px; height: 359.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins dashboard</span><a class="headerlink" href="#id40" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-3-open-jenkins-plugin-manager"><strong>Step 3: Open Jenkins Plugin Manager</strong></p>
+<p>Click the button <strong>“Manage Jenkins”</strong> and then click
+the button <strong>“Manage Plugins”</strong>.</p>
+<figure class="align-default" id="id41">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-33.png"><img alt="_images/CICD-by-Zufar-33.png" src="_images/CICD-by-Zufar-33.png" style="width: 763.0px; height: 319.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins dashboard with the
+pointer to “Manage Plugins” button</span><a class="headerlink" href="#id41" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-find-github-jenkins-plugin"><strong>Step 4: Find Github Jenkins plugin</strong></p>
+<p>Click the button <strong>“Available plugins”</strong>.</p>
+<figure class="align-default" id="id42">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-34.png"><img alt="_images/CICD-by-Zufar-34.png" src="_images/CICD-by-Zufar-34.png" style="width: 525.0px; height: 237.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Available plugins” button</span><a class="headerlink" href="#id42" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Find the <strong>Github</strong> plugin Search box.</p>
+<figure class="align-default" id="id43">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-35.png"><img alt="_images/CICD-by-Zufar-35.png" src="_images/CICD-by-Zufar-35.png" style="width: 419.5px; height: 278.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Github” plugin</span><a class="headerlink" href="#id43" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Select <strong>Github</strong> plugin.</p>
+<p class="rubric" id="h-step-5-install-github-jenkins-plugin"><strong>Step 5: Install Github Jenkins plugin</strong></p>
+<p>Select <strong>Github</strong> plugin. And then click the
+button <strong>“Install without restart”</strong>.</p>
+<figure class="align-default" id="id44">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-36.png"><img alt="_images/CICD-by-Zufar-36.png" src="_images/CICD-by-Zufar-36.png" style="width: 421.0px; height: 437.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Install without restart”
+button</span><a class="headerlink" href="#id44" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Wait for the end of the Github plugin downloading.</p>
+<figure class="align-default" id="id45">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-37.png"><img alt="_images/CICD-by-Zufar-37.png" src="_images/CICD-by-Zufar-37.png" style="width: 476.5px; height: 245.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the downloading Github plugin</span><a class="headerlink" href="#id45" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Yes! The Jenkins Github plugin is installed.</p>
+<p class="rubric" id="h-step-6-configure-github-jenkins-plugin"><strong>Step 6: Configure Github Jenkins
+Plugin</strong></p>
+<p>Now as the GitHub Jenkins plugin is installed, you can
+configure this plugin to integrate Jenkins with Git
+finally. To do that you need to return to the main
+page by clicking the button “Go back to the top page”.</p>
+<figure class="align-default" id="id46">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-38.png"><img alt="_images/CICD-by-Zufar-38.png" src="_images/CICD-by-Zufar-38.png" style="width: 341.0px; height: 111.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Go back to the top page”
+button</span><a class="headerlink" href="#id46" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then on the main page, you need to click the
+button <strong>“Manage Jenkins”</strong> and then click the
+button <strong>“Global tool configuration”</strong>.</p>
+<figure class="align-default" id="id47">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-39.png"><img alt="_images/CICD-by-Zufar-39.png" src="_images/CICD-by-Zufar-39.png" style="width: 564.0px; height: 306.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Plugin Manager web page
+with the pointer to “Global tool configuration”
+button</span><a class="headerlink" href="#id47" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then on the Global Tool Configuration web page you
+should go to the Git section.</p>
+<figure class="align-default" id="id48">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-40.png"><img alt="_images/CICD-by-Zufar-40.png" src="_images/CICD-by-Zufar-40.png" style="width: 238.5px; height: 222.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Global Tool Configuration
+web page with the pointer to “Name” and “Path to
+Git executable” input boxes</span><a class="headerlink" href="#id48" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the Git section, you need to configure Git by
+providing the name and path to Git on the computer.</p>
+<p>Then click the
+<strong>“Apply”</strong> and <strong>“Save”</strong> buttons**.**</p>
+<p>Here, you have finished configuring the Jenkins Github
+plugin.</p>
+<p class="rubric" id="h-step-7-integrate-git-into-the-pipeline"><strong>Step 7: Integrate Git into the
+pipeline</strong></p>
+<p>Now, as the Jenkins Github plugin is installed and
+configured, you’re now able to utilize this plugin
+within your pipeline. This will allow your pipeline
+which you created in module 2 to pull your project
+code from the specified GitHub repository.</p>
+<p>Well, to integrate this plugin into your pipeline you
+need to go to the Source Code Management section and
+choose Git in your pipeline. Then you need to provide
+your project repository URL. If your project
+repository is public on Github, you do not need to
+provide credentials. If the project repository is
+private on Github, you need to provide credentials.</p>
+<figure class="align-default" id="id49">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-41.png"><img alt="_images/CICD-by-Zufar-41.png" src="_images/CICD-by-Zufar-41.png" style="width: 257.0px; height: 420.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Job configuration web
+page with “Source Code Management” settings</span><a class="headerlink" href="#id49" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can use my project with the next Repositiry
+URL: <a class="reference external" href="https://github.com/Sunagatov/Hello.git">https://github.com/Sunagatov/Hello.git</a>.</p>
+<p>Just copy and paste it to the “<strong>Repository
+URL”</strong> input. Then click the
+<strong>“Apply”</strong> and <strong>“Save”</strong> buttons to finish the
+integration Git with the pipeline.</p>
+<p class="rubric" id="h-step-8-test-git-integrated-into-the-pipeline"><strong>Step 8: Test Git integrated into the
+pipeline</strong></p>
+<p>Now you can use your updated pipeline to pull a
+project from Github. To do that you need to click
+the <a href="#id1"><span class="problematic" id="id2">**</span></a>“Build Now”<a href="#id3"><span class="problematic" id="id4">**</span></a>button. As a result, you will see a
+successful build in the build history.</p>
+<figure class="align-default" id="id50">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-42.png"><img alt="_images/CICD-by-Zufar-42.png" src="_images/CICD-by-Zufar-42.png" style="width: 170.5px; height: 247.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins web page with pointers to
+“Build Now” button and “Build History” section</span><a class="headerlink" href="#id50" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Open the first build from the build history.</p>
+<figure class="align-default" id="id51">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-43.png"><img alt="_images/CICD-by-Zufar-43.png" src="_images/CICD-by-Zufar-43.png" style="width: 428.5px; height: 244.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins Pull_Code_From_Github_Job
+with successful job result</span><a class="headerlink" href="#id51" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now you can see the successful job result of the first
+build. If you open your AWS EC2 terminal. You can
+check that the pipeline works well.</p>
+<p>Just use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/var/lib/jenkins/workspace/<span class="o">{</span>your<span class="w"> </span>pipeline<span class="w"> </span>name<span class="o">}</span>
+</pre></div>
+</div>
+<p>This way you can see that your project from Github was
+pulled to your AWS EC2 virtual server instance.</p>
+<figure class="align-default" id="id52">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-44.png"><img alt="_images/CICD-by-Zufar-44.png" src="_images/CICD-by-Zufar-44.png" style="width: 260.5px; height: 33.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Github project downloaded into
+EC2 instance terminal</span><a class="headerlink" href="#id52" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-module-4-apache-maven"><strong>[Module 4]: Apache Maven</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Apache Maven</strong> is a widely used build automation
+and project management tool in software
+development. It streamlines the process of
+compiling, testing, and packaging code by managing
+project dependencies and providing a consistent
+build lifecycle. Maven employs XML-based
+configuration files (POM files) to define project
+structure, dependencies, and tasks, enabling
+developers to efficiently manage and deploy complex
+software projects.</p>
+</div>
+<p>Now that you have integrated Git into the pipeline,
+you can enhance the pipeline further by incorporating
+Apache Maven which enables you to build, test, and
+package your project. To do that you need to install
+Apache Maven on your AWS EC2 Virtual Server instance
+where Jenkins and Git were installed.</p>
+<p class="rubric" id="h-step-1-download-apache-maven"><strong>Step 1: Download Apache Maven</strong></p>
+<p>To download Apache Maven go to the
+<strong>“/opt”</strong> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/opt
+</pre></div>
+</div>
+<p>And then use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>wget<span class="w"> </span>https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+</pre></div>
+</div>
+<p>This command will download the latest official Apache
+Maven (check the latest version on the official Apache
+Maven website). To find the latest official Apache
+Maven release, use the
+link <a class="reference external" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a>.</p>
+<p class="rubric" id="h-step-2-extract-apache-maven-from-the-archive"><strong>Step 2: Extract Apache Maven from the
+archive</strong></p>
+<p>Use this command, to extract Apache Maven from the
+downloaded archive:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>tar<span class="w"> </span>-xvzf<span class="w"> </span>apache-maven-*.tar.gz
+</pre></div>
+</div>
+<p class="rubric" id="h-step-3-add-java-home-and-m-2-home"><strong>Step 3: Add JAVA_HOME and M2_HOME</strong></p>
+<p>Move to the root folder using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
+</pre></div>
+</div>
+<p>Edit <strong>.bash_profile</strong> file using this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>.bash_profile
+</pre></div>
+</div>
+<p>Add <strong>JAVA_HOME</strong> and M2_HOME variables.</p>
+<p>Assign the path to JDK11 for <strong>JAVA_HOME</strong> and path to
+the maven directory for <strong>M2_HOME</strong> variable.</p>
+<p>To find JDK path, use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>find<span class="w"> </span>/<span class="w"> </span>-name<span class="w"> </span>java
+</pre></div>
+</div>
+<figure class="align-default" id="id53">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-45.png"><img alt="_images/CICD-by-Zufar-45.png" src="_images/CICD-by-Zufar-45.png" style="width: 762.0px; height: 349.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal web page with .bash_profile file</span><a class="headerlink" href="#id53" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Or in .bashrc file. Accordingly to your maven version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">M2_HOME</span><span class="o">=</span>/opt/apache-maven-3.9.4
+<span class="nb">export</span><span class="w"> </span><span class="nv">M2</span><span class="o">=</span>/opt/apache-maven-3.9.4/bin
+
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$M2</span>:<span class="nv">$M2_HOME</span>
+<span class="nb">export</span><span class="w"> </span>PATH
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>How to use VIM</strong></p>
+<ul class="simple">
+<li><p>To <strong>edit</strong> the file press the keyboard
+button <strong>“ I “</strong> to insert data.</p></li>
+<li><p>To <strong>save</strong> the file press the keyboard button “
+esc “ and enter “:w“.</p></li>
+<li><p>To <strong>exit</strong> from the file press the keyboard
+button <strong>“ esc “</strong> and enter <strong>“:q”</strong>.</p></li>
+</ul>
+</div>
+<p>Save the changes.</p>
+<p>Then, execute this command to refresh system
+variables.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>.bash_profile
+</pre></div>
+</div>
+<p>To verify <strong>$PATH</strong>, use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p>To verify <strong>Apache Maven</strong>, use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>If you have done everything correctly, you will be
+able to view the version of Apache Maven.</p>
+<figure class="align-default" id="id54">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-46.png"><img alt="_images/CICD-by-Zufar-46.png" src="_images/CICD-by-Zufar-46.png" style="width: 1044.0px; height: 113.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of AWS EC2 Virtual Server instance
+terminal web page with the version of Apache Maven</span><a class="headerlink" href="#id54" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-4-install-apache-maven-jenkins-plugin"><strong>Step 4: Install Apache Maven Jenkins
+plugin</strong></p>
+<p>Since Apache Maven can be used on an EC2 instance, you
+can install the Apache Maven plugin to integrate it
+with the pipeline.</p>
+<p><strong>To achieve this, follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Dashboard“</strong> <strong>→ “Manage Jenkins“ →
+“Manage Plugins“ → “Available”.</strong></p></li>
+<li><p>In the search box, enter <strong>“Maven”</strong>.</p></li>
+<li><p>Choose <strong>“Maven Integration”</strong> plugin.</p></li>
+</ol>
+<figure class="align-default" id="id55">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-47.png"><img alt="_images/CICD-by-Zufar-47.png" src="_images/CICD-by-Zufar-47.png" style="width: 629.5px; height: 640.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Maven plugin</span><a class="headerlink" href="#id55" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Wait for the end of the downloading process.</p>
+<p>And then click the button <strong>“Go back to the top
+page”</strong>.</p>
+<figure class="align-default" id="id56">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-48.png"><img alt="_images/CICD-by-Zufar-48.png" src="_images/CICD-by-Zufar-48.png" style="width: 640.0px; height: 630.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Maven plugin
+downloading process</span><a class="headerlink" href="#id56" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric" id="h-step-5-configure-apache-maven-jenkins-plugin"><strong>Step 5: Configure Apache Maven Jenkins
+plugin</strong></p>
+<p>With the successful installation of the Apache Maven
+Jenkins plugin, you are now able to utilize this
+plugin within the pipeline which you created and
+updated in modules 2 and 3.</p>
+<p><strong>To do so, follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Go to <strong>“Dashboard“</strong> <strong>→ “Manage Jenkins“ →
+“Global Tool Coonfiguration“ → “JDK”</strong></p></li>
+<li><p>Click the button <strong>“Add JDK”.</strong></p></li>
+<li><p>Uncheck <strong>“Install automatically”.</strong></p></li>
+</ol>
+<figure class="align-default" id="id57">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-49.png"><img alt="_images/CICD-by-Zufar-49.png" src="_images/CICD-by-Zufar-49.png" style="width: 640.0px; height: 459.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to JDK
+configuration</span><a class="headerlink" href="#id57" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Then go to <strong>“Maven”</strong> section. Click the
+button <strong>“Add Maven”</strong>. Uncheck <strong>“Install
+automatically”.</strong></p>
+<p>Then add <strong>name</strong> and <strong>MAVEN_HOME</strong> path.</p>
+<figure class="align-default" id="id58">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-50.png"><img alt="_images/CICD-by-Zufar-50.png" src="_images/CICD-by-Zufar-50.png" style="width: 340.5px; height: 640.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of Jenkins installed on AWS EC2
+Virtual Server with the pointer to Apache Maven
+configuration</span><a class="headerlink" href="#id58" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Click the <strong>“Apply”</strong> and <strong>“Save”</strong> buttons.</p>
+<p>Here, you have finished configuring the Apache Maven
+Jenkins plugin.</p>
+<p class="rubric" id="h-step-6-integrate-apache-maven-into-the-pipeline"><strong>Step 6: Integrate Apache Maven into the
+pipeline</strong></p>
+<p>Now as the Apache Maven GitHub plugin is installed and
+configured, you’re now able to utilize Apache Maven
+within your pipeline. This will allow your pipeline
+which you created in the “[module 2]: Jenkins Server”
+to build your project code to create a jar artifact.</p>
+<p><strong>To integrate Apache Maven into the pipeline you need
+to follow these steps:</strong></p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Dashboard“</strong> <strong>→ “CI_CD_Pipeline“ →
+“Configure“ → “Build Steps”.</strong></p></li>
+<li><p>Click <strong>“Add build step”</strong> button.</p></li>
+<li><p>Choose <strong>“Invoke top-level Maven targets”</strong> option.</p></li>
+<li><p>Choose <strong>“Apache-Maven”</strong> as <strong>“Maven Version”.</strong></p></li>
+<li><p>Add <strong>“clean package”</strong> command
+to <strong>“Goals”</strong> input.</p></li>
+<li><p>Click <strong>“Advanced“</strong> button.</p></li>
+<li><p>Add “pom.xml” to <strong>“POM”</strong> input.</p></li>
+</ol>
+<figure class="align-default" id="id59">
+<a class="reference internal image-reference" href="_images/CICD-by-Zufar-51.png"><img alt="_images/CICD-by-Zufar-51.png" src="_images/CICD-by-Zufar-51.png" style="width: 262.5px; height: 406.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The screenshot of “Build Steps” section in the
+pipeline configuration with pointers to “Apply” and
+“Save” buttons</span><a class="headerlink" href="#id59" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Finally, you should
+click <strong>“Apply”</strong> and <strong>“Save”</strong> buttons to finish the
+integration of Apache Maven with the pipeline.</p>
+<p class="rubric" id="h-step-7-test-apache-maven-integrated-into-the-pipeline"><strong>Step 7: Test Apache Maven integrated
+into the pipeline</strong></p>
+<p>Now you can use your updated pipeline to build your
+Github project. To do that you need to click
+the <a href="#id5"><span class="problematic" id="id6">**</span></a>“Build Now”<a href="#id7"><span class="problematic" id="id8">**</span></a>button. As a result, you will see a
+successful job result in the build history.</p>
+<p>If you open your AWS EC2 terminal. You can check that
+the pipeline works well.</p>
+<p>Just use this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/var/lib/jenkins/workspace/<span class="o">{</span>your<span class="w"> </span>pipeline<span class="w"> </span>name<span class="o">}</span>/target
+</pre></div>
+</div>
+<p>This way you can see the JAR artifact, indicating the
+successful build of your project from GitHub.</p>
+<p>End of part 1.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="assignments.html" class="btn btn-neutral float-left" title="Assignments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CICD-1-Git-Jenkins%20%28on%20premise%29.html" class="btn btn-neutral float-right" title="Building a CI/CD Pipeline. Part1 Git-Jenkins (on premise)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

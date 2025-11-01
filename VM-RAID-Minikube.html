@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VM-RAID-Minikube &mdash; DevOps 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ce236e8" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins" href="CICD-by-Zufar.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DevOps
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lectures.html">Lectures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="assignments.html">Assignments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CICD-1-Git-Jenkins.html">Building a CI/CD Pipeline. Part1 Git-Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-1-Git-Jenkins%20%28on%20premise%29.html">Building a CI/CD Pipeline. Part1 Git-Jenkins (on premise)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-2-Docker.html">Building a CI/CD Pipeline. Part2 Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-3-Nexus.html">Building a CI/CD Pipeline. Part3 Nexus Ansible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-4-K8S.html">Building a CI/CD Pipeline. Part4 Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-5-Monitoring.html">Monitoring - Prometheus Grafana</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-6-Cloud.html">Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CICD-by-Zufar.html">Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">VM-RAID-Minikube</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DevOps</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="assignments.html">Assignments</a></li>
+      <li class="breadcrumb-item active">VM-RAID-Minikube</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/VM-RAID-Minikube.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vm-raid-minikube">
+<h1>VM-RAID-Minikube<a class="headerlink" href="#vm-raid-minikube" title="Link to this heading"></a></h1>
+<p>Steps:</p>
+<ol class="arabic simple">
+<li><p>Create virtual machine with debian/ubuntu/centos or download
+preinstalled image (<a class="reference external" href="https://www.osboxes.org/">https://www.osboxes.org/</a>).</p></li>
+<li><p>Add simple raid1 to virtual machine: *nix os system on 1-st hdd, 2d
+and 3d hdds are in raid1. 1 (with star). Only two hdds. Os system on
+raid1, based on this two hdd.</p></li>
+<li><p>How to test raid1. Create file on raid1 file system. Turn off vm and
+remove one of the hhds from vm. Turn on vm. File should be
+accessible.</p></li>
+<li><p>Add new hdd and sync it to raid1.</p></li>
+<li><p>Add section with assignment1 description into docx and send by e-mail
+for checking.</p></li>
+</ol>
+<p><strong>PROCEDURE</strong></p>
+<p>Install an Ubuntu Server 20.04 virtual machine using Virtual Box and add
+two additional HDDs to the VM:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-1.png"><img alt="_images/VM-RAID-Minikube-1.png" src="_images/VM-RAID-Minikube-1.png" style="width: 4.4493in; height: 3.63792in;" />
+</a>
+<p>Establish the connection from Windows to the VM with SSH in PowerShell
+as shown on the picture below:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-2.png"><img alt="_images/VM-RAID-Minikube-2.png" src="_images/VM-RAID-Minikube-2.png" style="width: 6.49653in; height: 4.42708in;" />
+</a>
+<p>List all the disks of the VM using the lsblk command:<a class="reference internal" href="_images/VM-RAID-Minikube-3.png"><img alt="image1" src="_images/VM-RAID-Minikube-3.png" style="width: 6.49653in; height: 3.125in;" /></a></p>
+<p>Create RAID1 based on sdb and sdc. In order to do that, create two
+primary partitions sdb1 and sdc1 respectively with the fdisk utility
+program:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-4.png"><img alt="_images/VM-RAID-Minikube-4.png" src="_images/VM-RAID-Minikube-4.png" style="width: 6.49653in; height: 4.67708in;" />
+</a>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-5.png"><img alt="_images/VM-RAID-Minikube-5.png" src="_images/VM-RAID-Minikube-5.png" style="width: 6.49653in; height: 4.52083in;" />
+</a>
+<p>Check for creation success:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-6.png"><img alt="_images/VM-RAID-Minikube-6.png" src="_images/VM-RAID-Minikube-6.png" style="width: 6.49653in; height: 3.74236in;" />
+</a>
+<p>The two partitions created successfully.</p>
+<p>Create a RAID1 array in /dev/md0 based on the created partitions using
+the mdadm command:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-7.png"><img alt="_images/VM-RAID-Minikube-7.png" src="_images/VM-RAID-Minikube-7.png" style="width: 6.49653in; height: 2.62361in;" />
+</a>
+<p>Create a file system based on RAID1:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-8.png"><img alt="_images/VM-RAID-Minikube-8.png" src="_images/VM-RAID-Minikube-8.png" style="width: 6.49653in; height: 2.42986in;" />
+</a>
+<p>Mount the file system:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-9.png"><img alt="_images/VM-RAID-Minikube-9.png" src="_images/VM-RAID-Minikube-9.png" style="width: 6.49653in; height: 0.25764in;" />
+</a>
+<p>Check for success:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-10.png"><img alt="_images/VM-RAID-Minikube-10.png" src="_images/VM-RAID-Minikube-10.png" style="width: 6.49653in; height: 3.18403in;" />
+</a>
+<p>Save the created partitions to mount them automatically each time the
+system boots. In order to do that, get the UUID of the RAID1 array:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-11.png"><img alt="_images/VM-RAID-Minikube-11.png" src="_images/VM-RAID-Minikube-11.png" style="width: 6.49653in; height: 0.54306in;" />
+</a>
+<p>Then edit the /etc/fstab file containing the boot information and paste
+the UUID in there with corresponding options:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-12.png"><img alt="_images/VM-RAID-Minikube-12.png" src="_images/VM-RAID-Minikube-12.png" style="width: 6.49653in; height: 0.35in;" />
+</a>
+<p>Display the edited file:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-13.png"><img alt="_images/VM-RAID-Minikube-13.png" src="_images/VM-RAID-Minikube-13.png" style="width: 6.49653in; height: 3.37222in;" />
+</a>
+<p>Test RAID1. In order to do that, add a test file in the /mnt directory
+as shown on the picture below:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-14.png"><img alt="_images/VM-RAID-Minikube-14.png" src="_images/VM-RAID-Minikube-14.png" style="width: 6.49653in; height: 1.47222in;" />
+</a>
+<p>Then remove sdc1 from RAID1 and check if the file is left:<a class="reference internal" href="_images/VM-RAID-Minikube-15.png"><img alt="image2" src="_images/VM-RAID-Minikube-15.png" style="width: 6.28125in; height: 5.17361in;" /></a></p>
+<p>The file left unaffected.</p>
+<p>Turn off the VM and remove one of the disks:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-16.png"><img alt="_images/VM-RAID-Minikube-16.png" src="_images/VM-RAID-Minikube-16.png" style="width: 5.32477in; height: 4.35374in;" />
+</a>
+<p>Turn the VM back on and display its disks to check if sdc completely
+removed but the file still left unaffected:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-17.png"><img alt="_images/VM-RAID-Minikube-17.png" src="_images/VM-RAID-Minikube-17.png" style="width: 6.49653in; height: 3.62014in;" />
+</a>
+<p>Turn the VM off and add a new HDD to it:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-18.png"><img alt="_images/VM-RAID-Minikube-18.png" src="_images/VM-RAID-Minikube-18.png" style="width: 5.26346in; height: 4.30361in;" />
+</a>
+<p>Turn the VM back on and display its disks:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-19.png"><img alt="_images/VM-RAID-Minikube-19.png" src="_images/VM-RAID-Minikube-19.png" style="width: 6.49653in; height: 3.45694in;" />
+</a>
+<p>The new HDD detected but not added to RAID. Add it with the following
+command and check for success:</p>
+<a class="reference internal image-reference" href="_images/VM-RAID-Minikube-20.png"><img alt="_images/VM-RAID-Minikube-20.png" src="_images/VM-RAID-Minikube-20.png" style="width: 6.49653in; height: 4.69097in;" />
+</a>
+<p>The test file still left unaffected.</p>
+<p><strong>CONCLUSION</strong></p>
+<p>In the conclusion of the laboratory work, the basic utilities of the
+Ubuntu system studied for working with the file system, partitioning and
+creating RAID arrays; all steps completed successfully.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CICD-by-Zufar.html" class="btn btn-neutral float-left" title="Building a CI/CD Pipeline with AWS, K8S, Docker, Ansible, Git, Github, Apache Maven, and Jenkins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
