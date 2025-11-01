@@ -1,3 +1,4 @@
+```mermaid
 flowchart LR
     subgraph CP["Control Plane (cp) nodes"]
         subgraph API["kube-apiserver"]
@@ -69,3 +70,4 @@ flowchart LR
     style Worker2 fill:#ecfdf5,stroke:#10b981
     style Worker3 fill:#ecfdf5,stroke:#10b981
     style CP fill:#f9fafb,stroke:#9ca3af
+```
